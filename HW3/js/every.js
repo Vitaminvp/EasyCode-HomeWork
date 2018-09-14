@@ -1,15 +1,21 @@
-const MyEvery = (elem, func) => {
-    if(elem instanceof Array){
-        for(let i = 0; i < elem.length; i++){
-            if(!func(elem[i], i, elem)) return false;
+
+const arr = [5, 7, 3, 2, 1];
+
+const myFunc = x => x > 1;
+
+
+const myEvery = (elem, func) => {
+    if(elem.length > 0){
+        const [x, ...rest] = elem;
+
+        if (func(x, elem)) {
+            return myEvery(rest, func);
         }
-        return true;
-    }else if (elem instanceof Object){
-        for(let key in elem){
-            if(!func(elem[key], key, elem)) return false;
+        else {
+            return false;
         }
-        return true;
-    }else{
-        return func(elem);
     }
+    return true;
 }
+
+console.log('MyEvery', myEvery(arr, myFunc));

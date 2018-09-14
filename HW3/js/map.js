@@ -1,13 +1,9 @@
-
 const arr = [5, 7, 3, 2, 1];
-
-
 const obj = {
     a: 1,
     b: 2,
     c: 3,
     d: 4
-
 };
 
 const myFunc = x => x*2;
