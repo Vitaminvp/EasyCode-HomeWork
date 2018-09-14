@@ -9,15 +9,15 @@ const obj = {
 const str = "Same string for test";
 
 
-const myHead = (elem) => {
+const myLast = (elem) => {
     if(elem instanceof Array || typeof elem == "string"){
         if (!elem.length) return undefined;
         return elem[elem.length -1];
     }else return undefined;
 }
 
-console.log('myHead', myHead(arr));
+console.log('myLast', myLast(arr));
 console.log('----------------------------------------------');
-console.log('myHead', myHead(obj));
+console.log('myLast', myLast(obj));
 console.log('----------------------------------------------');
-console.log('myHead', myHead(str));
+console.log('myLast', myLast(str));

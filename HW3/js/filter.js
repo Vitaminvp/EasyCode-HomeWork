@@ -1,17 +1,18 @@
-const myFilter = (elem, func) =>
-{
-    let newArr;
-    const [x, ...rest] = elem;
-    console.log('x', x);
-    console.log('rest', rest);
-    if(func(x)){
-        return newArr = [x, ...myFilter(rest, func)];
+const myFilter = (elem, func) => {
+    let newArr = [];
+    if(elem.length){
+        const [x, ...rest] = elem;
+        if(func(x)) {
+            return newArr = [...newArr, x, ...myFilter(rest, func)];
+        }else {
+            return newArr = [...newArr, ...myFilter(rest, func)];
+        }
     }else{
-        return newArr = [...myFilter(rest, func)];
+        return newArr;
     }
 }
-arr = [12, 3, 6, 87, 45];
-const func = x => x > 10;
+arr = [12, 3, 6, 87, 45, 1000, 85, 1, 'df', [3, 5]];
+const func = x => x > 1;
 
 console.log(myFilter(arr, func));
 
