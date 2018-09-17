@@ -342,27 +342,16 @@ const arr = [
         listOfStores: "west, nord, center"
     }
 ];
-
 // try to keep all ummutable
-
-
-
-
 const myFilter = (elem, func) => {
     let newArr = [];
     if(elem.length){
         let [x, ...rest] = elem;
         if(x instanceof Object) x = {...x};
-        if(func(x)) {
-            return newArr = [...newArr, x, ...myFilter(rest, func)];
-        }else {
-            return newArr = [...newArr, ...myFilter(rest, func)];
-        }
-    }else{
-        return newArr;
-    }
+        if(func(x)) return newArr = [...newArr, x, ...myFilter(rest, func)];
+        else return newArr = [...newArr, ...myFilter(rest, func)];
+    }else return newArr;
 }
-
 const myMap = (elem, func) => {
     if(elem instanceof Array){
         if (!elem.length) return [];
@@ -375,9 +364,7 @@ const myMap = (elem, func) => {
             newObj[key] = func(newObj[key]);
         }
         return newObj;
-    }else {
-        return func(elem);
-    }
+    }else return func(elem);
 }
 
 const filterFunc = item => item.type == "unmapped" && item.merchantZip < 61175;
@@ -388,10 +375,9 @@ const mapFunc = item => {
     item.listOfStores = Array.from(item.listOfStores.split(','));
     item.listOfStores = myMap(item.listOfStores, item => item.trim());
     item.reviews = myFilter(item.reviews, el => el.rating > 5);
+    item.transactions.summ = item.transactions.new - item.transactions.returning;
     return item;
 };
-
-
 
 
 const myMapForCompose = el => myMap(el, mapFunc);
@@ -404,3 +390,4 @@ console.log(compose(
     myFilterForCompose
 )(arr));
 
+// console.log(arr);
