@@ -82,7 +82,7 @@ const myMap = (elem, func) => {
     if(elem instanceof Array){
         if (!elem.length) return [];
         let [x, ...rest] = elem;
-        if(x instanceof Object) x = {...x};
+        x =  JSON.parse(JSON.stringify(x));
         return [func(x), ...myMap(rest, func)];
     }else if (elem instanceof Object){
         const newObj = {...elem}
@@ -105,3 +105,4 @@ console.log(compose(
     myFilterForCompose
 )(arr));
 
+console.log(arr);

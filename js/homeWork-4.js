@@ -357,6 +357,7 @@ const myMap = (elem, func) => {
         if (!elem.length) return [];
         let [x, ...rest] = elem;
         if(x instanceof Object) x = {...x};
+        if(x instanceof Array) x = [...x];
         return [func(x), ...myMap(rest, func)];
     }else if (elem instanceof Object){
         const newObj = {...elem}
@@ -375,7 +376,7 @@ const mapFunc = item => {
     item.listOfStores = Array.from(item.listOfStores.split(','));
     item.listOfStores = myMap(item.listOfStores, item => item.trim());
     item.reviews = myFilter(item.reviews, el => el.rating > 5);
-    item.transactions.summ = item.transactions.new - item.transactions.returning;
+    item.transactions.summ = item.transactions.new + item.transactions.returning;
     return item;
 };
 
@@ -390,4 +391,4 @@ console.log(compose(
     myFilterForCompose
 )(arr));
 
-// console.log(arr);
+console.log(arr);
