@@ -20,7 +20,7 @@ const arr = [
     },
     {
         key: "QWr234RY",
-        type: "need verification", // possible values "unmapped", "need verification", "mapped"
+        type: "need verification", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -37,7 +37,7 @@ const arr = [
     },
     {
         key: "QWr234RU",
-        type: "mapped", // possible values "unmapped", "need verification", "mapped"
+        type: "mapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -54,7 +54,7 @@ const arr = [
     },
     {
         key: "QWr234RI",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -71,7 +71,7 @@ const arr = [
     },
     {
         key: "QWr234RO",
-        type: "need verification", // possible values "unmapped", "need verification", "mapped"
+        type: "need verification", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -88,7 +88,7 @@ const arr = [
     },
     {
         key: "QWr234RP",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -105,7 +105,7 @@ const arr = [
     },
     {
         key: "QWr234RA",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -122,7 +122,7 @@ const arr = [
     },
     {
         key: "QWr234RS",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -139,7 +139,7 @@ const arr = [
     },
     {
         key: "QWr234RD",
-        type: "need verification", // possible values "unmapped", "need verification", "mapped"
+        type: "need verification", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -156,7 +156,7 @@ const arr = [
     },
     {
         key: "QWr234RF",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -173,7 +173,7 @@ const arr = [
     },
     {
         key: "QWr234RG",
-        type: "mapped", // possible values "unmapped", "need verification", "mapped"
+        type: "mapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -190,7 +190,7 @@ const arr = [
     },
     {
         key: "QWr234RH",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -207,7 +207,7 @@ const arr = [
     },
     {
         key: "QWr234RJ",
-        type: "need verification", // possible values "unmapped", "need verification", "mapped"
+        type: "need verification", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -224,7 +224,7 @@ const arr = [
     },
     {
         key: "QWr234RK",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -241,7 +241,7 @@ const arr = [
     },
     {
         key: "QWr234RL",
-        type: "need verification", // possible values "unmapped", "need verification", "mapped"
+        type: "need verification", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -258,7 +258,7 @@ const arr = [
     },
     {
         key: "QWr234RZ",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -275,7 +275,7 @@ const arr = [
     },
     {
         key: "QWr234RX",
-        type: "mapped", // possible values "unmapped", "need verification", "mapped"
+        type: "mapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -292,7 +292,7 @@ const arr = [
     },
     {
         key: "QWr234RC",
-        type: "mapped", // possible values "unmapped", "need verification", "mapped"
+        type: "mapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -309,7 +309,7 @@ const arr = [
     },
     {
         key: "QWr234RV",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -326,7 +326,7 @@ const arr = [
     },
     {
         key: "QWr234RB",
-        type: "unmapped", // possible values "unmapped", "need verification", "mapped"
+        type: "unmapped", 
         merchantName: "David",
         merchantSurname: "Arenas",
         merchantCity: "Charlotte",
@@ -370,14 +370,27 @@ const myMap = (elem, func) => {
 
 const filterFunc = item => item.type == "unmapped" && item.merchantZip < 61175;
 const mapFunc = item => {
-    item.merchantFullName = item.merchantName + " " + item.merchantSurname;
-    delete item.merchantName;
-    delete item.merchantSurname;
-    item.listOfStores = Array.from(item.listOfStores.split(','));
-    item.listOfStores = myMap(item.listOfStores, item => item.trim());
-    item.reviews = myFilter(item.reviews, el => el.rating > 5);
-    item.transactions.summ = item.transactions.new + item.transactions.returning;
-    return item;
+    const result = {
+        key: item.key,
+        type: item.type,
+        merchantFullName: item.merchantName + " " + item.merchantSurname,
+        merchantCity: item.merchantCity,
+        merchantZip: item.merchantZip,
+        transactions: JSON.parse(JSON.stringify(item.transactions)),
+        reviews: JSON.parse(JSON.stringify(item.reviews)),
+        listOfStores: Array.from(item.listOfStores.split(',')),
+    };
+    result.transactions.summ = result.transactions.new + result.transactions.returning;
+    result.listOfStores = myMap(result.listOfStores, item => item.trim());
+    result.reviews = myFilter(result.reviews, el => el.rating > 5);
+    // item.merchantFullName = item.merchantName + " " + item.merchantSurname;
+    // delete item.merchantName;
+    // delete item.merchantSurname;
+    // item.listOfStores = Array.from(item.listOfStores.split(','));
+    // item.listOfStores = myMap(item.listOfStores, item => item.trim());
+    // item.reviews = myFilter(item.reviews, el => el.rating > 5);
+    // item.transactions.summ = item.transactions.new + item.transactions.returning;
+    return result;
 };
 
 
