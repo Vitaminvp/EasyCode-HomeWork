@@ -399,9 +399,10 @@ const myFilterForCompose = el => myFilter(el, filterFunc);
 
 const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
 
-console.log(compose(
+console.table(compose(
     myMapForCompose,
     myFilterForCompose
 )(arr));
 
-console.log(arr);
+console.table(arr);
+
