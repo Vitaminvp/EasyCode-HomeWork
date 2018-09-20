@@ -380,31 +380,38 @@ const mapFunc = item => ({
 const myMapForCompose = el => myMap(el, mapFunc);
 const myFilterForCompose = el => myFilter(el, filterFunc);
 
-// const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
+
+const print = arg => document.write(JSON.stringify(arg));
 
 let slowFn = (arg) => new Promise((resolve, reject) => {
     setTimeout(() => resolve(arg), 1000);
     setTimeout(() => reject(new Error('O_o)')), 2000);
 });
 
-// async function myFunc(arg) {
-//     return await slowFn(arg);
-// }
 
 slowFn(arr)
     .then(result => myFilterForCompose(result))
     .then(result => myMapForCompose(result))
     .then(result => {
         console.table(result);
+        print(result);
         return result;
     })
     .catch(err => console.error(err));
 
 
-
-
-
-
+async function myFunc(arg){
+    try {
+        let arr = await slowFn(arg);
+        arr = myMapForCompose(myFilterForCompose(arr));
+        console.table(arr);
+        print(arr);
+        return arr;
+    } catch (err){
+        console.error(err);
+    }
+}
+myFunc(arr);
 
 
 
