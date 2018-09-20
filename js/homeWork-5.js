@@ -384,7 +384,7 @@ const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)));
 
 let slowFn = (arg) => new Promise((resolve, reject) => {
     setTimeout(() => resolve(arg), 1000);
-    // setTimeout(() => reject(new Error('O_o)')), 1000);
+    setTimeout(() => reject(new Error('O_o)')), 2000);
 });
 async function myFunc(arg) {
     return await slowFn(arg);
