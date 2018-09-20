@@ -413,16 +413,3 @@ async function myFunc(arg){
 }
 myFunc(arr);
 
-
-
-
-
-
-
-
-// myFunc(arr).then(result =>
-//     console.table(compose(
-//                         myMapForCompose,
-//                         myFilterForCompose)(result)
-//                 )
-// ).catch( err => console.error(err));
