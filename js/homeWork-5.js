@@ -381,7 +381,7 @@ const myMapForCompose = el => myMap(el, mapFunc);
 const myFilterForCompose = el => myFilter(el, filterFunc);
 
 
-const print = arg => document.write(JSON.stringify(arg));
+// const print = arg => document.write(`<pre>${JSON.stringify(arg)}</pre>`);
 
 let slowFn = (arg) => new Promise((resolve, reject) => {
     setTimeout(() => resolve(arg), 1000);
@@ -394,25 +394,25 @@ const myFuncPromise = (arg) => {
                 .then(result => myMapForCompose(result))
                 .then(result => {
                         console.table(result);
-                        print(result);
+                        // print(result);
                         return result;
                     })
                 .catch(err => console.error(err));
-}
+};
 
 myFuncPromise(arr);
 
-async function myFuncAsync(arg){
+const myFuncAsync = async (arg) => {
     try {
         let arr = await slowFn(arg);
         arr = myMapForCompose(myFilterForCompose(arr));
         console.table(arr);
-        print(arr);
+        // print(arr);
         return arr;
     } catch (err){
         console.error(err);
     }
-}
+};
 
 myFuncAsync(arr);
 
