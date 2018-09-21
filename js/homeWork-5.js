@@ -388,19 +388,21 @@ let slowFn = (arg) => new Promise((resolve, reject) => {
     setTimeout(() => reject(new Error('O_o)')), 2000);
 });
 
+const myFuncPromise = (arg) => {
+    return slowFn(arg)
+                .then(result => myFilterForCompose(result))
+                .then(result => myMapForCompose(result))
+                .then(result => {
+                        console.table(result);
+                        print(result);
+                        return result;
+                    })
+                .catch(err => console.error(err));
+}
 
-slowFn(arr)
-    .then(result => myFilterForCompose(result))
-    .then(result => myMapForCompose(result))
-    .then(result => {
-        console.table(result);
-        print(result);
-        return result;
-    })
-    .catch(err => console.error(err));
+myFuncPromise(arr);
 
-
-async function myFunc(arg){
+async function myFuncAsync(arg){
     try {
         let arr = await slowFn(arg);
         arr = myMapForCompose(myFilterForCompose(arr));
@@ -411,5 +413,6 @@ async function myFunc(arg){
         console.error(err);
     }
 }
-myFunc(arr);
+
+myFuncAsync(arr);
 
