@@ -1,4 +1,3 @@
-
 class StickyNotesApp {
   constructor() {
         // Shortcuts to DOM Elements.
@@ -8,24 +7,18 @@ class StickyNotesApp {
         this.notesSectionTitle = document.getElementById('notes-section-title');
 
         // Saves notes on button click.
-        this.addNoteButton.addEventListener('click', () => this.saveNote);
+        this.addNoteButton.addEventListener('click', () => this.saveNote());
 
         // Toggle for the button.
-        this.noteMessageInput.addEventListener('keyup', () => this.toggleButton);
+        this.noteMessageInput.addEventListener('keyup', () => this.toggleButton());
 
         for (let key in localStorage) {
             this.displayNote(key, localStorage[key]);
         }
-
         // Listen for updates to notes from other windows.
-        window.addEventListener('storage', e => {
-            this.displayNote(e.key, e.newValue);
-        });
+        window.addEventListener('storage', e => this.displayNote(e.key, e.newValue));
     }
-
     // Loads all the notes.
-
-
 // Saves a new sticky note on localStorage.
     saveNote() {
         if (this.noteMessageInput.value) {
@@ -36,14 +29,12 @@ class StickyNotesApp {
             this.toggleButton();
         }
     };
-
 // Resets the given MaterialTextField.
     static resetMaterialTextfield(element) {
         element.value = '';
         element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
         element.blur();
     };
-
 // Creates/updates/deletes a note in the UI.
     displayNote(key, message){
         let note = document.getElementById(key);
@@ -59,7 +50,6 @@ class StickyNotesApp {
         }
         note.setMessage(message);
     }
-
 // Enables or disables the submit button depending on the values of the input field.
     toggleButton() {
         if (this.noteMessageInput.value) {
@@ -67,18 +57,10 @@ class StickyNotesApp {
         } else {
             this.addNoteButton.setAttribute('disabled', 'true');
         }
-    };
-
-
-
-
-
+    }
 }
-
-
 // On load start the app.
 window.addEventListener('load', () => new StickyNotesApp());
-
 // A Sticky Note custom element that extends HTMLElement.
 class StickyNote extends HTMLElement{
     constructor(){
@@ -91,11 +73,9 @@ class StickyNote extends HTMLElement{
         this.messageElement = this.querySelector('.message');
         this.dateElement = this.querySelector('.date');
         this.deleteButton = this.querySelector('.delete');
-        this.deleteButton.addEventListener('click', () => this.deleteNote);
+        this.deleteButton.addEventListener('click', () => this.deleteNote());
     }
-
 // Fires when an attribute of the element is added/deleted/modified.
-
     attributeChangedCallback(attributeName) {
         // We display/update the created date message if the id changes.
         if (attributeName == 'id') {
@@ -106,31 +86,30 @@ class StickyNote extends HTMLElement{
                 date = new Date();
             }
             const month = StickyNote.MONTHS[date.getMonth()];
-            this.dateElement.textContent = 'Created on ' + month + ' ' + date.getDate();
+            this.dateElement.textContent = `Created on ${month} ${date.getDate()}`;
         }
     }
-
 // Sets the message of the note.
     setMessage(message) {
         this.messageElement.textContent = message;
         // Replace all line breaks by <br>.
         this.messageElement.innerHTML = this.messageElement.innerHTML.replace(/\n/g, '<br>');
-    };
+    }
 
 // Deletes the note by removing the element from the DOM and the data from localStorage.
     deleteNote() {
         localStorage.removeItem(this.id);
         this.parentNode.removeChild(this);
-    };
+    }
 }
 
 // Initial content of the element.
-StickyNote.TEMPLATE =
-  '<div class="message"></div>' +
-  '<div class="date"></div>' +
-  '<button class="delete mdl-button mdl-js-button mdl-js-ripple-effect">' +
-    'Delete' +
-  '</button>';
+StickyNote.TEMPLATE =`
+  <div class="message"></div>
+  <div class="date"></div>
+  <button class="delete mdl-button mdl-js-button mdl-js-ripple-effect">
+    Delete
+  </button>`;
 
 // StickyNote elements top level style classes.
 StickyNote.CLASSES = ['mdl-cell--4-col-desktop', 'mdl-card__supporting-text', 'mdl-cell--12-col',
