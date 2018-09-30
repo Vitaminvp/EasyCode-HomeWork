@@ -1,0 +1,7 @@
+{
+  "name": "Simple Sticky Notes",
+  "short_name": "Sticky Notes",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "orientation": "portrait"
+}
