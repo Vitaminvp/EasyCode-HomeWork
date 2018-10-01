@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "name": "Simple Sticky Notes",
+  "launch_path": "/index.html",
+  "description": "Simple Sticky Notes app",
+  "developer": {
+    "name": "",
+    "url": ""
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Simple Sticky Notes",
+      "description": "Simple Sticky Notes app"
+    }
+  }
+}

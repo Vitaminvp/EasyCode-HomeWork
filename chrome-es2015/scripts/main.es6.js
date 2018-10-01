@@ -1,15 +1,12 @@
 class StickyNotesApp {
-  constructor() {
-        // Shortcuts to DOM Elements.
+    constructor() {
         this.notesContainer = document.getElementById('notes-container');
         this.noteMessageInput = document.getElementById('message');
         this.addNoteButton = document.getElementById('save');
         this.notesSectionTitle = document.getElementById('notes-section-title');
 
-        // Saves notes on button click.
         this.addNoteButton.addEventListener('click', () => this.saveNote());
 
-        // Toggle for the button.
         this.noteMessageInput.addEventListener('keyup', () => this.toggleButton());
 
         for (let key in localStorage) {
@@ -25,16 +22,11 @@ class StickyNotesApp {
             const key = Date.now().toString();
             localStorage.setItem(key, this.noteMessageInput.value);
             this.displayNote(key, this.noteMessageInput.value);
-            StickyNotesApp.resetMaterialTextfield(this.noteMessageInput);
+            this.noteMessageInput.value = '';
             this.toggleButton();
         }
     };
-// Resets the given MaterialTextField.
-    static resetMaterialTextfield(element) {
-        element.value = '';
-        element.parentNode.MaterialTextfield.boundUpdateClassesHandler();
-        element.blur();
-    };
+
 // Creates/updates/deletes a note in the UI.
     displayNote(key, message){
         let note = document.getElementById(key);
@@ -63,9 +55,9 @@ class StickyNotesApp {
 window.addEventListener('load', () => new StickyNotesApp());
 // A Sticky Note custom element that extends HTMLElement.
 class StickyNote extends HTMLElement{
-    constructor(){
-      super();
-    }
+    // constructor(){
+    //     super();
+    // }
 // Fires when an instance of the element is created.
     createdCallback() {
         StickyNote.CLASSES.forEach( klass => this.classList.add(klass));
@@ -76,6 +68,7 @@ class StickyNote extends HTMLElement{
         this.deleteButton.addEventListener('click', () => this.deleteNote());
     }
 // Fires when an attribute of the element is added/deleted/modified.
+
     attributeChangedCallback(attributeName) {
         // We display/update the created date message if the id changes.
         if (attributeName == 'id') {
@@ -102,7 +95,6 @@ class StickyNote extends HTMLElement{
         this.parentNode.removeChild(this);
     }
 }
-
 // Initial content of the element.
 StickyNote.TEMPLATE =`
   <div class="message"></div>
@@ -113,12 +105,9 @@ StickyNote.TEMPLATE =`
 
 // StickyNote elements top level style classes.
 StickyNote.CLASSES = ['mdl-cell--4-col-desktop', 'mdl-card__supporting-text', 'mdl-cell--12-col',
-  'mdl-shadow--2dp', 'mdl-cell--4-col-tablet', 'mdl-card', 'mdl-cell', 'sticky-note'];
+    'mdl-shadow--2dp', 'mdl-cell--4-col-tablet', 'mdl-card', 'mdl-cell', 'sticky-note'];
 
 // List of shortened month names.
-StickyNote.MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov',
-                     'Dec'];
-
-
+StickyNote.MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 document.registerElement('sticky-note', StickyNote);

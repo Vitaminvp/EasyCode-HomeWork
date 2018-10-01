@@ -1,0 +1,89 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+.mdl-grid {
+  max-width: 1024px;
+  margin: 20px auto;
+}
+.material-icons {
+  font-size: 36px;
+  top: 5px;
+  position: relative;
+}
+.mdl-layout__header-row {
+  padding: 0;
+  margin: 0;
+}
+#save {
+  width: 100%;
+}
+#notes-container {
+  padding: 0;
+  width: 100%;
+}
+.mdl-card {
+  min-height: 0;
+}
+.message {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 200;
+  padding-bottom: 30px;
+}
+.delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #BBB;
+  font-size: 10px;
+  height: 25px;
+  line-height: 25px;
+}
+.delete:HOVER {
+  color: inherit;
+}
+.date {
+  position: absolute;
+  padding: 5px 15px;
+  bottom: 0;
+  left: 0;
+  font-style: italic;
+  font-size: 12px;
+  color: #BBB;
+}
+#notes-section-title {
+  margin-top: 20px;
+}
+.mdl-card__supporting-text {
+  background: linear-gradient(white, #f9f9f9);
+}
+.sticky-note {
+  background: linear-gradient(#FFF93A, #FFFC9E);
+  min-height:250px;
+}
+.gray{
+  background: #b0bec5;
+  color: grey;
+}
+.yellow{
+  background: rgba(255, 255, 0, 0.25);
+}
+.first, .second, .third{
+  font-weight: bold;
+  text-align: center;
+  color: darkgray;
+}
+.first{
+  background-color: #fff;
+}
+.second{
+  background-color: #f3f3f3;
+}
+.third{
+  background-color: rgba(221, 221, 221, 0.96);
+}
+.stickyNote{
+  position: relative;
+  min-height: 100px;
+    margin-bottom: 10px;
+}

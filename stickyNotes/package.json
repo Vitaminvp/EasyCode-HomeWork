@@ -1,0 +1,16 @@
+{
+  "name": "StickyNote",
+  "description": "Codelab",
+  "license": "Apache-2.0",
+  "author": "",
+  "repository": "",
+  "devDependencies": {
+    "serve": "^1.4.0"
+  },
+  "scripts": {
+    "start": "serve --port 52587"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.3"
+  }
+}
