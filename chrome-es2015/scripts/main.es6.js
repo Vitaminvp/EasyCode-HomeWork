@@ -55,9 +55,9 @@ class StickyNotesApp {
 window.addEventListener('load', () => new StickyNotesApp());
 // A Sticky Note custom element that extends HTMLElement.
 class StickyNote extends HTMLElement{
-    // constructor(){
-    //     super();
-    // }
+    constructor(){
+        super();
+    }
 // Fires when an instance of the element is created.
     createdCallback() {
         StickyNote.CLASSES.forEach( klass => this.classList.add(klass));

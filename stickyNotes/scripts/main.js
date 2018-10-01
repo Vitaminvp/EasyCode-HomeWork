@@ -22,7 +22,7 @@ class StickyNotesApp {
     displayNote(key, message) {
         let note = document.getElementById(key);
         if (!note) {
-            note = document.createElement('div');
+            note = document.createElement('sticky-note');
             note.id = key;
             this.notesSectionTitle.appendChild(note);
         }
@@ -63,14 +63,12 @@ StickyNote.MONTHS = [ 'Январь', 'Февраль', 'Март', 'Апрел�
 
 // Fires when an instance of the element is created.
 StickyNote.createdCallback = function() {
-    StickyNote.CLASSES.forEach(function(klass) {
-        this.classList.add(klass);
-    }.bind(this));
+    this.classList.add(...StickyNote.CLASSES);
     this.innerHTML = StickyNote.TEMPLATE;
     this.messageElement = this.querySelector('.message');
     this.dateElement = this.querySelector('.date');
     this.deleteButton = this.querySelector('.delete');
-    this.deleteButton.addEventListener('click', this.deleteNote.bind(this));
+    this.deleteButton.addEventListener('click', () => this.deleteNote());
 };
 
 // Fires when an attribute of the element is added/deleted/modified.
@@ -100,6 +98,6 @@ StickyNote.deleteNote = function() {
     this.parentNode.removeChild(this);
 };
 
-// document.registerElement('div', {
-//     prototype: StickyNote
-// });
+document.registerElement('sticky-note', {
+    prototype: StickyNote
+});
