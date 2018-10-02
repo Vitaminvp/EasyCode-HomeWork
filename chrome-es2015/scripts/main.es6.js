@@ -60,7 +60,7 @@ class StickyNote extends HTMLElement{
     }
 // Fires when an instance of the element is created.
     createdCallback() {
-        StickyNote.CLASSES.forEach( klass => this.classList.add(klass));
+        this.classList.add(...StickyNote.CLASSES);
         this.innerHTML = StickyNote.TEMPLATE;
         this.messageElement = this.querySelector('.message');
         this.dateElement = this.querySelector('.date');
