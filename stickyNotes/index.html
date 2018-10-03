@@ -1,81 +1,81 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Simple Sticky Notes app">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sticky Notes</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Simple Sticky Notes app">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticky Notes</title>
 
-  <!-- Disable tap highlight on IE -->
-  <meta name="msapplication-tap-highlight" content="no">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
 
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Simple Sticky Notes">
-  <meta name="theme-color" content="#303F9F">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Simple Sticky Notes">
+    <meta name="theme-color" content="#303F9F">
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Simple Sticky Notes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Simple Sticky Notes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
 
-  <!-- Tile icon for Win8 -->
-  <meta name="msapplication-TileImage" content="images/touch/touch-icon-144x144.png">
-  <meta name="msapplication-TileColor" content="#3372DF">
-  <meta name="msapplication-navbutton-color" content="#303F9F">
+    <!-- Tile icon for Win8 -->
+    <meta name="msapplication-TileImage" content="images/touch/touch-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <meta name="msapplication-navbutton-color" content="#303F9F">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue_grey-orange.min.css">
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue_grey-orange.min.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
-  <!-- Header section containing logo -->
-  <header class="container-fluid gray">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h3> Simple Sticky Notes</h3>
-      </div>
-    </div>
-  </header>
+    <!-- Header section containing logo -->
+    <header class="container-fluid gray">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3> Simple Sticky Notes</h3>
+            </div>
+        </div>
+    </header>
 
-  <main class="">
-    <div id="notes-container" class="container">
-    <div class="row">
-      <!-- Card containing the inputs to add a new sticky note -->
-      <div class="col-md-4 mt-5">
-        <div class="gray">
-          <h2 class="text-center">Add new note</h2>
+    <main class="">
+        <div id="notes-container" class="container">
+            <div class="row">
+                <!-- Card containing the inputs to add a new sticky note -->
+                <div class="col-md-4 mt-5">
+                    <div class="gray">
+                        <h2 class="text-center">Add new note</h2>
+                    </div>
+                    <div class="">
+                        <textarea class="form-control"  id="message"></textarea>
+                        <label class="" for="message"></label>
+                        <button id="save" disabled class="btn btn-dark">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Section separator for the sticky notes -->
+            <div id="" class="row mt-5">
+                <div class="col-md-4 text-center"><h3>New</h3></div>
+                <div class="col-md-4 text-center"><h3>In process</h3></div>
+                <div class="col-md-4 text-center"><h3>Done</h3></div>
+            </div>
+            <div id="notes-section-title" class="row">
+                <div class="col-md-4 first cont"></div>
+                <div class="col-md-4 second cont"></div>
+                <div class="col-md-4 third cont"></div>
+            </div>
         </div>
-        <div class="">
-              <textarea class="form-control"  id="message"></textarea>
-              <label class="" for="message"></label>
-            <button id="save" disabled class="btn btn-dark">
-              Add
-            </button>
-        </div>
-      </div>
-    </div>
-      <!-- Section separator for the sticky notes -->
-      <div id="" class="row mt-5">
-        <div class="col-md-4 text-center"><h3>New</h3></div>
-        <div class="col-md-4 text-center"><h3>In process</h3></div>
-        <div class="col-md-4 text-center"><h3>Done</h3></div>
-      </div>
-      <div id="notes-section-title" class="row">
-          <div class="col-md-4 first droppable"></div>
-            <div class="col-md-4 second droppable"></div>
-          <div class="col-md-4 third droppable"></div>
-      </div>
-    </div>
-  </main>
+    </main>
 </div>
 
 
