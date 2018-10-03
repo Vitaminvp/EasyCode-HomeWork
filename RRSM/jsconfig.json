@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "target": "esnext",
+      "module": "es6",
+      "alwaysStrict": true,
+      "checkJs": true,
+      "lib": [
+        "dom",
+        "esnext",
+        "webworker"
+      ],
+      "allowSyntheticDefaultImports": true,
+      "jsx": "react"
+    },
+    "exclude": [
+      "../node_modules",
+      "typings/main",
+      "typings/main.d.ts"
+    ],
+  }
