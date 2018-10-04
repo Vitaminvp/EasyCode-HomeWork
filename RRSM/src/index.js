@@ -8,14 +8,14 @@ const forthComponent = (props) => {
     }
   }, props.name);
 };
-const thirdComponent = (props) => {
+const thirdComponent = props => {
   return React.createElement(props.tag || 'h2', {
     style: {
       fontSize: props.fontSize,
       color: props.color,
       fontStyle: props.fontStyle
     }
-  }, props.name || forthComponent( {tag: 'muTag', name: 'forth' } ));
+  }, props.name || forthComponent( {tag: 'div', name: 'forth' } ));
 };
 const secondComponent = (props) => {
   return React.createElement(props.tag || 'h2', {

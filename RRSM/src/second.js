@@ -1,6 +1,6 @@
 const getGreet = () => "Hello there!!";
 let arr = [
-  {name: "The First"},
+  {name: "The First!!!"},
   {name: "second"},
   {name: "therd"}
 ];
