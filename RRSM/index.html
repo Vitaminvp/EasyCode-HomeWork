@@ -10,26 +10,6 @@
     <div id="app"></div>
     <script src="node_modules/react/umd/react.development.js"></script>
     <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
-    <script>
-        const secondComponent = (props) => {
-            return React.createElement('div', null,
-                React.createElement('h2', { style: { 'font-size': props.fontSize } }, 'Second component')
-            );
-        };
-
-        const firstComponent = () => {
-            return React.createElement('div', null,
-                React.createElement('h1', null, 'My first component!!!'),
-                React.createElement(secondComponent, { fontSize: 18 }),
-                React.createElement(secondComponent, { fontSize: 16 }),
-                React.createElement(secondComponent, { fontSize: 14 }),
-            );
-        };
-
-        ReactDOM.render(
-            React.createElement(firstComponent),
-            document.getElementById('app'),
-        );
-    </script>
+    <script src="dist/main.js"></script>
 </body>
 </html>
