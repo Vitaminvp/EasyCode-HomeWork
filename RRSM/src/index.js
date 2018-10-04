@@ -1,6 +1,6 @@
 require('./style.css');
 const forthComponent = (props) => {
-  return React.createElement(props.tag || 'h2', {
+  return React.createElement(props.tag || 'div', {
     style: {
       fontSize: props.fontSize,
       color: props.color,
@@ -15,7 +15,7 @@ const thirdComponent = (props) => {
       color: props.color,
       fontStyle: props.fontStyle
     }
-  }, props.name || forthComponent( { name: 'forth' } ));
+  }, props.name || forthComponent( {tag: 'muTag', name: 'forth' } ));
 };
 const secondComponent = (props) => {
   return React.createElement(props.tag || 'h2', {
