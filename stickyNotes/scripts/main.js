@@ -45,7 +45,9 @@ class StickyNotesApp {
             } else {
                 date = new Date();
             }
-            let shortDate = new Intl.DateTimeFormat("en-US", {day: 'numeric', month: 'short'}).format(date);
+            let shortDate = new Intl.DateTimeFormat("en-US", { year: 'numeric', month: 'numeric', day: 'numeric',
+                                                    hour: 'numeric', minute: 'numeric', second: 'numeric',
+                                                    hour12: false }).format(date);
             const data = document.createElement('div');
             data.className = "date";
             data.innerHTML = `Created on ${shortDate}`;
@@ -72,7 +74,7 @@ class StickyNotesApp {
 
             const btn = document.createElement('button');
             btn.className = "btn text-right delete";
-            btn.innerHTML = "Delete";
+            btn.innerHTML = "&times";
 
             note.addEventListener('dragstart', (e) => this.handleDragStart(e, this.dragSrcEl, note), false);
             note.addEventListener('dragend', this.handleDragEnd, false);
