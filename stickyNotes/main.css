@@ -1,9 +1,12 @@
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-
+.hide{
+    display: none;
+    opacity: 0;
+}
 .message {
-    font-size: 28px;
+    font-size: 1.6rem;
     line-height: 32px;
     font-weight: 200;
     padding-bottom: 30px;
@@ -39,7 +42,6 @@ html, body {
 }
 
 .stickyNote {
-    background: linear-gradient(#FFF93A, #FFFC9E);
     min-height: 250px;
     position: relative;
     min-height: 100px;
@@ -48,6 +50,16 @@ html, body {
     padding: 5px;
     border: 1px solid #ddd;
 }
+
+.first .stickyNote {
+    background: linear-gradient(#FFF93A, #FFF);
+}
+.second .stickyNote {
+    background: linear-gradient(#ff8d7c, #FFF);
+}
+.third .stickyNote {
+    background: linear-gradient(#74ff62, #FFF);
+}
 .cont.over {
     border: 2px dashed #4e4e4e;
 }
@@ -55,7 +67,10 @@ html, body {
     background: #b0bec5;
     color: grey;
 }
-
+#notes-section-title .cont{
+    padding: 25px;
+    min-height: 150px;
+}
 .first, .second, .third {
     font-weight: bold;
     text-align: center;
@@ -63,7 +78,7 @@ html, body {
 }
 
 .first {
-    background-color: #fff;
+    background-color: rgba(255, 255, 0, 0.23);
 }
 
 .second {

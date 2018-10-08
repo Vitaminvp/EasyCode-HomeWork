@@ -1,4 +1,5 @@
 require('./style.css');
+
 const forthComponent = props => {
   return React.createElement(
     props.tag || 'div',

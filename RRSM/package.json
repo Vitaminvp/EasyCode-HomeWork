@@ -13,12 +13,18 @@
     "babel-core": "^6.26.3",
     "babel-loader": "7",
     "css-loader": "^1.0.0",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9"
   },
   "scripts": {
+    "eslint": "eslint **/*.js --quiet",
     "format": "prettier --list-different --single-quote --write **/*.{js,jsx}",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
