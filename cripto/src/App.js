@@ -1,53 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
+import thirdComponent from './components/third';
+import secondComponent from './components/second';
 
 
-const forthComponent = props => {
-    return React.createElement(
-        props.tag || 'div',
-        {
-            style: {
-                fontSize: props.fontSize,
-                color: props.color,
-                fontStyle: props.fontStyle
-            },
-            key: Math.random()
-        },
-        [props.name || 'forth', ' \n']
-    );
-};
-const thirdComponent = props => {
-    return React.createElement(
-        props.tag || 'h2',
-        {
-            style: {
-                fontSize: props.fontSize,
-                color: props.color,
-                fontStyle: props.fontStyle
-            }
-        },
-        props.name || [
-            forthComponent({ tag: 'span', name: 'forth1' }),
-            forthComponent({ tag: 'div', name: 'forth2' }),
-            forthComponent({})
-        ]
-    );
-};
-const secondComponent = props => {
-    return React.createElement(
-        props.tag || 'h2',
-        {
-            style: {
-                fontSize: props.fontSize,
-                color: props.color,
-                fontStyle: props.fontStyle
-            }
-        },
-        props.name || 'Second component'
-    );
-};
-const first = require('./second.js')[0].name;
+
+
+const first = require('./components/temp.js')[0].name;
 const  App = () => {
     return React.createElement(
         'div',
