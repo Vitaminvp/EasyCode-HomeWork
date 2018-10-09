@@ -1,18 +1,14 @@
 import React from 'react';
 
-const forthComponent = props => {
-    return React.createElement(
-        props.tag || 'div',
-        {
-            style: {
-                fontSize: props.fontSize,
-                color: props.color,
-                fontStyle: props.fontStyle
-            },
-            key: Math.random()
-        },
-        [props.name || 'forth', ' \n']
-    );
-};
+const ForthComponent = props => (
+    <div style = { {
+            fontSize: props.fontSize,
+            color: props.color,
+            fontStyle: props.fontStyle
+            } } >
+        { props.tag }<br />
 
-export default forthComponent;
+        { props.name }
+    </div>);
+
+export default ForthComponent;

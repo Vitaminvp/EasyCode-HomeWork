@@ -1,38 +1,20 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import thirdComponent from './components/third';
-import secondComponent from './components/second';
+import ThirdComponent from './components/third';
+import Secondcomponent from './components/second';
 
 
 
 
 const first = require('./components/temp.js')[0].name;
-const  App = () => {
-    return React.createElement(
-        'div',
-        null,
-        React.createElement('h1', null, first),
-        React.createElement(secondComponent, {
-            fontSize: 18,
-            color: 'red',
-            tag: 'h2'
-        }),
-        React.createElement(secondComponent, {
-            fontSize: 16,
-            undefined,
-            fontStyle: 'italic',
-            name: 'SomeName',
-            tag: 'h3'
-        }),
-        React.createElement(thirdComponent, { fontSize: 14, tag: 'h3' }),
-        React.createElement(thirdComponent, {
-            fontSize: 14,
-            tag: 'h3',
-            name: 'third'
-        })
-    );
-};
+const  App = () => <React.Fragment>
+                        <h1>{ first }</h1>
+                        <Secondcomponent fontSize = {18} color = {'red'} tag = {'h2'} name = {'SomeName'} />
+                        <Secondcomponent fontSize = {16} fontStyle = {'italic'} name = {'SomeName'} tag = {'h3'} />
+                        <ThirdComponent fontSize = {14} tag = {'h3'} name = {'SomeName'} />,
+                        <ThirdComponent fontSize = {14} tag = {'h3'} name = {''} />
+                    </React.Fragment>;
 
 
 
