@@ -11,7 +11,9 @@ html, body {
     font-weight: 200;
     padding-bottom: 30px;
 }
-
+.second.cont .delete{
+    display: none;
+}
 .stickyNote .delete {
     display: flex;
     justify-content: center;
