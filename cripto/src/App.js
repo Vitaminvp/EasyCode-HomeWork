@@ -14,6 +14,7 @@ const  App = () => <React.Fragment>
                         <Secondcomponent fontSize = {16} fontStyle = {'italic'} name = {'SomeName'} tag = {'h3'} />
                         <ThirdComponent fontSize = {14} tag = {'h3'} name = {'SomeName'} />,
                         <ThirdComponent fontSize = {14} tag = {'h3'} name = {''} />
+                        <ThirdComponent fontSize = {14} tag = {'h3'} name = {''} />
                     </React.Fragment>;
 
 
