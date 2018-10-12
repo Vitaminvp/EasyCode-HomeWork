@@ -1,47 +1,34 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
+import React, {Component} from 'react';
+import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom';
 import History from './components/History.jsx';
 import News from './components/News.jsx';
 import Price from './components/Price.jsx';
 import Exchange from './components/Exchange.jsx';
 import Coins from './components/Coins.jsx';
-import ForOFor from './components/ForOFor.jsx'
+import ForOFor from './components/404.jsx'
 import './App.css';
-
+import TopMenu from './components/TopMenu/TopMenu';
 
 class App extends Component {
-  render() {
-    return (
-        <BrowserRouter>
-          <div>
-          <div className="top-menu">
-            <ul className="menu-main">
-              <li>
-                <NavLink to="/" activeClassName="active" exact>Price</NavLink>
-              </li>
-              <li>
-                <NavLink to="/history" activeClassName="active">History</NavLink>
-              </li>
-              <li>
-                <NavLink to="/exchange" activeClassName="active">Exchange</NavLink>
-              </li>
-              <li>
-                <NavLink to="/news" activeClassName="active">News</NavLink>
-              </li>
-            </ul>
-          </div>
-            <Switch>
-              <Route exact path="/" component={Price} />
-              <Route path="/history" component={History} />
-              <Route path="/exchange" component={Exchange} />
-              <Route path="/news" component={News} />
-              <Route path="/coins" component={Coins} />
-              <Route component={ForOFor} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-    );
-  }
+    render() {
+        return (
+            <>
+            <BrowserRouter>
+                <div>
+                    <Route path="/" component={TopMenu}/>
+                    <Switch>
+                        <Route exact path="/" component={Price}/>
+                        <Route path="/history" component={History}/>
+                        <Route path="/exchange" component={Exchange}/>
+                        <Route path="/news" component={News}/>
+                        <Route path="/coins" component={Coins}/>
+                        <Route component={ForOFor}/>
+                    </Switch>
+                </div>
+            </BrowserRouter>
+            </>
+        );
+    }
 }
 
 export default App;
