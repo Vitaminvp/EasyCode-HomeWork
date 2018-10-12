@@ -13,8 +13,9 @@ class App extends Component {
   render() {
     return (
         <BrowserRouter>
-          <div className="App">
-            <ul>
+          <div>
+          <div className="top-menu">
+            <ul className="menu-main">
               <li>
                 <NavLink to="/" activeClassName="active" exact>Price</NavLink>
               </li>
@@ -28,6 +29,7 @@ class App extends Component {
                 <NavLink to="/news" activeClassName="active">News</NavLink>
               </li>
             </ul>
+          </div>
             <Switch>
               <Route exact path="/" component={Price} />
               <Route path="/history" component={History} />
