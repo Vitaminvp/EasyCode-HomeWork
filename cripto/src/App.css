@@ -31,7 +31,7 @@
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 250ms ease-in;
+  transition: opacity 350ms ease-in;
 }
 .fade-exit.fade-exit-active {
   display: none;
@@ -41,5 +41,11 @@ h1{
     text-shadow: 0 2px 0 #000;
 }
 .top-menu + div{
-    margin: 50px;
+    border-radius: 5px;
+    margin: 30px;
+    background-color: #f3ece1;
+    padding: 20px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #c6c6c6;
+    box-shadow: 0 0 1px #ccc;
 }
