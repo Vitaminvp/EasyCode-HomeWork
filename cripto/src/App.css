@@ -40,3 +40,6 @@ h1{
     color: tomato;
     text-shadow: 0 2px 0 #000;
 }
+.top-menu + div{
+    margin: 50px;
+}

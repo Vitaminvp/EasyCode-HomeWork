@@ -1,11 +1,6 @@
-import React, {Component} from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Redirect
-} from "react-router-dom";
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History.jsx';
 import News from './components/News.jsx';
 import Price from './components/Price.jsx';
@@ -18,7 +13,7 @@ import TopMenu from './components/TopMenu/TopMenu';
 class App extends Component {
     render() {
         return (
-            <Router>
+            <BrowserRouter>
                 <Route
                     render={({location}) => (
                         <>
@@ -38,7 +33,7 @@ class App extends Component {
                         </>
                     )}
                 />
-            </Router>
+            </BrowserRouter>
         );
     }
 }
