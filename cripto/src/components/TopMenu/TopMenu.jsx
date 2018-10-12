@@ -5,7 +5,7 @@ import './TopMenu.css';
 class TopMenu extends Component {
     render() {
         return (
-            <div className="top-menu">
+            <nav className="top-menu">
                 <ul className="menu-main">
                     <li>
                         <NavLink to="/" activeClassName="active" exact>Price</NavLink>
@@ -19,8 +19,11 @@ class TopMenu extends Component {
                     <li>
                         <NavLink to="/news" activeClassName="active">News</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/coins" activeClassName="active">Coins</NavLink>
+                    </li>
                 </ul>
-            </div>
+            </nav>
         );
     }
 }
