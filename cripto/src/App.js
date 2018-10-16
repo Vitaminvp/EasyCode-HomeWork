@@ -25,7 +25,7 @@ class App extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={News}/>
-                                    <Route path="/coins" component={(props) => <Coins {...props} test=""/>}/>
+                                    <Route path="/coins" component={(props) => <Coins {...props} />}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>
