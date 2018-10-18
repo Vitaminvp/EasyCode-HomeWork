@@ -10,39 +10,33 @@ class Coins extends Component {
         this.state = {
             coins: Object.keys(coinsData.Data).slice(0, 12).map(key => coinsData.Data[key]),
             value: '',
-            list: ['test']
+            list: []
         };
     }
 
     static defaultProps = {
         test: "select your coin."
-    }
+    };
 
     handleChange = (event) => {
         const value = event.target.value;
-        if(value){
-            this.setState({
-                value
-            });
-            this.isActBtn = false;
-        }else {
-            this.setState({
-                value
-            });
-            this.isActBtn = true
-        }
+        this.isActBtn = !value;
+
+        this.setState({
+            value
+        });
+        console.log("this.state", this.state);
     };
 
     handleSubmit = (event) => {
-        if (this.state.value) {
-            // let list = [...this.state.list];
-            // list.push(this.state.value);
-            alert('Your choice is: ' + this.state.value);
+        const {value} = this.state;
+        if (value) {
+            alert('Your choice is: ' + value);
             this.setState({
-                list: [...this.state.list, this.state.value]
+                list: [...this.state.list, value]
             });
         }
-        console.log("this.state.list", this.state.list);
+        console.log("this.state", this.state);
         event.preventDefault();
     };
 
@@ -61,7 +55,6 @@ class Coins extends Component {
                     </label>
                     <input type="submit" value="Submit" disabled={this.isActBtn}/>
                 </form>
-
             </div>
         );
     }
