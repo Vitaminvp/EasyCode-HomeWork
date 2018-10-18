@@ -5,7 +5,7 @@ import History from './components/History.jsx';
 import News from './components/News.jsx';
 import Price from './components/Price.jsx';
 import Exchange from './components/Exchange.jsx';
-import Coins from './components/Coins.jsx';
+import Coins from './components/coins/Coins.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
