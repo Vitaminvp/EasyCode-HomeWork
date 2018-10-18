@@ -31,7 +31,7 @@ class Coins extends Component {
             });
             this.isActBtn = true
         }
-    }
+    };
 
     handleSubmit = (event) => {
         if (this.state.value) {
@@ -44,7 +44,7 @@ class Coins extends Component {
         }
         console.log("this.state.list", this.state.list);
         event.preventDefault();
-    }
+    };
 
     render() {
         const {coins} = this.state;
