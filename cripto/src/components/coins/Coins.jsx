@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import coinsData from '../../data/coinsList.json';
 import SelectOpt from "./selectOption/select";
 import './coins.css';
+import Coin from "./Coin/Coin";
 
 class Coins extends Component {
     constructor(props) {
@@ -16,11 +17,9 @@ class Coins extends Component {
     static defaultProps = {
         test: "select your coin."
     };
-
     handleChange = (event) => {
         const value = event.target.value;
         this.isActBtn = !value;
-
         this.setState({
             value
         });
@@ -37,9 +36,14 @@ class Coins extends Component {
         console.log("this.state", this.state);
         event.preventDefault();
     };
-
+    handleDelete = (item) =>{
+        const list = this.state.list.filter(element => element !== item );
+        this.setState({
+            list
+        });
+    }
     render() {
-        const {coins} = this.state;
+        const {coins, list} = this.state;
         return (
             <div>
                 <h1>Coins {this.props.test}</h1>
@@ -48,11 +52,15 @@ class Coins extends Component {
                         <i>Pick your coin:&nbsp;</i>
                         <select value={this.state.value} onChange={this.handleChange}>
                             <option value=""></option>
-                            {coins.map(coin => <SelectOpt Name={coin.Name} key={coin.Id}/>)}
+                            {coins.map(coin => <SelectOpt Name={coin.Name} key={coin.Id} />)}
                         </select>
                     </label>
                     <input type="submit" value="Submit" disabled={this.isActBtn}/>
                 </form>
+                <div className="coins">
+                    { list.map(item =>  coins.filter(element => item === element.Name ))
+                        .map(itm => <Coin coin = {itm[0]} key = {itm[0].Id} handleDelete={ this.handleDelete }/>) }
+                </div>
             </div>
         );
     }

@@ -1,3 +1,9 @@
 i{
     color: #4e4e4e;
 }
+.coins{
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    margin-top: 30px;
+}
