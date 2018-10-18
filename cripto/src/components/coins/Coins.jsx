@@ -13,7 +13,6 @@ class Coins extends Component {
             list: []
         };
     }
-
     static defaultProps = {
         test: "select your coin."
     };
@@ -31,7 +30,6 @@ class Coins extends Component {
     handleSubmit = (event) => {
         const {value} = this.state;
         if (value) {
-            alert('Your choice is: ' + value);
             this.setState({
                 list: [...this.state.list, value]
             });
