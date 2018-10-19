@@ -29,9 +29,11 @@ class Coins extends Component {
         const {value} = this.state;
         if (value) {
             this.setState({
+                value: '',
                 list: [...this.state.list, value]
             });
         }
+        this.isActBtn = true;
         event.preventDefault();
     };
     handleDelete = (item) =>{
@@ -50,14 +52,17 @@ class Coins extends Component {
                         <i>Pick your coin:&nbsp;</i>
                         <select value={this.state.value} onChange={this.handleChange} className="coinSelect">
                             <option value=""></option>
-                            {coins.map(coin => <SelectOpt Name={coin.Name} key={coin.Id} />)}
+                            { coins.filter(coin => list.every( lst => lst !== coin.Name )).map(item => <SelectOpt Name={item.Name} key={item.Id} />)}
                         </select>
                     </label>
                     <input type="submit" value="Submit" disabled={this.isActBtn} className="submitBtn"/>
                 </form>
                 <div className="coins">
                     { list.map(item =>  coins.filter(element => item === element.Name ))
-                        .map(itm => <Coin coin = {itm[0]} key = {itm[0].Id} handleDelete={ this.handleDelete }/>) }
+                        .map(itm => {
+                            const [item] = itm;
+                            return <Coin coin = {item} key = {item.Id} handleDelete={ this.handleDelete }/>
+                        }) }
                 </div>
             </div>
         );
