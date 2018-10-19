@@ -150,7 +150,7 @@ class Coins extends Component {
                         {listToMap.map(itm => {
                             const [item] = itm;
                             const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
-                            return <CurAmount coin={item} key={item.Id} value={coinFromList.value} currency={this.state.curlist} />
+                            return <CurAmount coin={item} key={item.Id} value={coinFromList.value} currency={this.state.curlist} currencyAll={this.state.currency}/>
                         })}
                     </div>
                 </div>

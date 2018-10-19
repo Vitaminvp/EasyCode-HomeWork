@@ -16,6 +16,7 @@ i{
 }
 .coins{
     display: flex;
+    align-content: center;
     flex-wrap: wrap;
     border-radius: 5px;
     margin-top: 30px;
