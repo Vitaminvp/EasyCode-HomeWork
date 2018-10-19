@@ -1,0 +1,11 @@
+.coinAmount_text{
+    padding-left: 10px;
+    width: 100%;
+    margin: 0 10px;
+    height: 25px;
+    border-radius: 5px;
+    outline: none;
+    color: tomato;
+    text-shadow: 0 1px 0 #000;
+    font-weight: bold;
+}

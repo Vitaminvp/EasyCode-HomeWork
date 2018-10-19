@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import './coinAmount.css';
 
 class CoinAmount extends Component {
-    handleClick = (e) => {
+    handleCange = (e) => {
         e.preventDefault();
+        this.props.handleCoinsChangeAmount(this.props.coin.Name, e.target.value);
 
     }
     render() {
-        const {coin} = this.props;
+        const {coin, value} = this.props;
         return (
             <div className="coinAmount">
-                <label className="coinAmount_label"><span>{coin.Name}:</span> <input name={coin.Name} onClick={this.handleClick} className="coinAmount_input" /></label>
+                <label className="coinAmount_label"><span>{coin.Name}:</span> <input onChange={this.handleCange} defaultValue={value} className="coinAmount_input" /></label>
             </div>
         );
     }

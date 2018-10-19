@@ -13,7 +13,7 @@ class Coins extends Component {
         this.isActBtnCoin = true;
         this.isActBtnCur = true;
         this.state = {
-            currency: [{Name:'USD', Id: '0'}, {Name:'EUR', Id: '1'}, {Name:'UHR', Id: '2'}],
+            currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}],
             current: '',
             curlist: [],
             coins: [],
@@ -45,7 +45,10 @@ class Coins extends Component {
         });
     };
     handleSubmit = (event) => {
-        const {value} = this.state;
+        const value = {
+            Name: this.state.value,
+            value: 0
+        };
         if (value) {
             this.setState({
                 value: '',
@@ -56,32 +59,45 @@ class Coins extends Component {
         event.preventDefault();
     };
     handleSubmitCur = (event) => {
-        const {current} = this.state;
+        const current = {
+            Name: this.state.current
+        };
         if (current) {
             this.setState({
                 current: '',
                 curlist: [...this.state.curlist, current]
             });
         }
+        console.log("this.state.curlist", this.state.curlist);
         this.isActBtnCur = true;
         event.preventDefault();
     };
     handleDelete = (item) => {
-        const list = this.state.list.filter(element => element !== item);
+        const list = this.state.list.filter(element => element.Name !== item);
         this.setState({
             list
         });
     };
     handleDeleteCur = (item) => {
-        const curlist = this.state.curlist.filter(element => element !== item);
+        const curlist = this.state.curlist.filter(element => element.Name !== item);
         this.setState({
             curlist
         });
     };
+    handleCoinsChangeAmount = (name, value) =>{
+        let list = [...this.state.list];
+        list = list.map(item => {
+            if(item.Name === name ) item.value = value;
+            return item;
+        });
+        this.setState({
+            list
+        });
+    };
     render() {
         const {coins, list, currency, curlist} = this.state;
-        const listToMap = list.map(item => coins.filter(element => item === element.Name));
-        const curlistToMap = curlist.map(item => currency.filter(element => item === element.Name));
+        const listToMap = list.map(item => coins.filter(element => item.Name === element.Name));
+        const curlistToMap = curlist.map(item => currency.filter(element => item.Name === element.Name));
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
@@ -91,7 +107,7 @@ class Coins extends Component {
                             <i>Pick your coin:&nbsp;</i>
                             <select value={this.state.value} onChange={this.handleChangeCoin} className="coinSelect">
                                 <option value=""></option>
-                                {coins.filter(coin => list.every(lst => lst !== coin.Name)).map(item => <SelectOpt
+                                {coins.filter(coin => list.every(lst => lst.Name !== coin.Name)).map(item => <SelectOpt
                                     Name={item.Name} key={item.Id}/>)}
                             </select>
                         </label>
@@ -106,7 +122,8 @@ class Coins extends Component {
                     <div className="coinsAmount">
                         {listToMap.map(itm => {
                                     const [item] = itm;
-                                    return <CoinAmount coin={item} key={item.Id}/>
+                                    const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
+                                    return <CoinAmount coin={item} key={item.Id} value={coinFromList.value} handleCoinsChangeAmount={this.handleCoinsChangeAmount}/>
                                 })}
                     </div>
                 </div>
@@ -117,7 +134,7 @@ class Coins extends Component {
                             <i>Pick your currency:&nbsp;</i>
                             <select value={this.state.current} onChange={this.handleChangeCur} className="coinSelect">
                                 <option value=""></option>
-                                {currency.filter(cur => curlist.every(lst => lst !== cur.Name))
+                                {currency.filter(cur => curlist.every(lst => lst.Name !== cur.Name))
                                     .map(item => <SelectOpt Name={item.Name} key={item.Id}/>)}
                             </select>
                         </label>
@@ -126,13 +143,14 @@ class Coins extends Component {
                     <div className="coins">
                         {curlistToMap.map(itm => {
                             const [item] = itm;
-                            return <Cur key ={item.Id} cur={item} handleDeleteCur={this.handleDeleteCur}/>;
+                            return <Cur key ={item.Id} cur={item} handleDeleteCur={this.handleDeleteCur} />;
                         })}
                     </div>
                     <div className="coinsAmount">
                         {listToMap.map(itm => {
                             const [item] = itm;
-                            return <CurAmount coin={item} key={item.Id}/>
+                            const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
+                            return <CurAmount coin={item} key={item.Id} value={coinFromList.value} currency={this.state.curlist} />
                         })}
                     </div>
                 </div>
