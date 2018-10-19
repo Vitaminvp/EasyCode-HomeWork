@@ -6,13 +6,16 @@ class CurAmount extends Component {
         currensy: []
     };
     render() {
-        const {coin, value, currensy} = this.props;
-        console.log("currensy", currensy);
+        const {coin, value, currency} = this.props;
+        console.log("currency", currency);
 
         return (
             <div className="coinAmount">
                 <div className="coinAmount_text" >{coin.Name}:
-                     {value}
+                    <ul>
+                        {currency.map(item => <li>{value* 528}  {item.Name}</li>)}
+                    </ul>
+
                 </div>
             </div>
         );
