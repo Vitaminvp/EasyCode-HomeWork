@@ -16,4 +16,8 @@
     height: 25px;
     border-radius: 5px;
     outline: none;
+    color: tomato;
+    text-shadow: 0 1px 0 #000;
+    font-weight: bold;
+
 }

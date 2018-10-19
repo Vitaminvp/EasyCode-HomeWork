@@ -10,7 +10,7 @@ class Cur extends Component {
         const {cur} = this.props;
         return (
             <div className="coin">
-                <div>{cur.Name}</div>
+                <h3>{cur.Name}</h3>
                 <a href="/" onClick={this.handleClick}>&times;</a>
             </div>
         );

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import coinsData from '../../data/coinsList.json';
 import SelectOpt from "./selectOption/select";
 import './coins.css';
 import Coin from "./Coin/Coin";
 import CoinAmount from "./CoinAmount/CoinAmount";
+import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
+import { CRYPTO_COMPARE_URL_ALL } from '../../constants';
 
 class Coins extends Component {
     constructor(props) {
@@ -15,12 +16,17 @@ class Coins extends Component {
             currency: [{Name:'USD', Id: '0'}, {Name:'EUR', Id: '1'}, {Name:'UHR', Id: '2'}],
             current: '',
             curlist: [],
-            coins: Object.keys(coinsData.Data).slice(0, 12).map(key => coinsData.Data[key]),
+            coins: [],
             value: '',
             list: []
         };
     }
-
+    componentDidMount() {
+        fetch(CRYPTO_COMPARE_URL_ALL)
+            .then(responce => responce.json())
+            .then(responce => this.setState({ coins: Object.keys(responce.Data).slice(0, 12).map(key => responce.Data[key]) }))
+            .catch(err => alert(err));
+    }
     static defaultProps = {
         test: "select your coin."
     };
@@ -37,9 +43,7 @@ class Coins extends Component {
         this.setState({
             current
         });
-        console.log("this.state.current", this.state.current);
     };
-
     handleSubmit = (event) => {
         const {value} = this.state;
         if (value) {
@@ -91,7 +95,7 @@ class Coins extends Component {
                                     Name={item.Name} key={item.Id}/>)}
                             </select>
                         </label>
-                        <input type="submit" value="Submit" disabled={this.isActBtnCoin} className="submitBtn"/>
+                        <input type="submit" value="Add" disabled={this.isActBtnCoin} className="submitBtn"/>
                     </form>
                     <div className="coins">
                         {listToMap.map(itm => {
@@ -113,16 +117,22 @@ class Coins extends Component {
                             <i>Pick your currency:&nbsp;</i>
                             <select value={this.state.current} onChange={this.handleChangeCur} className="coinSelect">
                                 <option value=""></option>
-                                {currency.filter(cur => curlist.every(lst => lst !== cur.Name)).map(item => <SelectOpt
-                                    Name={item.Name} key={item.Id}/>)}
+                                {currency.filter(cur => curlist.every(lst => lst !== cur.Name))
+                                    .map(item => <SelectOpt Name={item.Name} key={item.Id}/>)}
                             </select>
                         </label>
-                        <input type="submit" value="Submit" disabled={this.isActBtnCur} className="submitBtn"/>
+                        <input type="submit" value="Add" disabled={this.isActBtnCur} className="submitBtn"/>
                     </form>
                     <div className="coins">
                         {curlistToMap.map(itm => {
                             const [item] = itm;
                             return <Cur key ={item.Id} cur={item} handleDeleteCur={this.handleDeleteCur}/>;
+                        })}
+                    </div>
+                    <div className="coinsAmount">
+                        {listToMap.map(itm => {
+                            const [item] = itm;
+                            return <CurAmount coin={item} key={item.Id}/>
                         })}
                     </div>
                 </div>
