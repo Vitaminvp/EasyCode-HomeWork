@@ -146,7 +146,7 @@ class Coins extends Component {
                             return <Cur key ={item.Id} cur={item} handleDeleteCur={this.handleDeleteCur} />;
                         })}
                     </div>
-                    <div className="coinsAmount">
+                    <div className="coinsAmounts">
                         {listToMap.map(itm => {
                             const [item] = itm;
                             const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
