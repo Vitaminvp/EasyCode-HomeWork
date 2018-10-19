@@ -6,6 +6,8 @@ import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
 import { CRYPTO_COMPARE_URL_ALL } from '../../constants';
+import { COINS_NUM } from '../../constants';
+
 
 class Coins extends Component {
     constructor(props) {
@@ -24,7 +26,7 @@ class Coins extends Component {
     componentDidMount() {
         fetch(CRYPTO_COMPARE_URL_ALL)
             .then(responce => responce.json())
-            .then(responce => this.setState({ coins: Object.keys(responce.Data).slice(0, 12).map(key => responce.Data[key]) }))
+            .then(responce => this.setState({ coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key]) }))
             .catch(err => alert(err));
     }
     static defaultProps = {

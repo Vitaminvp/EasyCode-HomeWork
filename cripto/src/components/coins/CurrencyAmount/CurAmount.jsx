@@ -33,7 +33,6 @@ class CurAmount extends Component {
             </div>
         );
     }
-
 }
 
 export default CurAmount;
