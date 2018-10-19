@@ -18,7 +18,6 @@ class CurAmount extends Component {
             .then(responce => responce.json())
             .then(responce => this.setState({ currencyRate: responce }))
             .catch(err => alert(err));
-        console.log("this.state.currencyRate", this.state.currencyRate);
     }
     render() {
         const {coin, value, currency} = this.props;

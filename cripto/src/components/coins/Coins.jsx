@@ -70,7 +70,6 @@ class Coins extends Component {
                 curlist: [...this.state.curlist, current]
             });
         }
-        console.log("this.state.curlist", this.state.curlist);
         this.isActBtnCur = true;
         event.preventDefault();
     };
