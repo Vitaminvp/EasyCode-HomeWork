@@ -7,3 +7,14 @@ i{
     border-radius: 5px;
     margin-top: 30px;
 }
+.coinSelect, .submitBtn{
+    width: 100px;
+    margin: 0 10px;
+    height: 30px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+.submitBtn:disabled{
+    cursor: default;
+}

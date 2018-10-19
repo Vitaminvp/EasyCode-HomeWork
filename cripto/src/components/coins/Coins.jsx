@@ -23,7 +23,6 @@ class Coins extends Component {
         this.setState({
             value
         });
-        console.log("this.state", this.state);
     };
 
     handleSubmit = (event) => {
@@ -33,7 +32,6 @@ class Coins extends Component {
                 list: [...this.state.list, value]
             });
         }
-        console.log("this.state", this.state);
         event.preventDefault();
     };
     handleDelete = (item) =>{
@@ -50,12 +48,12 @@ class Coins extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <i>Pick your coin:&nbsp;</i>
-                        <select value={this.state.value} onChange={this.handleChange}>
+                        <select value={this.state.value} onChange={this.handleChange} className="coinSelect">
                             <option value=""></option>
                             {coins.map(coin => <SelectOpt Name={coin.Name} key={coin.Id} />)}
                         </select>
                     </label>
-                    <input type="submit" value="Submit" disabled={this.isActBtn}/>
+                    <input type="submit" value="Submit" disabled={this.isActBtn} className="submitBtn"/>
                 </form>
                 <div className="coins">
                     { list.map(item =>  coins.filter(element => item === element.Name ))
