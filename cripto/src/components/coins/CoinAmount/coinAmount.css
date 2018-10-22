@@ -2,11 +2,29 @@
     margin: 10px;
 }
 .coinAmount_label{
+    position: relative;
     color: tomato;
     font-weight: bold;
     text-shadow: 0 1px 0 #000;
 }
-.coinAmount_label span{
+.warning{
+    display: none;
+    opacity: 0.75;
+    position: absolute;
+    top: -25px;
+    left: 90%;
+    background-color: tomato;
+    border-radius: 5px;
+    border: 1px solid red;
+    text-shadow: none;
+    color: white;
+    white-space: nowrap;
+    padding: 4px;
+}
+.coinAmount_input.alarm{
+    border: 1px solid red;
+}
+.coinAmount_label .coinName{
     display: inline-block;
     width: 60px;
 }
