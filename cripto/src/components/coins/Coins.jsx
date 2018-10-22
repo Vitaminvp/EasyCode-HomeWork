@@ -15,7 +15,7 @@ class Coins extends Component {
         this.isActBtnCoin = true;
         this.isActBtnCur = true;
         this.state = {
-            currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}],
+            currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}, {Name: 'RUB', Id: '3'}],
             current: '',
             curlist: [],
             coins: [],

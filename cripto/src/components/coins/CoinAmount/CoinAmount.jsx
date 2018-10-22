@@ -24,7 +24,7 @@ class CoinAmount extends Component {
                 <label className="coinAmount_label"><span className="coinName">{coin.Name}:</span> <input onChange={this.handleChange}
                                                                                      defaultValue={value}
                                                                                      className="coinAmount_input"/>
-                                                                              <span className="warning">Input numbers!</span></label>
+                                                                              <span className="warning">Only numbers allowed!</span></label>
             </div>
         );
     }
