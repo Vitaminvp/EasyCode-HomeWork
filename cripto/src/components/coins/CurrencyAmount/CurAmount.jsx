@@ -27,7 +27,6 @@ class CurAmount extends Component {
                     <ul>
                         { currency.map(item => <li key={Math.random()}>{value * this.state.currencyRate[item.Name]}  {item.Name}</li>) }
                     </ul>
-
                 </div>
             </div>
         );
