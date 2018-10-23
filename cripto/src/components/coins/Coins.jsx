@@ -34,15 +34,15 @@ class Coins extends Component {
             .catch(err => alert(err));
     }
 
-    handleChangeCoin = e => {
-        const value = e.target.value;
-        this.isActBtnCoin = !value;
-        this.setState({value});
-    };
-    handleChangeCur = e => {
-        const current = e.target.value;
-        this.isActBtnCur = !current;
-        this.setState({current});
+    handleChange = (value, isCoin) => {
+        if(isCoin){
+            this.isActBtnCoin = !value;
+            this.setState({value});
+        }else{
+            this.isActBtnCur = !value;
+            this.setState({current: value});
+        }
+
     };
     handleSubmit = event => {
         const value = {
@@ -69,15 +69,19 @@ class Coins extends Component {
         this.isActBtnCur = true;
         event.preventDefault();
     };
+
+    filterForDelete = (item, isCoin) => (!isCoin? this.state.curlist:this.state.list).filter(element => element.Name !== item) ;
+
     handleDelete = (item, isCoin) => {
         if(isCoin){
-            const list = this.state.list.filter(element => element.Name !== item);
+            const list = this.filterForDelete(item, isCoin);
             this.setState({list});
         }else{
-            const curlist = this.state.curlist.filter(element => element.Name !== item);
+            const curlist = this.filterForDelete(item);
             this.setState({curlist});
         }
     };
+
     handleCoinsChangeAmount = (name, value) => {
         let list = [...this.state.list];
         list = list.map(item => {
@@ -88,53 +92,51 @@ class Coins extends Component {
     };
 
     render() {
-        const {coins, list, currency, curlist} = this.state;
-        const listToMap = list.map(item => coins.filter(element => item.Name === element.Name));
+        const {coins, list, currency, curlist, value} = this.state;
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
                     <h2>Coins: {this.props.test}</h2>
+
                     <Form  onSubmit={this.handleSubmit}
-                           value={this.state.value}
-                           onChange={this.handleChangeCoin}
+                           value={value}
+                           onChange={this.handleChange}
                            coins={coins}
                            list={list}
-                           disabled={this.isActBtnCoin}
-                    />
+                           isCoin={true}
+                           disabled={this.isActBtnCoin} />
+
                     <Coin handleDelete={this.handleDelete}
                           list={list}
                           items={coins}
-                    />
-                    <div className="coinsAmount">
-                        {listToMap.map(itm => {
-                            const [item] = itm;
-                            const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
-                            return <CoinAmount coin={item} key={item.Id} value={coinFromList.value}
-                                               handleCoinsChangeAmount={this.handleCoinsChangeAmount}/>
-                        })}
-                    </div>
+                          classN="coins"   />
+
+                    <CoinAmount list={list}
+                                items={coins}
+                                classN="coinsAmounts"
+                                handleCoinsChangeAmount={this.handleCoinsChangeAmount}
+                                amount={true}  />
                 </div>
                 <div className="coinContainer">
                     <h2>Curensy: </h2>
                     <Form  onSubmit={this.handleSubmitCur}
                            value={this.state.current}
-                           onChange={this.handleChangeCur}
+                           onChange={this.handleChange}
                            coins={currency}
                            list={curlist}
                            disabled={this.isActBtnCur}
                     />
                     <Cur handleDelete={this.handleDelete}
+                         classN="coins"
                          list={curlist}
                          items={currency} />
 
-                    <div className="coinsAmounts">
-                        {listToMap.map(itm => {
-                            const [item] = itm;
-                            const [coinFromList] = this.state.list.filter(elem => elem.Name === item.Name);
-                            return <CurAmount coin={item} key={item.Id} value={coinFromList.value}
-                                              currency={this.state.curlist} currencyAll={this.state.currency}/>
-                        })}
-                    </div>
+                    <CurAmount list={list}
+                               items={coins}
+                               classN="coinsAmounts"
+                               curlist={curlist}
+                               currencyAll={currency}
+                               amount={true}  />
                 </div>
             </div>
         );
