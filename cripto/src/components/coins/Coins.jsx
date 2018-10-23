@@ -101,10 +101,10 @@ class Coins extends Component {
                            list={list}
                            disabled={this.isActBtnCoin}
                     />
-
                     <Coin handleDelete={this.handleDelete}
                           list={list}
-                          items={coins} />
+                          items={coins}
+                    />
                     <div className="coinsAmount">
                         {listToMap.map(itm => {
                             const [item] = itm;
@@ -126,6 +126,7 @@ class Coins extends Component {
                     <Cur handleDelete={this.handleDelete}
                          list={curlist}
                          items={currency} />
+
                     <div className="coinsAmounts">
                         {listToMap.map(itm => {
                             const [item] = itm;
