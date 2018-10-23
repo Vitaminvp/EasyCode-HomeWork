@@ -34,17 +34,17 @@ class Coins extends Component {
             .catch(err => alert(err));
     }
 
-    handleChangeCoin = (event) => {
-        const value = event.target.value;
+    handleChangeCoin = e => {
+        const value = e.target.value;
         this.isActBtnCoin = !value;
         this.setState({value});
     };
-    handleChangeCur = (event) => {
-        const current = event.target.value;
+    handleChangeCur = e => {
+        const current = e.target.value;
         this.isActBtnCur = !current;
         this.setState({current});
     };
-    handleSubmit = (event) => {
+    handleSubmit = event => {
         const value = {
             Name: this.state.value,
             value: 0
@@ -58,7 +58,7 @@ class Coins extends Component {
         this.isActBtnCoin = true;
         event.preventDefault();
     };
-    handleSubmitCur = (event) => {
+    handleSubmitCur = event => {
         const current = { Name: this.state.current };
         if (current) {
             this.setState({
@@ -90,7 +90,6 @@ class Coins extends Component {
     render() {
         const {coins, list, currency, curlist} = this.state;
         const listToMap = list.map(item => coins.filter(element => item.Name === element.Name));
-        const curlistToMap = curlist.map(item => currency.filter(element => item.Name === element.Name));
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
@@ -102,12 +101,10 @@ class Coins extends Component {
                            list={list}
                            disabled={this.isActBtnCoin}
                     />
-                    <div className="coins">
-                        {listToMap.map(itm => {
-                            const [item] = itm;
-                            return <Coin coin={item} key={item.Id} handleDelete={this.handleDelete}/>
-                        })}
-                    </div>
+
+                    <Coin handleDelete={this.handleDelete}
+                          list={list}
+                          items={coins} />
                     <div className="coinsAmount">
                         {listToMap.map(itm => {
                             const [item] = itm;
@@ -126,12 +123,9 @@ class Coins extends Component {
                            list={curlist}
                            disabled={this.isActBtnCur}
                     />
-                    <div className="coins">
-                        {curlistToMap.map(itm => {
-                            const [item] = itm;
-                            return <Cur key={item.Id} cur={item} handleDeleteCur={this.handleDelete}/>;
-                        })}
-                    </div>
+                    <Cur handleDelete={this.handleDelete}
+                         list={curlist}
+                         items={currency} />
                     <div className="coinsAmounts">
                         {listToMap.map(itm => {
                             const [item] = itm;

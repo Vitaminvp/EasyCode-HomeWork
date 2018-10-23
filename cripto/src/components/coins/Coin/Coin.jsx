@@ -1,17 +1,18 @@
 import React from 'react';
 import {CRYPTO_COMPARE_URL} from '../../../constants';
 import './coin.css';
+import WrappedComponent from '../decorators/listTransformation';
 
-const Coin = ({coin, handleDelete}) => {
+const Coin = ({item, handleDelete}) => {
     const handleClick = (e) => {
         e.preventDefault();
-        handleDelete(coin.Name, true);
+        handleDelete(item.Name, true);
     }
     return <div className="coin">
-        <img src={`${CRYPTO_COMPARE_URL}${coin.ImageUrl}`} alt={coin.CoinName}/>
+        <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName}/>
         <a href="/" onClick={handleClick}>&times;</a>
     </div>;
 };
 
-export default Coin;
+export default WrappedComponent(Coin);
 
