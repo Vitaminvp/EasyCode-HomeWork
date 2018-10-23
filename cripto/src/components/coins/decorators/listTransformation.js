@@ -8,7 +8,7 @@ export default (OriginalComponent) => class WrappedComponent extends Component {
         return <div className={classN}>
             {listToMap.map(itm => {
                 const [item] = itm;
-                const coinFromList = !!amount ? list.filter(elem => elem.Name === item.Name)[0].value: '';
+                const coinFromList = amount ? list.filter(elem => elem.Name === item.Name)[0].value: '';
                 return <OriginalComponent {...this.props} item={item} key={item.Id} value={coinFromList}/>
             })}
         </div>

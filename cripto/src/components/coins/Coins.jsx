@@ -104,7 +104,7 @@ class Coins extends Component {
                            coins={coins}
                            list={list}
                            isCoin={true}
-                           disabled={this.isActBtnCoin} />
+                           disabled={this.isActBtnCoin} >Pick your coins</Form>
 
                     <Coin handleDelete={this.handleDelete}
                           list={list}
@@ -124,8 +124,7 @@ class Coins extends Component {
                            onChange={this.handleChange}
                            coins={currency}
                            list={curlist}
-                           disabled={this.isActBtnCur}
-                    />
+                           disabled={this.isActBtnCur}>Pick your currency</Form>
                     <Cur handleDelete={this.handleDelete}
                          classN="coins"
                          list={curlist}
