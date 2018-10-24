@@ -104,7 +104,7 @@ class Coins extends Component {
                     <Coin handleDelete={this.handleDelete}
                           list={list}
                           items={coins}
-                    />
+                     />
                     <div className="coinsAmount">
                         {listToMap.map(itm => {
                             const [item] = itm;

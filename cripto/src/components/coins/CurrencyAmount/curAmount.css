@@ -22,9 +22,15 @@
     position: relative;
 }
 .coinAmount_text ul{
+    display: flex;
+    width: 100%;
     list-style-type: none;
     margin: 0;
     margin-left: 10px;
     padding: 0;
     text-shadow: none;
+}
+.coinAmount_text ul li{
+    width: 25%;
+    text-align: right;
 }
