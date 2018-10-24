@@ -1,13 +1,15 @@
-.coinAmount{
+.coinAmount {
     margin: 10px;
 }
-.coinAmount_label{
+
+.coinAmount_label {
     position: relative;
     color: tomato;
     font-weight: bold;
     text-shadow: 0 1px 0 #000;
 }
-.warning{
+
+.warning {
     display: none;
     opacity: 0.75;
     position: absolute;
@@ -21,14 +23,17 @@
     white-space: nowrap;
     padding: 4px;
 }
-.coinAmount_input.alarm{
+
+.coinAmount_input.alarm {
     border: 1px solid red;
 }
-.coinAmount_label .coinName{
+
+.coinAmount_label .coinName {
     display: inline-block;
     width: 60px;
 }
-.coinAmount_input{
+
+.coinAmount_input {
     padding-left: 10px;
     width: 60px;
     margin: 0 10px;

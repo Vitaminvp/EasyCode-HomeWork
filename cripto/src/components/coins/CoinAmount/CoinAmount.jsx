@@ -18,12 +18,14 @@ const CoinAmount = ({item, value, handleCoinsChangeAmount}) => {
         e.preventDefault();
     };
 
-        return <div className="coinAmount">
-                <label className="coinAmount_label"><span className="coinName">{item.Name}:</span> <input onChange={handleChange}
-                                                                                     defaultValue={value}
-                                                                                     className="coinAmount_input"/>
-                                                                              <span className="warning">Only numbers allowed!</span></label>
-            </div>;
+    return <div className="coinAmount">
+        <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
+            <input
+                onChange={handleChange}
+                defaultValue={value}
+                className="coinAmount_input"/>
+            <span className="warning">Only numbers allowed!</span></label>
+    </div>;
 };
 
 export default WrappedComponent(CoinAmount);

@@ -35,48 +35,49 @@ class Coins extends Component {
     }
 
     handleChange = (value, isCoin) => {
-        if(isCoin){
+        if (isCoin) {
             this.isActBtnCoin = !value;
             this.setState({value});
-        }else{
+        } else {
             this.isActBtnCur = !value;
             this.setState({current: value});
         }
 
     };
-    handleSubmit = event => {
-        const value = {
-            Name: this.state.value,
-            value: 0
-        };
-        if (value) {
-            this.setState({
-                value: '',
-                list: [...this.state.list, value]
-            });
+    handleSubmit = (event, isCoin) => {
+        if (isCoin) {
+            const value = {
+                Name: this.state.value,
+                value: 0
+            };
+            if (value) {
+                this.setState({
+                    value: '',
+                    list: [...this.state.list, value]
+                });
+            }
+            this.isActBtnCoin = true;
+        } else {
+            const current = {Name: this.state.current};
+            if (current) {
+                this.setState({
+                    current: '',
+                    curlist: [...this.state.curlist, current]
+                });
+            }
+            this.isActBtnCur = true;
         }
-        this.isActBtnCoin = true;
-        event.preventDefault();
-    };
-    handleSubmitCur = event => {
-        const current = { Name: this.state.current };
-        if (current) {
-            this.setState({
-                current: '',
-                curlist: [...this.state.curlist, current]
-            });
-        }
-        this.isActBtnCur = true;
         event.preventDefault();
     };
 
-    filterForDelete = (item, isCoin) => (!isCoin? this.state.curlist:this.state.list).filter(element => element.Name !== item) ;
+
+    filterForDelete = (item, isCoin) => (!isCoin ? this.state.curlist : this.state.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
-        if(isCoin){
+        if (isCoin) {
             const list = this.filterForDelete(item, isCoin);
             this.setState({list});
-        }else{
+        } else {
             const curlist = this.filterForDelete(item);
             this.setState({curlist});
         }
@@ -98,44 +99,46 @@ class Coins extends Component {
                 <div className="coinContainer">
                     <h2>Coins: {this.props.test}</h2>
 
-                    <Form  onSubmit={this.handleSubmit}
-                           value={value}
-                           onChange={this.handleChange}
-                           coins={coins}
-                           list={list}
-                           isCoin={true}
-                           disabled={this.isActBtnCoin} >Pick your coins</Form>
+                    <Form onSubmit={this.handleSubmit}
+                          value={value}
+                          onChange={this.handleChange}
+                          coins={coins}
+                          list={list}
+                          isCoin={true}
+                          disabled={this.isActBtnCoin}>Pick your coins</Form>
 
                     <Coin handleDelete={this.handleDelete}
                           list={list}
                           items={coins}
-                          classN="coins"   />
+                          classN="coins"/>
 
                     <CoinAmount list={list}
                                 items={coins}
                                 classN="coinsAmounts"
                                 handleCoinsChangeAmount={this.handleCoinsChangeAmount}
-                                amount={true}  />
+                                amount={true}/>
                 </div>
                 <div className="coinContainer">
-                    <h2>Curensy: </h2>
-                    <Form  onSubmit={this.handleSubmitCur}
-                           value={this.state.current}
-                           onChange={this.handleChange}
-                           coins={currency}
-                           list={curlist}
-                           disabled={this.isActBtnCur}>Pick your currency</Form>
+                    <h2>Currency: </h2>
+
+                    <Form onSubmit={this.handleSubmit}
+                          value={this.state.current}
+                          onChange={this.handleChange}
+                          coins={currency}
+                          list={curlist}
+                          disabled={this.isActBtnCur}>Pick your currency</Form>
+
                     <Cur handleDelete={this.handleDelete}
                          classN="coins"
                          list={curlist}
-                         items={currency} />
+                         items={currency}/>
 
                     <CurAmount list={list}
                                items={coins}
                                classN="coinsAmounts"
                                curlist={curlist}
                                currencyAll={currency}
-                               amount={true}  />
+                               amount={true}/>
                 </div>
             </div>
         );
