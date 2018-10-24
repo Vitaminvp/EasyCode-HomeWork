@@ -29,8 +29,10 @@
     margin-left: 10px;
     padding: 0;
     text-shadow: none;
+<<<<<<< HEAD
 }
 .coinAmount_text ul li{
     width: 25%;
+    padding: 0 5px;
     text-align: right;
 }
