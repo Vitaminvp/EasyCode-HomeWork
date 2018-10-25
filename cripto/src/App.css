@@ -49,3 +49,39 @@ h1{
     border-bottom: 1px solid #c6c6c6;
     box-shadow: 0 0 1px #ccc;
 }
+#modal-root {
+    position: relative;
+    z-index: 999;
+}
+.modal {
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal div{
+    position: relative;
+}
+.modal div img{
+    max-width: 300px;
+}
+.modal div button{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    font-size: 5rem;
+    color: darkgray;
+    transition: all .25s ease;
+    cursor: pointer;
+}
+.modal div button:hover{
+    color: tomato;
+    transform: scale(1.05);
+}
