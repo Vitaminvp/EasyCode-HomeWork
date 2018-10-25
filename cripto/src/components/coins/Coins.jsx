@@ -44,7 +44,9 @@ class Coins extends Component {
         localStorage.setItem('curlist', JSON.stringify(localCurList));
     };
 
-    componentWillUnmount(){
+    // componentWillUnmount(){
+    // }
+    getSnapshotBeforeUpdate(prevProps, prevState){
         this.setLocalState();
     }
 
@@ -56,7 +58,7 @@ class Coins extends Component {
             this.isActBtnCur = !value;
             this.setState({current: value});
         }
-        this.setLocalState();
+        // this.setLocalState();
     };
     handleSubmit = (event, isCoin) => {
         if (isCoin) {
@@ -82,9 +84,9 @@ class Coins extends Component {
             this.isActBtnCur = true;
         }
         event.preventDefault();
-        this.setLocalState();
-        console.log("this.state.list", this.state.list);
-        console.log("this.state.curlist", this.state.curlist);
+        // this.setLocalState();
+        // console.log("this.state.list", this.state.list);
+        // console.log("this.state.curlist", this.state.curlist);
     };
 
 
@@ -98,9 +100,9 @@ class Coins extends Component {
             const curlist = this.filterForDelete(item);
             this.setState({curlist: [...curlist]});
         }
-        this.setLocalState();
-        console.log("this.state.list", this.state.list);
-        console.log("this.state.curlist", this.state.curlist);
+        // this.setLocalState();
+        // console.log("this.state.list", this.state.list);
+        // console.log("this.state.curlist", this.state.curlist);
     };
 
     handleCoinsChangeAmount = (name, value) => {
@@ -110,7 +112,7 @@ class Coins extends Component {
             return item;
         });
         this.setState({list});
-        this.setLocalState();
+        // this.setLocalState();
     };
 
     render() {
