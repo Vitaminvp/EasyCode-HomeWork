@@ -12,12 +12,11 @@ class Coin extends React.Component {
 
     handleShow = () => {
         this.setState({showModal: true});
-    }
+    };
 
     handleHide = () => {
         this.setState({showModal: false});
-    }
-
+    };
 
     handleClick = (e) => {
         e.preventDefault();
@@ -45,7 +44,7 @@ class Coin extends React.Component {
                 {modal}
         </>;
     }
-};
+}
 
 export default WrappedComponent(Coin);
 

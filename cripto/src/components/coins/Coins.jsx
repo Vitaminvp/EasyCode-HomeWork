@@ -14,6 +14,8 @@ class Coins extends Component {
         super(props);
         this.isActBtnCoin = true;
         this.isActBtnCur = true;
+        this.newlist = [];
+
         this.state = {
             currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}, {Name: 'RUB', Id: '3'}],
             current: '',
@@ -27,12 +29,36 @@ class Coins extends Component {
     static defaultProps = {
         test: "select your coin."
     };
-
+    // componentWillMount() {
+    //     const list = localStorage.getItem('list');
+    //     if(list){
+    //         console.log("list", [...Array.from(JSON.parse(list))]);
+    //         this.setState({ list: [...Array.from(JSON.parse(list))] });
+    //         console.log("this.state", this.state.list);
+    //     }
+    // }
     componentDidMount() {
         fetch(CRYPTO_COMPARE_URL_ALL)
             .then(responce => responce.json())
             .then(responce => this.setState({coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key])}))
             .catch(err => alert(err));
+        // const list = [];
+        // for (let key in localStorage) {
+        //     if(parseInt(key)) {
+        //         list.push(JSON.parse(localStorage[key]));
+        //     }
+        // }
+        // this.setState({
+        //     list
+        // });
+
+
+        // const list = localStorage.getItem('list');
+        // if(list){
+        //     console.log("list", [...Array.from(JSON.parse(list))]);
+        //     this.setState({ list: [...Array.from(JSON.parse(list))] });
+        //     console.log("this.state", this.state.list);
+        // }
     }
 
     handleChange = (value, isCoin) => {
@@ -56,6 +82,11 @@ class Coins extends Component {
                     value: '',
                     list: [...this.state.list, value]
                 });
+                const localName = value.Name;
+                const serialItem = JSON.stringify(value);
+                localStorage.setItem(localName, serialItem);
+                const Item = JSON.parse(localStorage.getItem(localName));
+                console.log("Item", Item);
             }
             this.isActBtnCoin = true;
         } else {
@@ -68,6 +99,7 @@ class Coins extends Component {
             }
             this.isActBtnCur = true;
         }
+        // console.log("this.state.list", this.state.list);
         event.preventDefault();
     };
 
