@@ -7,6 +7,7 @@ import Cur from "./Currency/Cur";
 import {CRYPTO_COMPARE_URL_ALL} from '../../constants';
 import {COINS_NUM} from '../../constants';
 import Form from "./Form/Form";
+import ErrorBoundary from "../ErrorBoundary";
 
 class Coins extends Component {
     constructor(props) {
@@ -98,47 +99,54 @@ class Coins extends Component {
             <div className="coinsWrapper">
                 <div className="coinContainer">
                     <h2>Coins: {this.props.test}</h2>
+                    <ErrorBoundary>
+                        <Form onSubmit={this.handleSubmit}
+                              value={value}
+                              onChange={this.handleChange}
+                              coins={coins}
+                              list={list}
+                              isCoin={true}
+                              disabled={this.isActBtnCoin}>Pick your coins</Form>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <Coin handleDelete={this.handleDelete}
+                              list={list}
+                              items={coins}
+                              classN="coins"/>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CoinAmount list={list}
+                                    items={coins}
+                                    classN="coinsAmounts"
+                                    handleCoinsChangeAmount={this.handleCoinsChangeAmount}
+                                    amount={true}/>
+                    </ErrorBoundary>
 
-                    <Form onSubmit={this.handleSubmit}
-                          value={value}
-                          onChange={this.handleChange}
-                          coins={coins}
-                          list={list}
-                          isCoin={true}
-                          disabled={this.isActBtnCoin}>Pick your coins</Form>
-
-                    <Coin handleDelete={this.handleDelete}
-                          list={list}
-                          items={coins}
-                          classN="coins"/>
-
-                    <CoinAmount list={list}
-                                items={coins}
-                                classN="coinsAmounts"
-                                handleCoinsChangeAmount={this.handleCoinsChangeAmount}
-                                amount={true}/>
                 </div>
                 <div className="coinContainer">
                     <h2>Currency: </h2>
-
-                    <Form onSubmit={this.handleSubmit}
-                          value={this.state.current}
-                          onChange={this.handleChange}
-                          coins={currency}
-                          list={curlist}
-                          disabled={this.isActBtnCur}>Pick your currency</Form>
-
-                    <Cur handleDelete={this.handleDelete}
-                         classN="coins"
-                         list={curlist}
-                         items={currency}/>
-
-                    <CurAmount list={list}
-                               items={coins}
-                               classN="coinsAmounts"
-                               curlist={curlist}
-                               currencyAll={currency}
-                               amount={true}/>
+                    <ErrorBoundary>
+                        <Form onSubmit={this.handleSubmit}
+                              value={this.state.current}
+                              onChange={this.handleChange}
+                              coins={currency}
+                              list={curlist}
+                              disabled={this.isActBtnCur}>Pick your currency</Form>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <Cur handleDelete={this.handleDelete}
+                             classN="coins"
+                             list={curlist}
+                             items={currency}/>
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CurAmount list={list}
+                                   items={coins}
+                                   classN="coinsAmounts"
+                                   curlist={curlist}
+                                   currencyAll={currency}
+                                   amount={true}/>
+                    </ErrorBoundary>
                 </div>
             </div>
         );

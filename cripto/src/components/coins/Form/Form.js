@@ -7,7 +7,7 @@ const Form = ({value, onChange, onSubmit, coins, list, disabled, children, isCoi
         <label>
             <i>{children}:&nbsp;</i>
             <select value={value} onChange={(e) => onChange(e.target.value, isCoin)} className="coinSelect">
-                <option value=""></option>
+                <option value="">&nbsp;</option>
                 {coins.filter(coin => list.every(lst => lst.Name !== coin.Name)).map(item => <SelectOpt
                     Name={item.Name}
                     key={item.Id}/>)}

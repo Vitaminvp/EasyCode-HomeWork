@@ -5,7 +5,6 @@ import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
 import SelectOpt from "./Form/selectOption/select";
-import { CRYPTO_COMPARE_URL_ALL } from '../../constants';
 
 let coinsList;
 
@@ -14,15 +13,15 @@ let coinsList;
         const component = shallow(<SelectOpt />);
         expect(component).toMatchSnapshot();
     });
-    xit('CoinAmount render correctly', () => {
+    it('CoinAmount render correctly', () => {
         const component = shallow(<CoinAmount />);
         expect(component).toMatchSnapshot();
     });
-    xit('CurAmount render correctly', () => {
+    it('CurAmount render correctly', () => {
         const component = shallow(<CurAmount />);
         expect(component).toMatchSnapshot();
     });
-    xit('Cur render correctly', () => {
+    it('Cur render correctly', () => {
         const component = shallow(<Cur />);
         expect(component).toMatchSnapshot();
     });
