@@ -44,10 +44,13 @@ class Coins extends Component {
         localStorage.setItem('curlist', JSON.stringify(localCurList));
     };
 
-    getSnapshotBeforeUpdate(prevProps, prevState){
+    getSnapshotBeforeUpdate(){
         this.setLocalState();
+        return null;
     }
+    componentDidUpdate(){
 
+    }
     handleChange = (value, isCoin) => {
         if (isCoin) {
             this.isActBtnCoin = !value;
