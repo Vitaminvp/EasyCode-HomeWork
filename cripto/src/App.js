@@ -20,12 +20,16 @@ class App extends Component {
         const strList = list.map(item => `${item.Name}:${item.value}`).join('&');
         const curlist = localStorage.getItem('curlist')?JSON.parse(localStorage.getItem('curlist')):[];
         const strCurList = curlist.map(item => `${item.Name}`).join('&');
-        const url = `/coins/${strList}/${strCurList}`;
+        const url = strList || strCurList ? `/coins/${strList}|${strCurList}` : '/coins/888:3|USD';
         this.state = {
             coins: [],
             url
         }
     }
+    handleSetState = (url) => {
+        if(url !== this.state.url)
+            this.setState({url});
+    };
     componentDidMount() {
         if(!this.state.coins.length){
             fetch(CRYPTO_COMPARE_URL_ALL)
@@ -48,7 +52,7 @@ class App extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={News}/>
-                                    <Route path="/coins/:list/:curlist" component={(props) => <Coins {...props} coins={this.state.coins} />}/>
+                                    <Route path="/coins/:list" component={(props) => <Coins {...props} coins={this.state.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>

@@ -17,10 +17,12 @@ class Coins extends Component {
         // const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
         // const curlist = localStorage.getItem('curlist')?JSON.parse(localStorage.getItem('curlist')):[];
         // ------------ localStorage ------------- //
-
-        const list = this.props.match.params.list.split('&') ? this.props.match.params.list.split('&').map(item => ({Name: item.split(':')[0], value: parseInt(item.split(':')[1])})) : [];
-        const curlist = this.props.match.params.curlist.split('&') ? this.props.match.params.curlist.split('&').map(item => ({Name: item})) : [];
-
+        const split = this.props.match.params.list.split('|');
+        const list = split[0] ? split[0].split('&').map(item => ({
+            Name: item.split(':')[0],
+            value: parseInt(item.split(':')[1])
+        })) : [];
+        const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.state = {
             currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}, {Name: 'RUB', Id: '3'}],
             current: '',
@@ -40,21 +42,37 @@ class Coins extends Component {
         localStorage.setItem('list', JSON.stringify(localList));
         localStorage.setItem('curlist', JSON.stringify(localCurList));
     };
+    getLocalState = () => {
+        const list = this.state.list.map(item => `${item.Name}:${item.value}`).join('&');
+        const curlist = this.state.curlist.map(item => `${item.Name}`).join('&');
+        let allList;
+        if(list || curlist){
+            allList = `/coins/${list}|${curlist}`
+        }else{
+            allList='';
+        }
+        return allList;
+    };
+
     // ------------ localStorage ------------- //
     getSnapshotBeforeUpdate(prevProps, prevState) {
         // ------------ localStorage ------------- //
         this.setLocalState();
         // ------------ localStorage ------------- //
-        const list = this.state.list.map(item => `${item.Name}:${item.value}`).join('&');
-        const curlist = this.state.curlist.map(item => `${item.Name}`).join('&');
-        const allList = `/coins/${list}/${curlist}`;
-        if (this.props.location.pathname !== allList) {
-            window.history.pushState({ id: 'localhost' }, 'Cripto', allList);
+
+        if (this.props.location.pathname !== this.getLocalState()) {
+            const url = this.getLocalState();
+            window.history.pushState({id: 'localhost'}, 'Cripto', url);
         }
         return null;
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
+    }
+
+    componentWillUnmount() {
+        const url = this.getLocalState();
+        this.props.handleSetState(url);
     }
 
     handleChange = (value, isCoin) => {
