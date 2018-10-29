@@ -9,15 +9,42 @@ import Coins from './components/coins/Coins.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
+import {CRYPTO_COMPARE_URL_ALL} from './constants';
+import {COINS_NUM} from './constants';
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
+        const strList = list.map(item => `${item.Name}:${item.value}`).join('&');
+        const curlist = localStorage.getItem('curlist')?JSON.parse(localStorage.getItem('curlist')):[];
+        const strCurList = curlist.map(item => `${item.Name}`).join('&');
+        const url = strList || strCurList ? `/coins/${strList}|${strCurList}` : '/coins/888:3|USD';
+        this.state = {
+            coins: [],
+            url
+        }
+    }
+    handleSetState = (url) => {
+        if(url !== this.state.url)
+            this.setState({url});
+    };
+    componentDidMount() {
+        if(!this.state.coins.length){
+            fetch(CRYPTO_COMPARE_URL_ALL)
+                .then(responce => responce.json())
+                .then(responce => this.setState({coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key])}))
+                .catch(err => alert(err));
+        }
+    }
     render() {
         return (
             <BrowserRouter>
                 <Route
                     render={({location}) => (
                         <>
-                        <TopMenu/>
+                        <TopMenu url={this.state.url} />
                         <TransitionGroup>
                             <CSSTransition key={location.key} classNames="fade" timeout={500}>
                                 <Switch location={location}>
@@ -25,7 +52,7 @@ class App extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={News}/>
-                                    <Route path="/coins" component={(props) => <Coins {...props} />}/>
+                                    <Route path="/coins/:list" component={(props) => <Coins {...props} coins={this.state.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>

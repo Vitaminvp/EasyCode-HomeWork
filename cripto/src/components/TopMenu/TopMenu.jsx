@@ -20,7 +20,7 @@ class TopMenu extends Component {
                         <NavLink to="/news" activeClassName="active">News</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/coins" activeClassName="active">Coins</NavLink>
+                        <NavLink to={this.props.url} activeClassName="active">Coins</NavLink>
                     </li>
                 </ul>
             </nav>
