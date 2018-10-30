@@ -1,119 +1,27 @@
 html, body {
     font-family: 'Roboto', 'Helvetica', sans-serif;
 }
-.hide{
-    display: none;
-    opacity: 0;
-}
-.gray{
+.search{
+    background-color: #c6c6c6;
     border-radius: .25rem;
 }
-.message {
-    font-size: 1.6rem;
-    line-height: 32px;
-    font-weight: 200;
-    padding-bottom: 30px;
+.search-input{
+    margin: 20px auto;
+    max-width: 80%;
 }
-.second.cont .delete{
-    display: none;
-}
-.stickyNote .delete {
+.movie{
+    border-radius: .25rem;
+    background-color: #fff;
+    margin: 20px auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1rem;
-    position: absolute;
-    top: -1.2rem;
-    right: -1.2rem;
-    color: darkgray;
-    font-weight: bold;
-    padding: 0;
-    margin: 0;
-    height: 25px;
-    width: 25px;
-    border: 1px solid darkgray;
+    padding: 10px 20px 10px 10px;
 }
-.stickyNote .delete:hover{
-    color: red;
+.movie img {
+    max-width: 200px;
 }
-.delete:HOVER {
-    color: inherit;
+.movie .info {
+    margin-left: 10px;
 }
-
-.date {
-    position: absolute;
-    padding: 0px 4px;
-    bottom: 0;
-    left: 0;
-    font-style: italic;
-    font-size: 10px;
-    color: #f9a8a8;
+.movie .data{
+    text-align: justify;
 }
-
-#notes-section-title {
-    margin-top: 20px;
-    background: linear-gradient(white, #f9f9f9);
-}
-
-.stickyNote {
-    min-height: 250px;
-    position: relative;
-    min-height: 100px;
-    margin-bottom: 20px;
-    box-shadow: 5px;
-    padding: 5px;
-    border: 1px solid #ddd;
-}
-
-.first .stickyNote {
-    background: linear-gradient(#FFF93A, #FFF);
-}
-.second .stickyNote {
-    background: linear-gradient(#ff8d7c, #FFF);
-}
-.third .stickyNote {
-    background: linear-gradient(#74ff62, #FFF);
-}
-.cont.over {
-    border: 2px dashed #4e4e4e;
-}
-.gray {
-    background: #b0bec5;
-    color: grey;
-}
-#notes-section-title .cont{
-    padding: 25px;
-    min-height: 150px;
-}
-.first, .second, .third {
-    font-weight: bold;
-    text-align: center;
-    color: darkgray;
-}
-
-.first {
-    background-color: rgba(255, 255, 0, 0.23);
-}
-
-.second {
-    background-color: #f3f3f3;
-}
-
-.third {
-    background-color: rgba(221, 221, 221, 0.96);
-}
-
-
-[draggable] {
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    /* Required to make elements draggable in old WebKit */
-    -khtml-user-drag: element;
-    -webkit-user-drag: element;
-    cursor: move;
-
-}
-
-

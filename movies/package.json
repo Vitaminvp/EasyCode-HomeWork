@@ -1,13 +1,34 @@
 {
-  "name": "chrome-es2015-codelab",
-  "description": "ES2015 Codelab",
-  "license": "Apache-2.0",
-  "author": "Google",
-  "repository": "googlecodelabs/chrome-es2015",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "global": "^4.3.2",
+    "prettier": "^1.14.3"
+  },
+  "name": "rrsm",
+  "description": "React+Redux course code samples",
+  "version": "1.0.0",
+  "main": "index.js",
   "devDependencies": {
-    "serve": "^1.4.0"
+    "babel-core": "^6.26.3",
+    "babel-loader": "7",
+    "css-loader": "^1.0.0",
+    "eslint": "4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   },
   "scripts": {
-    "start": "serve --port 52587"
-  }
+    "eslint": "eslint **/*.js --quiet",
+    "format": "prettier --list-different --single-quote --write **/*.{js,jsx}",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "author": "",
+  "license": "ISC"
 }
