@@ -19,9 +19,9 @@ class Coins extends Component {
         // ------------ localStorage ------------- //
         const split = this.props.match.params.list.split('|');
         const list = split[0] ? split[0].split('&').map(item => ({
-            Name: item.split(':')[0],
-            value: parseInt(item.split(':')[1])
-        })) : [];
+                                                            Name: item.split(':')[0],
+                                                            value: parseInt(item.split(':')[1])
+                                                        })) : [];
         const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.state = {
             currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}, {Name: 'RUB', Id: '3'}],

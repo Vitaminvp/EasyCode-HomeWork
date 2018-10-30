@@ -4,9 +4,7 @@ export default function MovieDetail (data) {
     const template = `
         <a href="#" class="back">Back</a>
         <article class="movie">
-        
-        
-        <div class="img"><img src='${d.poster_path}' ></div>
+            <div class="img"><img src='${d.poster_path}' ></div>
             <div class="info">
                <h2>${d.title}</h2>
                 <div><strong>${d.date}</strong></div>
@@ -21,7 +19,7 @@ export default function MovieDetail (data) {
         </article>`;
     const article = document.createElement('ARTICLE');
     const wrapperForMany = document.querySelector('.wrapperForMany');
-    const wrapperForOne = document.querySelector('.wrapperForOne');
+    const wrapperForOne = document.querySelector('.onemovie');
     article.classList.add('.movie');
     article.innerHTML = template;
     wrapperForMany.style.display =  'none';
