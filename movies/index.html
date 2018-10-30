@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Simple Sticky Notes app">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticky Notes</title>
+    <title>Movies searcher</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue_grey-orange.min.css">
@@ -23,21 +23,31 @@
             </div>
         </div>
     </header>
-    <section class="container search">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h3>Movie search</h3>
-                <input type="text" class="search-input form-control" />
+    <div class="wrapperForMany">
+        <section class="container search mb-1">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3>Movie search</h3>
+                    <input type="text" class="search-input form-control" />
+                    <ul class="filters">
+                        <li><a data-filter="min" href="">Рейтинг мин.</a></li>
+                        <li><a data-filter="max" href="">Рейтинг макс.</a></li>
+                        <li><a data-filter="new" href="">Новые</a></li>
+                        <li><a data-filter="old" href="">Старые</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
-    <section class="container search">
-        <div class="row">
-            <div class="col-12">
-                <div class="movies"></div>
+        </section>
+        <section class="container search">
+            <div class="row">
+                <div class="col-12">
+                    <div class="movies"></div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+    <div class="wrapperForOne"></div>
+
 </div>
 
 

@@ -25,3 +25,12 @@ html, body {
 .movie .data{
     text-align: justify;
 }
+.filters{
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    padding-left: 0;
+}
+.filters li{
+    margin-left: 20px;
+}
