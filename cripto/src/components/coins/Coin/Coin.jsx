@@ -2,27 +2,23 @@ import React from 'react';
 import Modal from '../../Modal';
 import {CRYPTO_COMPARE_URL} from '../../../constants';
 import './coin.css';
-import WrappedComponent from '../decorators/listTransformation';
+import WrappedComponent from '../HOC/listTransformation';
 
 class Coin extends React.Component {
     constructor(props) {
         super(props);
         this.state = {showModal: false};
     }
-
     handleShow = () => {
         this.setState({showModal: true});
     };
-
     handleHide = () => {
         this.setState({showModal: false});
     };
-
     handleClick = (e) => {
         e.preventDefault();
         this.props.handleDelete(this.props.item.Name, true);
     };
-
     render() {
         const {item} = this.props;
         const modal = this.state.showModal ? (

@@ -13,7 +13,7 @@ import {CRYPTO_COMPARE_URL_ALL} from './constants';
 import {COINS_NUM} from './constants';
 
 class App extends Component {
-
+    _isMounted = false;
     constructor(props) {
         super(props);
         const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
@@ -31,12 +31,16 @@ class App extends Component {
             this.setState({url});
     };
     componentDidMount() {
+        this._isMounted = true;
         if(!this.state.coins.length){
             fetch(CRYPTO_COMPARE_URL_ALL)
                 .then(responce => responce.json())
-                .then(responce => this.setState({coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key])}))
-                .catch(err => alert(err));
+                .then(responce => this._isMounted&&this.setState({coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key])}))
+                .catch(err => this._isMounted&&alert(err));
         }
+    }
+    componentWillUnmount(){
+        this._isMounted = false;
     }
     render() {
         return (

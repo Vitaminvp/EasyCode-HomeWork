@@ -1,8 +1,8 @@
 import React from 'react';
-import WrappedComponent from '../decorators/listTransformation';
+import WrappedComponent from '../HOC/listTransformation';
 import './coinAmount.css';
 
-const CoinAmount = ({item, value, handleCoinsChangeAmount}) => {
+const CoinAmount = ({item, value, handleCoinsChangeAmount, Spn}) => {
     const handleChange = (e) => {
         e.target.classList.remove('alarm');
         e.target.parentNode.lastChild.style.display = 'none';
@@ -24,7 +24,10 @@ const CoinAmount = ({item, value, handleCoinsChangeAmount}) => {
                 onChange={handleChange}
                 defaultValue={value}
                 className="coinAmount_input"/>
-            <span className="warning">Only numbers allowed!</span></label>
+
+            {Spn}
+
+        </label>
     </div>;
 };
 

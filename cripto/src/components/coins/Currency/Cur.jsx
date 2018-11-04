@@ -1,6 +1,6 @@
 import React from 'react';
 import './currency.css';
-import WrappedComponent from '../decorators/listTransformation';
+import WrappedComponent from '../HOC/listTransformation';
 
 const Cur = ({item, handleDelete}) => {
 

@@ -4,6 +4,8 @@ import Coin from "./Coin/Coin";
 import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
+import Span from "./CoinAmount/Span";
+
 
 import Form from "./Form/Form";
 import ErrorBoundary from "../ErrorBoundary";
@@ -152,14 +154,15 @@ class Coins extends Component {
                         <Coin handleDelete={this.handleDelete}
                               list={list}
                               items={coins}
-                              classN="coins"/>
+                              classN="coins" />
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <CoinAmount list={list}
                                     items={coins}
                                     classN="coinsAmounts"
                                     handleCoinsChangeAmount={this.handleCoinsChangeAmount}
-                                    amount={true}/>
+                                    amount={true}
+                                    Spn={<Span>Only numbers allowed!</Span>}/>
                     </ErrorBoundary>
 
                 </div>
