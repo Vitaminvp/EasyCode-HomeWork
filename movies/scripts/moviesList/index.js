@@ -17,7 +17,6 @@ export default class MoviesList{
             article.innerHTML = Movie(item);
             this.fragment.appendChild(article);
         });
-
     };
 
     renderToDOM(selector){

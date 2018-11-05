@@ -11,6 +11,8 @@ import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
 import {CRYPTO_COMPARE_URL_ALL} from './constants';
 import {COINS_NUM} from './constants';
+import store from './store';
+import { Provider } from 'react-redux';
 
 class App extends Component {
     _isMounted = false;
@@ -44,6 +46,7 @@ class App extends Component {
     }
     render() {
         return (
+            <Provider store = {store}>
             <BrowserRouter>
                 <Route
                     render={({location}) => (
@@ -65,6 +68,7 @@ class App extends Component {
                     )}
                 />
             </BrowserRouter>
+            </Provider>
         );
     }
 }
