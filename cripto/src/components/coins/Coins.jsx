@@ -5,8 +5,6 @@ import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
 import Span from "./CoinAmount/Span";
-
-
 import Form from "./Form/Form";
 import ErrorBoundary from "../ErrorBoundary";
 
