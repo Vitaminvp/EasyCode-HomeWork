@@ -30,15 +30,14 @@ class Coins extends Component {
         const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.state = {
             curlist,
-            // value: '',
             list
         };
     }
     static propTypes = {
         currencyAC: PropTypes.func.isRequired,
         currency: PropTypes.array.isRequired,
-        current: PropTypes.array,
-        value: PropTypes.array
+        current: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
     };
     static defaultProps = {
         test: "select your coin."
@@ -86,30 +85,30 @@ class Coins extends Component {
     handleChange = (value, isCoin) => {
         if (isCoin) {
             this.isActBtnCoin = !value;
-            this.setState({value});
+            this.props.valueAC(value);
         } else {
             this.isActBtnCur = !value;
-            this.setState({current: value});
+            this.props.currentAC(value);
         }
     };
     handleSubmit = (event, isCoin) => {
         if (isCoin) {
             const value = {
-                Name: this.state.value,
+                Name: this.props.value,
                 value: 0
             };
-            if (value) {
+            if (this.props.value) {
+                this.props.valueAC('');
                 this.setState({
-                    value: '',
                     list: [...this.state.list, value]
                 });
             }
             this.isActBtnCoin = true;
         } else {
-            const current = {Name: this.state.current};
-            if (current) {
+            const current = {Name: this.props.current};
+            if (current.Name) {
+                this.props.currentAC('');
                 this.setState({
-                    current: '',
                     curlist: [...this.state.curlist, current]
                 });
             }
@@ -141,8 +140,8 @@ class Coins extends Component {
     };
 
     render() {
-        const {list, curlist, value} = this.state;
-        const {coins, currency} = this.props;
+        const {list, curlist} = this.state;
+        const {coins, currency, value, current} = this.props;
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
@@ -176,7 +175,7 @@ class Coins extends Component {
                     <h2>Currency: </h2>
                     <ErrorBoundary>
                         <Form onSubmit={this.handleSubmit}
-                              value={this.state.current}
+                              value={current}
                               onChange={this.handleChange}
                               coins={currency}
                               list={curlist}
@@ -211,7 +210,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
     currencyAC: currency,
     currentAC: current,
-    valueAC: value,
+    valueAC: value
 };
 
 const CoinsComponent = connect(

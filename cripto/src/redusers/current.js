@@ -4,9 +4,9 @@ const initialCurrent = '';
 
 
 export default (current = initialCurrent, action) => {
-    const {type} = action;
+    const {type, payload} = action;
     switch (type) {
-        case CURRENT: return action.payload;
-        default: return currency;
+        case CURRENT: return payload;
+        default: return current;
     }
 }

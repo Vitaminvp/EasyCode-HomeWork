@@ -23,7 +23,7 @@ class App extends Component {
         const strList = list.map(item => `${item.Name}:${item.value}`).join('&');
         const curlist = localStorage.getItem('curlist')?JSON.parse(localStorage.getItem('curlist')):[];
         const strCurList = curlist.map(item => `${item.Name}`).join('&');
-        const url = strList || strCurList ? `/coins/${strList}|${strCurList}` : '/coins/888:3|USD';
+        const url = strList || strCurList ? `/coins/${strList}|${strCurList}` : '/coins/888:1|USD';
         this.state = {
             coins: [],
             url

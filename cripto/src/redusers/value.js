@@ -4,9 +4,9 @@ const initialValue = '';
 
 
 export default (value = initialValue, action) => {
-    const {type} = action;
+    const {type, payload} = action;
     switch (type) {
-        case VALUE: return action.payload;
+        case VALUE: return payload;
         default: return value;
     }
 }
