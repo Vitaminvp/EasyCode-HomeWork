@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { increment }  from '../AC';
+
 class News extends Component {
     static propTypes = {
       counter:  PropTypes.number

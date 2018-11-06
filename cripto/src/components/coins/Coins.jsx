@@ -215,7 +215,7 @@ const mapDispatchToProps = {
 
 const CoinsComponent = connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(Coins);
 
 export default CoinsComponent;
