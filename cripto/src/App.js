@@ -14,7 +14,6 @@ import {COINS_NUM} from './constants';
 import store from './store';
 import { Provider } from 'react-redux';
 
-
 class App extends Component {
     _isMounted = false;
     constructor(props) {
