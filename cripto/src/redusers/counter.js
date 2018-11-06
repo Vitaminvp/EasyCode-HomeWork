@@ -1,6 +1,8 @@
 import { INCREMENT } from '../constants';
 
-export default (count =  0, action) => {
+const initialCount = 0;
+
+export default (count =  initialCount, action) => {
     const {type} = action;
     switch (type) {
         case INCREMENT: return count + 1;

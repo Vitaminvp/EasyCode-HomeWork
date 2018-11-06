@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import './coins.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Coin from "./Coin/Coin";
 import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
@@ -7,6 +8,10 @@ import Cur from "./Currency/Cur";
 import Span from "./CoinAmount/Span";
 import Form from "./Form/Form";
 import ErrorBoundary from "../ErrorBoundary";
+import './coins.css';
+import {currency} from "../../AC";
+import {current} from "../../AC";
+import {value} from "../../AC";
 
 class Coins extends Component {
     constructor(props) {
@@ -24,14 +29,17 @@ class Coins extends Component {
                                                         })) : [];
         const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.state = {
-            currency: [{Name: 'USD', Id: '0'}, {Name: 'EUR', Id: '1'}, {Name: 'UAH', Id: '2'}, {Name: 'RUB', Id: '3'}],
-            current: '',
             curlist,
-            value: '',
+            // value: '',
             list
         };
     }
-
+    static propTypes = {
+        currencyAC: PropTypes.func.isRequired,
+        currency: PropTypes.array.isRequired,
+        current: PropTypes.array,
+        value: PropTypes.array
+    };
     static defaultProps = {
         test: "select your coin."
     };
@@ -133,8 +141,8 @@ class Coins extends Component {
     };
 
     render() {
-        const {list, currency, curlist, value} = this.state;
-        const {coins} = this.props;
+        const {list, curlist, value} = this.state;
+        const {coins, currency} = this.props;
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
@@ -194,5 +202,22 @@ class Coins extends Component {
     }
 }
 
-export default Coins;
+const mapStateToProps = state => ({
+    currency: state.currency,
+    current: state.current,
+    value: state.value
+});
+
+const mapDispatchToProps = {
+    currencyAC: currency,
+    currentAC: current,
+    valueAC: value,
+};
+
+const CoinsComponent = connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Coins);
+
+export default CoinsComponent;
 

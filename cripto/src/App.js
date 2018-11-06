@@ -5,7 +5,7 @@ import History from './components/History.jsx';
 import News from './components/News.jsx';
 import Price from './components/Price.jsx';
 import Exchange from './components/Exchange.jsx';
-import Coins from './components/coins/Coins.jsx';
+import CoinsComponent from './components/coins/Coins.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
@@ -13,6 +13,7 @@ import {CRYPTO_COMPARE_URL_ALL} from './constants';
 import {COINS_NUM} from './constants';
 import store from './store';
 import { Provider } from 'react-redux';
+
 
 class App extends Component {
     _isMounted = false;
@@ -59,7 +60,7 @@ class App extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={News}/>
-                                    <Route path="/coins/:list" component={(props) => <Coins {...props} coins={this.state.coins} handleSetState={this.handleSetState}/>}/>
+                                    <Route path="/coins/:list" component={(props) => <CoinsComponent {...props} coins={this.state.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>
