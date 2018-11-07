@@ -60,7 +60,6 @@ class Coins extends Component {
         return allList;
     };
 
-    // ------------ localStorage ------------- //
     getSnapshotBeforeUpdate(prevProps, prevState) {
         // ------------ localStorage ------------- //
         this.setLocalState();
