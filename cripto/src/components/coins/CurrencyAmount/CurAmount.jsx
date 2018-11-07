@@ -33,7 +33,7 @@ class CurAmount extends Component {
             <div className="coinAmount_text"><span>{item.Name}:</span>
                 <ul>
                     {curlist.map(item => <li
-                        key={Math.random()}>{(value * this.state.currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
+                        key={item.Name}>{(value * this.state.currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
                 </ul>
             </div>
         </div>;

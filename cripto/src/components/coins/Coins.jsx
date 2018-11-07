@@ -140,6 +140,7 @@ class Coins extends Component {
                 <div className="coinContainer">
                     <h2>Coins: {this.props.test}</h2>
                     <ErrorBoundary>
+
                         <Form onSubmit={this.handleSubmit}
                               value={value}
                               onChange={this.handleChange}
@@ -147,20 +148,19 @@ class Coins extends Component {
                               list={list}
                               isCoin={true}
                               disabled={this.isActBtnCoin}>Pick your coins</Form>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+
                         <Coin handleDelete={this.handleDelete}
                               list={list}
                               items={coins}
                               classN="coins" />
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+
                         <CoinAmount list={list}
                                     items={coins}
                                     classN="coinsAmounts"
                                     handleCoinsChangeAmount={this.handleCoinsChangeAmount}
                                     amount={true}
                                     Spn={<Span>Only numbers allowed!</Span>}/>
+
                     </ErrorBoundary>
 
                 </div>
