@@ -9,9 +9,8 @@ import Span from "./CoinAmount/Span";
 import Form from "./Form/Form";
 import ErrorBoundary from "../ErrorBoundary";
 import './coins.css';
-import {currency} from "../../AC";
-import {current} from "../../AC";
-import {value} from "../../AC";
+import {currency, current, value, addToList, setCurList, addToCurList} from "../../AC";
+import {setList} from "../../AC/index";
 
 class Coins extends Component {
     constructor(props) {
@@ -28,14 +27,14 @@ class Coins extends Component {
                                                             value: parseInt(item.split(':')[1])
                                                         })) : [];
         const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
-        this.state = {
-            curlist,
-            list
-        };
+        this.props.setListAC(list);
+        this.props.setCListAC(curlist);
     }
     static propTypes = {
         currencyAC: PropTypes.func.isRequired,
         currency: PropTypes.array.isRequired,
+        list: PropTypes.array.isRequired,
+        curlist: PropTypes.array.isRequired,
         current: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
     };
@@ -44,14 +43,14 @@ class Coins extends Component {
     };
     // ------------ localStorage ------------- //
     setLocalState = () => {
-        const localList = [...this.state.list];
-        const localCurList = [...this.state.curlist];
+        const localList = [...this.props.list];
+        const localCurList = [...this.props.curlist];
         localStorage.setItem('list', JSON.stringify(localList));
         localStorage.setItem('curlist', JSON.stringify(localCurList));
     };
     getLocalState = () => {
-        const list = this.state.list.map(item => `${item.Name}:${item.value}`).join('&');
-        const curlist = this.state.curlist.map(item => `${item.Name}`).join('&');
+        const list = this.props.list.map(item => `${item.Name}:${item.value}`).join('&');
+        const curlist = this.props.curlist.map(item => `${item.Name}`).join('&');
         let allList;
         if(list || curlist){
             allList = `/coins/${list}|${curlist}`
@@ -99,18 +98,14 @@ class Coins extends Component {
             };
             if (this.props.value) {
                 this.props.valueAC('');
-                this.setState({
-                    list: [...this.state.list, value]
-                });
+                this.props.addToListAC(value);
             }
             this.isActBtnCoin = true;
         } else {
             const current = {Name: this.props.current};
             if (current.Name) {
                 this.props.currentAC('');
-                this.setState({
-                    curlist: [...this.state.curlist, current]
-                });
+                this.props.addToCListAC(current);
             }
             this.isActBtnCur = true;
         }
@@ -118,30 +113,29 @@ class Coins extends Component {
     };
 
 
-    filterForDelete = (item, isCoin) => (!isCoin ? this.state.curlist : this.state.list).filter(element => element.Name !== item);
+    filterForDelete = (item, isCoin) => (!isCoin ? this.props.curlist : this.props.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
         if (isCoin) {
             const list = this.filterForDelete(item, isCoin);
-            this.setState({list: [...list]});
+            this.props.setListAC(list);
         } else {
             const curlist = this.filterForDelete(item);
-            this.setState({curlist: [...curlist]});
+            this.props.setCListAC(curlist);
         }
     };
 
     handleCoinsChangeAmount = (name, value) => {
-        let list = [...this.state.list];
+        let list = [...this.props.list];
         list = list.map(item => {
             if (item.Name === name) item.value = value;
             return item;
         });
-        this.setState({list});
+        this.props.setListAC(list);
     };
 
     render() {
-        const {list, curlist} = this.state;
-        const {coins, currency, value, current} = this.props;
+        const {coins, currency, value, current, list, curlist} = this.props;
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
@@ -204,13 +198,19 @@ class Coins extends Component {
 const mapStateToProps = state => ({
     currency: state.currency,
     current: state.current,
-    value: state.value
+    value: state.value,
+    list: state.list,
+    curlist: state.curlist
 });
 
 const mapDispatchToProps = {
     currencyAC: currency,
     currentAC: current,
-    valueAC: value
+    valueAC: value,
+    setListAC: setList,
+    addToListAC: addToList,
+    setCListAC: setCurList,
+    addToCListAC: addToCurList
 };
 
 const CoinsComponent = connect(

@@ -1,7 +1,4 @@
-import { INCREMENT } from '../constants';
-import { CURRENCY } from '../constants';
-import { CURRENT } from '../constants';
-import { VALUE } from '../constants';
+import { INCREMENT, CURRENCY, CURRENT, VALUE, SETLIST, ADDTOLIST, ADDTOCLIST, SETCLIST } from '../constants';
 
 export function increment(data) {
     return {
@@ -9,7 +6,6 @@ export function increment(data) {
         payload: data
     }
 }
-
 export function currency(data) {
     return {
         type: CURRENCY,
@@ -25,6 +21,31 @@ export function current(data) {
 export function value(data) {
     return {
         type: VALUE,
+        payload: data
+    }
+}
+export function setList(data) {
+    return {
+        type: SETLIST,
+        payload: data
+    }
+}
+export function addToList(data) {
+    return {
+        type: ADDTOLIST,
+        payload: data
+    }
+}
+
+export function setCurList(data) {
+    return {
+        type: SETCLIST,
+        payload: data
+    }
+}
+export function addToCurList(data) {
+    return {
+        type: ADDTOCLIST,
         payload: data
     }
 }

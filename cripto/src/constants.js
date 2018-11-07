@@ -6,6 +6,11 @@ export const INCREMENT = 'INCREMENT';
 export const CURRENCY = 'CURRENCY';
 export const CURRENT = 'CURRENT';
 export const VALUE = 'VALUE';
+export const SETLIST = 'SETLIST';
+export const ADDTOLIST = 'ADDTOLIST';
+export const DELFROMLIST = 'DELFROMLIST';
+export const SETCLIST = 'SETCLIST';
+export const ADDTOCLIST = 'ADDTOCLIST';
 
 
 
