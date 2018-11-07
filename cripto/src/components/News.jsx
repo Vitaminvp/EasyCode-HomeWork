@@ -9,7 +9,6 @@ class News extends Component {
     };
     handleClick = () => {
         this.props.increment();
-        console.log("inc", this.props.counter );
     };
     render() {
         return (
