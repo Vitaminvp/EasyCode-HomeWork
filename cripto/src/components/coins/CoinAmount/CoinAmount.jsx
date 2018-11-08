@@ -2,7 +2,7 @@ import React from 'react';
 import WrappedComponent from '../HOC/listTransformation';
 import './coinAmount.css';
 
-const CoinAmount = ({item, value, handleCoinsChangeAmount, Spn}) => {
+const CoinAmount = ({item, value, Spn, handleCoinsChangeAmount}) => {
     const handleChange = (e) => {
         e.target.classList.remove('alarm');
         e.target.parentNode.lastChild.style.display = 'none';
@@ -19,16 +19,14 @@ const CoinAmount = ({item, value, handleCoinsChangeAmount, Spn}) => {
     };
 
     return <div className="coinAmount">
-        <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
-            <input
-                onChange={handleChange}
-                defaultValue={value}
-                className="coinAmount_input"/>
-
-            {Spn}
-
-        </label>
-    </div>;
+                <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
+                    <input
+                        onChange={handleChange}
+                        defaultValue={value}
+                        className="coinAmount_input"/>
+                    {Spn}
+                </label>
+            </div>;
 };
 
 export default WrappedComponent(CoinAmount);
