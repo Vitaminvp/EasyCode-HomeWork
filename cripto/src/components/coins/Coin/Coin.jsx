@@ -9,11 +9,8 @@ class Coin extends React.Component {
         super(props);
         this.state = {showModal: false};
     }
-    handleShow = () => {
-        this.setState({showModal: true});
-    };
-    handleHide = () => {
-        this.setState({showModal: false});
+    toggleModal = () => {
+        this.setState({showModal: !this.state.showModal});
     };
     handleClick = (e) => {
         e.preventDefault();
@@ -25,16 +22,16 @@ class Coin extends React.Component {
             <Modal>
                 <div className="modal">
                     <div>
-                        <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName} onClick={this.handleHide}/>
+                        <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName} onClick={this.toggleModal}/>
                         <h2>{item.CoinName}</h2>
-                        <button onClick={this.handleHide}>&times;</button>
+                        <button onClick={this.toggleModal}>&times;</button>
                     </div>
                 </div>
             </Modal>
         ) : null;
         return <>
                 <div className="coin">
-                    <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName} onClick={this.handleShow}/>
+                    <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName} onClick={this.toggleModal}/>
                     <a href="/" onClick={this.handleClick}>&times;</a>
                 </div>
                 {modal}
