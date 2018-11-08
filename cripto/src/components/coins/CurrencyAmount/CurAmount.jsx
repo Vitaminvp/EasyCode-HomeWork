@@ -17,7 +17,6 @@ class CurAmount extends Component {
     };
     componentDidMount() {
         this._isMounted = true;
-
         const currensyNames = this.props.currencyAll.map(item => item.Name.toUpperCase()).join(',');
         fetch(`${CRYPTO_COMPARE_URL_CUR}${this.props.item.Name.toUpperCase()}&tsyms=${currensyNames}`)
             .then(responce => responce.json())
@@ -39,6 +38,5 @@ class CurAmount extends Component {
         </div>;
     }
 }
-
 export default WrappedComponent(CurAmount);
 
