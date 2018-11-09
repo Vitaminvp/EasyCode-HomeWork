@@ -1,13 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Coin from "./Coin/Coin";
+import Coins from "./Coins";
 import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";
 import SelectOpt from "./Form/selectOption/select";
+import coinsData from '../../data/coinsList.json';
 
-let coinsList;
+let  coinsList = Object.keys(coinsData.Data).slice(0, 10).map(key => coinsData.Data[key]);
 
+    xtest('Coins render correctly', () => {
+        const component = shallow(<Coins coins={coinsList} search="" currency={() => {}} current={() => {}} value={() => {}} addToList={() => {}} setCurList={() => {}} addToCurList={() => {}} />);
+        expect(component).toMatchSnapshot();
+    });
 
     it('SelectOpt render correctly', () => {
         const component = shallow(<SelectOpt />);
