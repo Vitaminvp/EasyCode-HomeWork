@@ -25,7 +25,7 @@ const CoinAmount = ({item, value, handleCoinsChangeAmount, Spn}) => {
                 defaultValue={value}
                 className="coinAmount_input"/>
 
-            {Spn}
+            { Spn }
 
         </label>
     </div>;
