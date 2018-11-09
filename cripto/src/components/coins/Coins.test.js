@@ -9,19 +9,19 @@ import SelectOpt from "./Form/selectOption/select";
 let coinsList;
 
 
-    xit('SelectOpt render correctly', () => {
+    it('SelectOpt render correctly', () => {
         const component = shallow(<SelectOpt />);
         expect(component).toMatchSnapshot();
     });
-    xit('CoinAmount render correctly', () => {
+    it('CoinAmount render correctly', () => {
         const component = shallow(<CoinAmount />);
         expect(component).toMatchSnapshot();
     });
-    xit('CurAmount render correctly', () => {
+    it('CurAmount render correctly', () => {
         const component = shallow(<CurAmount />);
         expect(component).toMatchSnapshot();
     });
-    xit('Cur render correctly', () => {
+    it('Cur render correctly', () => {
         const component = shallow(<Cur />);
         expect(component).toMatchSnapshot();
     });
