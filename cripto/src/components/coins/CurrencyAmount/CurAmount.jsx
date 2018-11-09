@@ -9,7 +9,8 @@ class CurAmount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currencyRate: {}
+            currencyRate: {},
+            isLoading: false
         };
     }
     static defaultProps = {
@@ -17,25 +18,31 @@ class CurAmount extends Component {
     };
     componentDidMount() {
         this._isMounted = true;
+        this.setState({isLoading: true});
         const currensyNames = this.props.currencyAll.map(item => item.Name.toUpperCase()).join(',');
         fetch(`${CRYPTO_COMPARE_URL_CUR}${this.props.item.Name.toUpperCase()}&tsyms=${currensyNames}`)
             .then(responce => responce.json())
-            .then(responce => this._isMounted&&this.setState({currencyRate: responce}))
+            .then(responce => {
+                this._isMounted&&this.setState({currencyRate: responce})
+                this.setState({isLoading: false})
+            })
             .catch(err => this._isMounted&&alert(err));
     }
     componentWillUnmount(){
         this._isMounted = false;
     }
     render() {
+        const Loading = () => <div>Загрузка ...</div>;
+        const { isLoading } = this.state;
         const {item, value, curlist} = this.props;
         return <div className="coinAmount">
-            <div className="coinAmount_text"><span>{item.Name}:</span>
-                <ul>
-                    {curlist.map(item => <li
-                        key={item.Name}>{(value * this.state.currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
-                </ul>
-            </div>
-        </div>;
+                    { isLoading ? <Loading />
+                    : <div className="coinAmount_text"><span>{item.Name}:</span>
+                         <ul>
+                             {curlist.map(item => <li key={item.Name}>{(value * this.state.currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
+                         </ul>
+                      </div>}
+            </div>;
     }
 }
 export default WrappedComponent(CurAmount);

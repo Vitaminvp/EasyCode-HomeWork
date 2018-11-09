@@ -50,4 +50,4 @@ export function addToCurList(data) {
     }
 }
 
-export const boundIncrement = data => dispatch => dispatch(increment(data));
+// export const boundIncrement = data => dispatch => dispatch(increment(data));
