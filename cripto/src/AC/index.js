@@ -1,4 +1,7 @@
-import { INCREMENT, CURRENCY, CURRENT, VALUE, SETLIST, ADDTOLIST, ADDTOCLIST, SETCLIST } from '../constants';
+import { INCREMENT, CURRENCY, CURRENT, VALUE, SETLIST, ADDTOLIST, ADDTOCLIST, SETCLIST,
+    ERROR_COINS_LIST, RECEIVE_COINS_LIST, REQUEST_COINS_LIST  } from '../constants';
+import {CRYPTO_COMPARE_URL_ALL} from '../constants';
+import {COINS_NUM} from '../constants';
 
 export function increment(data) {
     return {
@@ -50,4 +53,26 @@ export function addToCurList(data) {
     }
 }
 
-export const boundIncrement = data => dispatch => dispatch(increment(data));
+// export const boundIncrement = data => dispatch => dispatch(increment(data));
+
+export const requestCoinsListAction = () => ({
+    type: REQUEST_COINS_LIST
+});
+
+export const receiveCoinsListAction = coins => ({
+    type: RECEIVE_COINS_LIST,
+    payload: coins
+});
+
+export const errorCoinsListAction = (err) => ({
+    type: ERROR_COINS_LIST,
+    payload: err
+});
+
+export const getCoinsList = () => (dispatch) => {
+    dispatch(requestCoinsListAction());
+        fetch(CRYPTO_COMPARE_URL_ALL)
+            .then(responce => responce.json())
+            .then(responce => dispatch(receiveCoinsListAction(Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key]))))
+            .catch(err => dispatch(errorCoinsListAction(err)));
+};

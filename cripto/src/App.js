@@ -9,12 +9,11 @@ import CoinsComponent from './components/coins/Coins.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
-import {CRYPTO_COMPARE_URL_ALL} from './constants';
-import {COINS_NUM} from './constants';
-import store from './store';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+import { getCoinsList } from './AC';
 
-class App extends Component {
+
+class AppComponent extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
@@ -24,7 +23,6 @@ class App extends Component {
         const strCurList = curlist.map(item => `${item.Name}`).join('&');
         const url = strList || strCurList ? `/coins/${strList}|${strCurList}` : '/coins/888:1|USD';
         this.state = {
-            coins: [],
             url
         }
     }
@@ -34,19 +32,13 @@ class App extends Component {
     };
     componentDidMount() {
         this._isMounted = true;
-        if(!this.state.coins.length){
-            fetch(CRYPTO_COMPARE_URL_ALL)
-                .then(responce => responce.json())
-                .then(responce => this._isMounted&&this.setState({coins: Object.keys(responce.Data).slice(0, COINS_NUM).map(key => responce.Data[key])}))
-                .catch(err => this._isMounted&&alert(err));
-        }
+        this.props.getCoinsList();
     }
     componentWillUnmount(){
         this._isMounted = false;
     }
     render() {
         return (
-            <Provider store = {store}>
             <BrowserRouter>
                 <Route
                     render={({location}) => (
@@ -59,7 +51,7 @@ class App extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={News}/>
-                                    <Route path="/coins/:list" component={(props) => <CoinsComponent {...props} coins={this.state.coins} handleSetState={this.handleSetState}/>}/>
+                                    <Route path="/coins/:list" component={(props) => <CoinsComponent {...props} coins={this.props.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>
@@ -68,9 +60,20 @@ class App extends Component {
                     )}
                 />
             </BrowserRouter>
-            </Provider>
         );
     }
 }
+const mapStateToProps = state => ({
+    coins: state.coins.coins,
+});
+
+const mapDispatchToProps = {
+    getCoinsList,
+};
+
+const App = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AppComponent);
 
 export default App;

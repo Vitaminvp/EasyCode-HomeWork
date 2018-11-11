@@ -4,7 +4,9 @@ import currency from './currency';
 import current from './current';
 import value from './value';
 import list from './setList';
+import coins from './getCoins';
 import curlist from './setCList';
+import currencyRate from './getCurrency';
 
 export default combineReducers({
     counter,
@@ -12,5 +14,7 @@ export default combineReducers({
     current,
     value,
     list,
-    curlist
+    curlist,
+    coins,
+    currencyRate
 });
