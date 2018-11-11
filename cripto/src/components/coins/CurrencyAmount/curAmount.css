@@ -7,7 +7,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 10px;
     width: 100%;
     margin: 0 10px;
     border-radius: 5px;
@@ -40,4 +39,34 @@
     width: 25%;
     padding: 0 5px;
     text-align: right;
+}
+.coinAmount_info{
+    display: flex;
+    color: tomato;
+    padding: 4.5px;
+    margin: 0 10px;
+    font-weight: bold;
+}
+.coinAmount_info span{
+    font-weight: normal;
+
+}
+.coinAmount_info ul{
+    list-style-type: none;
+}
+.coinAmount_info .img_block{
+    width: 30%;
+}
+.coinAmount_info .img_block img{
+    width: 100%;
+    height: auto;
+}
+.coinAmount_text a{
+    text-decoration: none;
+    color: #acacac;
+    transition: all .25s ease;
+}
+.coinAmount_text a:hover{
+    text-decoration: none;
+    color: tomato;
 }

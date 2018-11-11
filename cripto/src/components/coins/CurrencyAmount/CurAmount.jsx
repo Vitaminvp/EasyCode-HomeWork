@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import WrappedComponent from '../HOC/listTransformation';
 import './curAmount.css';
 import {requestCurrencyListAction} from '../../../AC/sagaCurrency';
+import {CRYPTO_COMPARE_URL} from '../../../constants';
 
 class CurAmountComponent extends Component {
     _isMounted = false;
-
+    constructor(props) {
+        super(props);
+        this.state = {toggleBtn: false};
+    }
 
     static defaultProps = {
         currensy: []
@@ -21,16 +25,33 @@ class CurAmountComponent extends Component {
     componentWillUnmount(){
         this._isMounted = false;
     }
+
+    handleToggleBtn = (e) => {
+        e.preventDefault();
+        this.setState({toggleBtn: !this.state.toggleBtn})
+    };
     render() {
         const {item, value, curlist, currencyRate} = this.props;
         return <div className="coinAmount">
-            <div className="coinAmount_text"><span>{item.Name}:</span>
-                <ul>
-                    {curlist.map(item => <li
-                        key={item.Name}>{(value * currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
-                </ul>
-            </div>
-        </div>;
+                <div className="coinAmount_text"><span>{item.Name}:</span>
+                    <ul>
+                        {curlist.map(item => <li
+                            key={item.Name}>{(value * currencyRate[item.Name]).toFixed(2)} {item.Name}</li>)}
+                    </ul>
+                    <a href="./" onClick={this.handleToggleBtn}>{this.state.toggleBtn?<span>&and;</span>:<span>&or;</span>}</a>
+                </div>
+            {this.state.toggleBtn?
+                <div className="coinAmount_info">
+                    <div className="img_block"><img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName}/></div>
+                    <ul>
+                    <li><span>Algorithm:</span> {item.Algorithm}</li>
+                    <li><span>FullName:</span> {item.FullName}</li>
+                    <li><span>Symbol:</span> {item.Symbol}</li>
+                    <li><span>ProofType:</span> {item.ProofType}</li>
+                </ul></div>
+                :
+                null}
+            </div>;
     }
 }
 const mapStateToProps = state => ({
