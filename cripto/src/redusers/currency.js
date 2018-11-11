@@ -9,9 +9,9 @@ const initialCurrency = [
 
 
 export default (currency = initialCurrency, action) => {
-    const {type} = action;
+    const {type, payload} = action;
     switch (type) {
-        case CURRENCY: return [...action.payload];
+        case CURRENCY: return (payload instanceof Array) ? [...payload] : [payload];
         default: return currency;
     }
 }
