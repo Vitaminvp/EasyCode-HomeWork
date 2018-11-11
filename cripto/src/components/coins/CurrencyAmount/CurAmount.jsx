@@ -44,10 +44,10 @@ class CurAmountComponent extends Component {
                 <div className="coinAmount_info">
                     <div className="img_block"><img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName}/></div>
                     <ul>
-                    <li><span>Algorithm:</span> {item.Algorithm}</li>
-                    <li><span>FullName:</span> {item.FullName}</li>
-                    <li><span>Symbol:</span> {item.Symbol}</li>
-                    <li><span>ProofType:</span> {item.ProofType}</li>
+                        <li><span>Algorithm:</span> {item.Algorithm}</li>
+                        <li><span>FullName:</span> {item.FullName}</li>
+                        <li><span>Symbol:</span> {item.Symbol}</li>
+                        <li><span>ProofType:</span> {item.ProofType}</li>
                 </ul></div>
                 :
                 null}
