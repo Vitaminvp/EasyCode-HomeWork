@@ -29,6 +29,7 @@ class Coins extends Component {
         const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.props.setListAC(list);
         this.props.setCListAC(curlist);
+        this.state={ toggleBtn: '' };
     }
     static propTypes = {
         currencyAC: PropTypes.func.isRequired,
@@ -79,7 +80,11 @@ class Coins extends Component {
         const url = this.getLocalState();
         this.props.handleSetState(url);
     }
-
+    handleToggleBtn = (itemName) => {
+        this.setState({
+            toggleBtn: this.state.toggleBtn !== itemName ? itemName : ''
+        })
+    };
     handleChange = (value, isCoin) => {
         if (isCoin) {
             this.isActBtnCoin = !value;
@@ -186,6 +191,8 @@ class Coins extends Component {
                                    classN="coinsAmounts"
                                    curlist={curlist}
                                    currencyAll={currency}
+                                   handleToggleBtn = {this.handleToggleBtn}
+                                   toggleBtn = {this.state.toggleBtn}
                                    amount={true}/>
                     </ErrorBoundary>
                 </div>

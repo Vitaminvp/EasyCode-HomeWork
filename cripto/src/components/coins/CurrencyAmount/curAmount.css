@@ -59,6 +59,7 @@
 }
 .coinAmount_info .img_block img{
     width: 100%;
+    max-width: 200px;
     height: auto;
 }
 .coinAmount_text a{
@@ -69,4 +70,29 @@
 .coinAmount_text a:hover{
     text-decoration: none;
     color: tomato;
+}
+.coinInfo-enter {
+    opacity: 0.01;
+}
+
+.coinInfo-enter.coinInfo-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.coinInfo-leave {
+    opacity: 1;
+}
+
+.coinInfo-leave.coinInfo-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+.coinInfo-appear {
+    opacity: 0.01;
+}
+
+.coinInfo-appear.coinInfo-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
 }

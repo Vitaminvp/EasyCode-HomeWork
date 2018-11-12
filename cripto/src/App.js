@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History.jsx';
-import News from './components/News.jsx';
+import News from './components/news/News.jsx';
 import Price from './components/Price.jsx';
 import Exchange from './components/Exchange.jsx';
 import CoinsComponent from './components/coins/Coins.jsx';
