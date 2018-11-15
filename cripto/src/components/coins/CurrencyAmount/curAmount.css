@@ -18,7 +18,7 @@
 }
 
 .coinAmount_text span {
-    width: 60px;
+    width: 70px;
 }
 
 .coinAmount_text ul {
@@ -30,26 +30,40 @@
     width: 100%;
     list-style-type: none;
     margin: 0;
-    margin-left: 10px;
+    margin-left: 20px;
+    padding: 0;
+    text-shadow: none;
+    justify-content: space-around;
+}
+.coinAmount_text ul div{
+    min-width: 25%;
+    width: 100%;
+}
+.coinAmount_text .toggleArrow {
+    align-self: flex-start;
+}
+.coinAmount_text ul ul{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
     padding: 0;
     text-shadow: none;
 }
 
 .coinAmount_text ul li {
-    width: 25%;
-    padding: 0 5px;
-    text-align: right;
+    padding: 0;
+    text-align: left;
 }
 .coinAmount_info{
     display: flex;
     color: tomato;
-    padding: 4.5px;
-    margin: 0 10px;
+    margin: 0 10px 0 0;
     font-weight: bold;
 }
 .coinAmount_info span{
     font-weight: normal;
-
 }
 .coinAmount_info ul{
     list-style-type: none;

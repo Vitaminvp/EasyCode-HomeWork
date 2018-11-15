@@ -21,7 +21,7 @@ export function* getCurrencyList(action) {
         const responce = yield call(
             () => fetch(`${CRYPTO_COMPARE_URL_CUR}${action.nameToUpper}&tsyms=${action.currensyNames}`).then(responce => responce.json()),
         );
-        yield put(receiveCurrencyListAction(responce));
+        yield put(receiveCurrencyListAction(responce['RAW'][action.nameToUpper]));
     } catch (err) {
         yield put(errorCurrencyListAction(err));
     }

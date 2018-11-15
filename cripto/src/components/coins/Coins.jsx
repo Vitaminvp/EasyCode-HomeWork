@@ -96,6 +96,7 @@ class Coins extends Component {
     };
     handleSubmit = (event, isCoin) => {
         if (isCoin) {
+            this.setState({toggleBtn: ''});
             const value = {
                 Name: this.props.value,
                 value: 0

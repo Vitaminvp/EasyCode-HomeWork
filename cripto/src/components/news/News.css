@@ -1,7 +1,17 @@
 .newsItem{
-    display: flex;
+    /*display: flex;*/
 }
 .newsImgBox{
     margin: 20px;
     max-width: 300px;
+    max-height: 300px;
+    float: left;
+}
+.posts{
+    display: flex;
+    flex-wrap: wrap;
+}
+.post{
+    min-width: 400px;
+    width: 50%;
 }
