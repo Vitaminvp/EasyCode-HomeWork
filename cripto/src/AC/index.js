@@ -9,44 +9,44 @@ export function increment(data) {
         payload: data
     }
 }
-export function currency(data) {
+export function setCurrencyNameAll(data) {
     return {
         type: CURRENCY,
         payload: data
     }
 }
-export function current(data) {
+export function setCurrentCurrency(data) {
     return {
         type: CURRENT,
         payload: data
     }
 }
-export function value(data) {
+export function setCurrentCoin(data) {
     return {
         type: VALUE,
         payload: data
     }
 }
-export function setList(data) {
+export function setCoinsList(data) {
     return {
         type: SETLIST,
         payload: data
     }
 }
-export function addToList(data) {
+export function addToCoinsList(data) {
     return {
         type: ADDTOLIST,
         payload: data
     }
 }
 
-export function setCurList(data) {
+export function setCurrencyList(data) {
     return {
         type: SETCLIST,
         payload: data
     }
 }
-export function addToCurList(data) {
+export function addToCurrencyList(data) {
     return {
         type: ADDTOCLIST,
         payload: data

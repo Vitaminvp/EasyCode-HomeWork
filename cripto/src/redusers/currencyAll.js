@@ -8,10 +8,10 @@ const initialCurrency = [
 ];
 
 
-export default (currency = initialCurrency, action) => {
+export default (currencyAll = initialCurrency, action) => {
     const {type, payload} = action;
     switch (type) {
         case CURRENCY: return (payload instanceof Array) ? [...payload] : [payload];
-        default: return currency;
+        default: return currencyAll;
     }
 }

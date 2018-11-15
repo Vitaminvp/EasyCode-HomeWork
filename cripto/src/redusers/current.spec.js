@@ -1,4 +1,4 @@
-import current from './current';
+import current from './currentCurrency';
 import { CURRENT } from '../constants';
 
 describe('Search reducers', () => {

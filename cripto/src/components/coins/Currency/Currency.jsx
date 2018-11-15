@@ -2,7 +2,7 @@ import React from 'react';
 import './currency.css';
 import WrappedComponent from '../HOC/listTransformation';
 
-const Cur = ({item, handleDelete}) => {
+const Currency = ({item, handleDelete}) => {
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -14,5 +14,5 @@ const Cur = ({item, handleDelete}) => {
     </div>;
 };
 
-export default WrappedComponent(Cur);
+export default WrappedComponent(Currency);
 

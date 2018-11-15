@@ -3,41 +3,40 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Coin from "./Coin/Coin";
 import CoinAmount from "./CoinAmount/CoinAmount";
-import CurAmount from "./CurrencyAmount/CurAmount";
-import Cur from "./Currency/Cur";
-import Span from "./CoinAmount/Span";
+import CurrencyAmount from "./CurrencyAmount/CurrencyAmount";
+import Currency from "./Currency/Currency";
+import Span from "./CoinAmount/ErrorSpan";
 import Form from "./Form/Form";
 import ErrorBoundary from "../ErrorBoundary";
-import './coins.css';
-import {currency, current, value, addToList, setCurList, addToCurList} from "../../AC";
-import {setList} from "../../AC/index";
+import './price.css';
+import {setCurrencyNameAll, setCurrentCurrency, setCurrentCoin, addToCoinsList, setCoinsList, setCurrencyList, addToCurrencyList} from "../../AC";
 
-class Coins extends Component {
+class PriceComponent extends Component {
     constructor(props) {
         super(props);
         this.isActBtnCoin = true;
         this.isActBtnCur = true;
         // ------------ localStorage ------------- //
         // const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
-        // const curlist = localStorage.getItem('curlist')?JSON.parse(localStorage.getItem('curlist')):[];
+        // const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         // ------------ localStorage ------------- //
         const split = this.props.match.params.list.split('|');
         const list = split[0] ? split[0].split('&').map(item => ({
                                                             Name: item.split(':')[0],
                                                             value: parseInt(item.split(':')[1])
                                                         })) : [];
-        const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
-        this.props.setListAC(list);
-        this.props.setCListAC(curlist);
+        const currencyList = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
+        this.props.setCoinsList(list);
+        this.props.setCurrencyList(currencyList);
         this.state={ toggleBtn: '' };
     }
     static propTypes = {
-        currencyAC: PropTypes.func.isRequired,
-        currency: PropTypes.array.isRequired,
+        setCurrencyNameAll: PropTypes.func.isRequired,
+        currencyAll: PropTypes.array.isRequired,
         list: PropTypes.array.isRequired,
-        curlist: PropTypes.array.isRequired,
-        current: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
+        currencyList: PropTypes.array.isRequired,
+        setCurrentCoin: PropTypes.func.isRequired,
+        currentCoin: PropTypes.string.isRequired
     };
     static defaultProps = {
         test: "select your coin."
@@ -45,16 +44,16 @@ class Coins extends Component {
     // ------------ localStorage ------------- //
     setLocalState = () => {
         const localList = [...this.props.list];
-        const localCurList = [...this.props.curlist];
-        localStorage.setItem('list', JSON.stringify(localList));
-        localStorage.setItem('curlist', JSON.stringify(localCurList));
+        const localCurList = [...this.props.currencyList];
+        localStorage.setItem('coinsList', JSON.stringify(localList));
+        localStorage.setItem('currencyList', JSON.stringify(localCurList));
     };
     getLocalState = () => {
-        const list = this.props.list.map(item => `${item.Name}:${item.value}`).join('&');
-        const curlist = this.props.curlist.map(item => `${item.Name}`).join('&');
+        const coinsList = this.props.list.map(item => `${item.Name}:${item.value}`).join('&');
+        const currencyList = this.props.currencyList.map(item => `${item.Name}`).join('&');
         let allList;
-        if(list || curlist){
-            allList = `/coins/${list}|${curlist}`
+        if(coinsList || currencyList){
+            allList = `/coins/${coinsList}|${currencyList}`
         }else{
             allList='';
         }
@@ -88,29 +87,29 @@ class Coins extends Component {
     handleChange = (value, isCoin) => {
         if (isCoin) {
             this.isActBtnCoin = !value;
-            this.props.valueAC(value);
+            this.props.setCurrentCoin(value);
         } else {
             this.isActBtnCur = !value;
-            this.props.currentAC(value);
+            this.props.setCurrentCurrency(value);
         }
     };
     handleSubmit = (event, isCoin) => {
         if (isCoin) {
             this.setState({toggleBtn: ''});
-            const value = {
-                Name: this.props.value,
+            const coin = {
+                Name: this.props.currentCoin,
                 value: 0
             };
-            if (this.props.value) {
-                this.props.valueAC('');
-                this.props.addToListAC(value);
+            if (this.props.currentCoin) {
+                this.props.setCurrentCoin('');
+                this.props.addToCoinsList(coin);
             }
             this.isActBtnCoin = true;
         } else {
-            const current = {Name: this.props.current};
+            const current = {Name: this.props.currentCurrency};
             if (current.Name) {
-                this.props.currentAC('');
-                this.props.addToCListAC(current);
+                this.props.setCurrentCurrency('');
+                this.props.addToCurrencyList(current);
             }
             this.isActBtnCur = true;
         }
@@ -118,15 +117,15 @@ class Coins extends Component {
     };
 
 
-    filterForDelete = (item, isCoin) => (!isCoin ? this.props.curlist : this.props.list).filter(element => element.Name !== item);
+    filterForDelete = (item, isCoin) => (!isCoin ? this.props.currencyList : this.props.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
         if (isCoin) {
             const list = this.filterForDelete(item, isCoin);
-            this.props.setListAC(list);
+            this.props.setCoinsList(list);
         } else {
-            const curlist = this.filterForDelete(item);
-            this.props.setCListAC(curlist);
+            const currencyList = this.filterForDelete(item);
+            this.props.setCurrencyList(currencyList);
         }
     };
 
@@ -136,19 +135,20 @@ class Coins extends Component {
             if (item.Name === name) item.value = value;
             return item;
         });
-        this.props.setListAC(list);
+        this.props.setCoinsList(list);
     };
 
     render() {
-        const {coins, currency, value, current, list, curlist} = this.props;
+        const {coins, currencyAll, currentCoin, currentCurrency, list, currencyList} = this.props;
+        console.log("Price this.props.", this.props);
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
-                    <h2>Coins: {this.props.test}</h2>
+                    <h2>Price: {this.props.test}</h2>
                     <ErrorBoundary>
 
                         <Form onSubmit={this.handleSubmit}
-                              value={value}
+                              value={currentCoin}
                               onChange={this.handleChange}
                               coins={coins}
                               list={list}
@@ -174,24 +174,25 @@ class Coins extends Component {
                     <h2>Currency: </h2>
                     <ErrorBoundary>
                         <Form onSubmit={this.handleSubmit}
-                              value={current}
+                              value={currentCurrency}
                               onChange={this.handleChange}
-                              coins={currency}
-                              list={curlist}
+                              coins={currencyAll}
+                              list={currencyList}
                               disabled={this.isActBtnCur}>Pick your currency</Form>
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <Cur handleDelete={this.handleDelete}
+                        <Currency handleDelete={this.handleDelete}
                              classN="coins"
-                             list={curlist}
-                             items={currency}/>
+                             list={currencyList}
+                             items={currencyAll}/>
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <CurAmount list={list}
+                        <CurrencyAmount
+                                   list={list}
                                    items={coins}
                                    classN="coinsAmounts"
-                                   curlist={curlist}
-                                   currencyAll={currency}
+                                   currencyList={currencyList}
+                                   currencyAll={currencyAll}
                                    handleToggleBtn = {this.handleToggleBtn}
                                    toggleBtn = {this.state.toggleBtn}
                                    amount={true}/>
@@ -203,27 +204,27 @@ class Coins extends Component {
 }
 
 const mapStateToProps = state => ({
-    currency: state.currency,
-    current: state.current,
-    value: state.value,
+    currencyAll: state.currencyAll,
+    currentCurrency: state.currentCurrency,
+    currentCoin: state.currentCoin,
     list: state.list,
-    curlist: state.curlist
+    currencyList: state.currencyList
 });
 
 const mapDispatchToProps = {
-    currencyAC: currency,
-    currentAC: current,
-    valueAC: value,
-    setListAC: setList,
-    addToListAC: addToList,
-    setCListAC: setCurList,
-    addToCListAC: addToCurList
+    setCurrencyNameAll,
+    setCurrentCurrency,
+    setCurrentCoin,
+    setCoinsList,
+    addToCoinsList,
+    setCurrencyList,
+    addToCurrencyList
 };
 
-const CoinsComponent = connect(
+const Price = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Coins);
+)(PriceComponent);
 
-export default CoinsComponent;
+export default Price;
 

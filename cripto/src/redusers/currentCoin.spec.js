@@ -1,4 +1,4 @@
-import value from './value';
+import value from './currentCoin';
 import { VALUE } from '../constants';
 
 describe('Search reducers', () => {

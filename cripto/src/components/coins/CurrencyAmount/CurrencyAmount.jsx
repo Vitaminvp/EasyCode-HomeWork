@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import WrappedComponent from '../HOC/listTransformation';
-import './curAmount.css';
+import './currencyAmount.css';
 import {requestCurrencyListAction} from '../../../AC/sagaCurrency';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-class CurAmountComponent extends Component {
+class CurrencyAmountComponent extends Component {
     _isMounted = false;
 
     static defaultProps = {
@@ -14,10 +14,10 @@ class CurAmountComponent extends Component {
 
     componentDidMount() {
         this._isMounted = true;
-        const currensyNames = this.props.currencyAll.map(item => item.Name.toUpperCase()).join(',');
+        const currencyNames = this.props.currencyAll.map(item => item.Name.toUpperCase()).join(',');
         const nameToUpper = this.props.item.Name.toUpperCase();
         if (this._isMounted)
-            this.props.requestCurrencyListAction(currensyNames, nameToUpper);
+            this.props.requestCurrencyListAction(currencyNames, nameToUpper);
     }
 
     componentWillUnmount() {
@@ -30,11 +30,11 @@ class CurAmountComponent extends Component {
     };
 
     render() {
-        const {item, value, curlist, currencyRate} = this.props;
+        const {item, value, currencyList, currencyRate} = this.props;
         return <div className="coinAmount">
             <div className="coinAmount_text"><span>{item.Name}:</span>
                 <ul>
-                    {curlist.map(el => {
+                    {currencyList.map(el => {
                             return (<div key={el.Name}>
                                     <li >{(value * (currencyRate[el.Name] ? currencyRate[el.Name]['PRICE'] : 0)).toFixed(2)} {el.Name}</li>
                                     {this.props.toggleBtn === this.props.item.Name ?
@@ -79,10 +79,10 @@ const mapDispatchToProps = {
     requestCurrencyListAction,
 };
 
-const CurAmount = connect(
+const CurrencyAmount = connect(
     mapStateToProps,
     mapDispatchToProps,
-)(WrappedComponent(CurAmountComponent));
+)(WrappedComponent(CurrencyAmountComponent));
 
-export default CurAmount;
+export default CurrencyAmount;
 
