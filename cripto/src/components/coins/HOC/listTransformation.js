@@ -2,7 +2,6 @@ import React from 'react'
 
  const  WrappedComponent = (OriginalComponent) => (props) => {
         const {list, items, classN, amount} = props;
-        console.log("props", props);
         const listToMap = !list ? [] : list.map(item => items.filter(element => item.Name === element.Name));
         if((items ? items.length : undefined) && !!list.length){
             return <div className={classN}>

@@ -6,7 +6,7 @@ import CoinAmount from "./CoinAmount/CoinAmount";
 import CurrencyAmount from "./CurrencyAmount/CurrencyAmount";
 import Currency from "./Currency/Currency";
 import Span from "./CoinAmount/ErrorSpan";
-import Form from "./Form/Form";
+import AddItemForm from "./Form/AddItemForm";
 import ErrorBoundary from "../ErrorBoundary";
 import './price.css';
 import {setCurrencyNameAll, setCurrentCurrency, setCurrentCoin, addToCoinsList, setCoinsList, setCurrencyList, addToCurrencyList} from "../../AC";
@@ -139,20 +139,19 @@ class PriceComponent extends Component {
 
     render() {
         const {coins, currencyAll, currentCoin, currentCurrency, list, currencyList} = this.props;
-        console.log("Price this.props.", this.props);
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
                     <h2>Price: {this.props.test}</h2>
                     <ErrorBoundary>
 
-                        <Form onSubmit={this.handleSubmit}
+                        <AddItemForm onSubmit={this.handleSubmit}
                               value={currentCoin}
                               onChange={this.handleChange}
                               coins={coins}
                               list={list}
                               isCoin={true}
-                              disabled={this.isActBtnCoin}>Pick your coins</Form>
+                              disabled={this.isActBtnCoin}>Pick your coins</AddItemForm>
 
                         <Coin handleDelete={this.handleDelete}
                               list={list}
@@ -172,12 +171,12 @@ class PriceComponent extends Component {
                 <div className="coinContainer">
                     <h2>Currency: </h2>
                     <ErrorBoundary>
-                        <Form onSubmit={this.handleSubmit}
+                        <AddItemForm onSubmit={this.handleSubmit}
                               value={currentCurrency}
                               onChange={this.handleChange}
                               coins={currencyAll}
                               list={currencyList}
-                              disabled={this.isActBtnCur}>Pick your currency</Form>
+                              disabled={this.isActBtnCur}>Pick your currency</AddItemForm>
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <Currency handleDelete={this.handleDelete}
