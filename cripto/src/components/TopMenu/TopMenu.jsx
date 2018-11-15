@@ -8,7 +8,10 @@ class TopMenu extends Component {
             <nav className="top-menu">
                 <ul className="menu-main">
                     <li>
-                        <NavLink to="/" activeClassName="active" exact>Price</NavLink>
+                        <NavLink to={this.props.url} activeClassName="active">Price</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/" activeClassName="active" exact>Coins</NavLink>
                     </li>
                     <li>
                         <NavLink to="/history" activeClassName="active">History</NavLink>
@@ -19,9 +22,7 @@ class TopMenu extends Component {
                     <li>
                         <NavLink to="/news" activeClassName="active">News</NavLink>
                     </li>
-                    <li>
-                        <NavLink to={this.props.url} activeClassName="active">Coins</NavLink>
-                    </li>
+
                 </ul>
             </nav>
         );

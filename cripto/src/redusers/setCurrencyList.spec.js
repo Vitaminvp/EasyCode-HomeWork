@@ -1,4 +1,4 @@
-import setCList from './setCList';
+import setCList from './setCurrencyList';
 import { SETCLIST } from '../constants';
 
 describe('Search reducers', () => {

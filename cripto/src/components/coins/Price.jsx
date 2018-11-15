@@ -12,7 +12,7 @@ import './coins.css';
 import {currency, current, value, addToList, setCurList, addToCurList} from "../../AC";
 import {setList} from "../../AC/index";
 
-class Coins extends Component {
+class Price extends Component {
     constructor(props) {
         super(props);
         this.isActBtnCoin = true;
@@ -26,16 +26,16 @@ class Coins extends Component {
                                                             Name: item.split(':')[0],
                                                             value: parseInt(item.split(':')[1])
                                                         })) : [];
-        const curlist = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
+        const currencyList = split[1] ? split[1].split('&').map(item => ({Name: item})) : [];
         this.props.setListAC(list);
-        this.props.setCListAC(curlist);
+        this.props.setCListAC(currencyList);
         this.state={ toggleBtn: '' };
     }
     static propTypes = {
         currencyAC: PropTypes.func.isRequired,
         currency: PropTypes.array.isRequired,
         list: PropTypes.array.isRequired,
-        curlist: PropTypes.array.isRequired,
+        currencyList: PropTypes.array.isRequired,
         current: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
     };
@@ -47,14 +47,14 @@ class Coins extends Component {
         const localList = [...this.props.list];
         const localCurList = [...this.props.curlist];
         localStorage.setItem('list', JSON.stringify(localList));
-        localStorage.setItem('curlist', JSON.stringify(localCurList));
+        localStorage.setItem('currencyList', JSON.stringify(localCurList));
     };
     getLocalState = () => {
         const list = this.props.list.map(item => `${item.Name}:${item.value}`).join('&');
-        const curlist = this.props.curlist.map(item => `${item.Name}`).join('&');
+        const currencyList = this.props.curlist.map(item => `${item.Name}`).join('&');
         let allList;
-        if(list || curlist){
-            allList = `/coins/${list}|${curlist}`
+        if(list || currencyList){
+            allList = `/price/${list}|${currencyList}`
         }else{
             allList='';
         }
@@ -125,12 +125,12 @@ class Coins extends Component {
             const list = this.filterForDelete(item, isCoin);
             this.props.setListAC(list);
         } else {
-            const curlist = this.filterForDelete(item);
-            this.props.setCListAC(curlist);
+            const currencyList = this.filterForDelete(item);
+            this.props.setCListAC(currencyList);
         }
     };
 
-    handleCoinsChangeAmount = (name, value) => {
+    handlePriceChangeAmount = (name, value) => {
         let list = [...this.props.list];
         list = list.map(item => {
             if (item.Name === name) item.value = value;
@@ -140,11 +140,12 @@ class Coins extends Component {
     };
 
     render() {
-        const {coins, currency, value, current, list, curlist} = this.props;
+        console.log("this.props", this.props);
+        const {coins, currency, value, current, list, currencyList} = this.props;
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
-                    <h2>Coins: {this.props.test}</h2>
+                    <h2>Price: {this.props.test}</h2>
                     <ErrorBoundary>
 
                         <Form onSubmit={this.handleSubmit}
@@ -163,7 +164,7 @@ class Coins extends Component {
                         <CoinAmount list={list}
                                     items={coins}
                                     classN="coinsAmounts"
-                                    handleCoinsChangeAmount={this.handleCoinsChangeAmount}
+                                    handlePriceChangeAmount={this.handlePriceChangeAmount}
                                     amount={true}
                                     Spn={<Span>Only numbers allowed!</Span>}/>
 
@@ -177,20 +178,20 @@ class Coins extends Component {
                               value={current}
                               onChange={this.handleChange}
                               coins={currency}
-                              list={curlist}
+                              list={currencyList}
                               disabled={this.isActBtnCur}>Pick your currency</Form>
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <Cur handleDelete={this.handleDelete}
                              classN="coins"
-                             list={curlist}
+                             list={currencyList}
                              items={currency}/>
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <CurAmount list={list}
                                    items={coins}
                                    classN="coinsAmounts"
-                                   curlist={curlist}
+                                   curlist={currencyList}
                                    currencyAll={currency}
                                    handleToggleBtn = {this.handleToggleBtn}
                                    toggleBtn = {this.state.toggleBtn}
@@ -220,10 +221,10 @@ const mapDispatchToProps = {
     addToCListAC: addToCurList
 };
 
-const CoinsComponent = connect(
+const PriceComponent = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Coins);
+)(Price);
 
-export default CoinsComponent;
+export default PriceComponent;
 

@@ -1,20 +1,20 @@
 import { combineReducers } from 'redux';
 import counter from './counter';
-import currency from './currency';
+import currencyAll from './currency';
 import current from './current';
 import value from './value';
 import list from './setList';
 import coins from './getCoins';
-import curlist from './setCList';
+import currencyList from './setCurrencyList';
 import currencyRate from './getCurrency';
 
 export default combineReducers({
     counter,
-    currency,
+    currencyAll,
     current,
     value,
     list,
-    curlist,
+    currencyList,
     coins,
     currencyRate
 });

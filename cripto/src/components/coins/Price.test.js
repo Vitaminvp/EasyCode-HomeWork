@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Coin from "./Coin/Coin";
-import Coins from "./Coins";
+import Coins from "./Price";
 import CoinAmount from "./CoinAmount/CoinAmount";
 import CurAmount from "./CurrencyAmount/CurAmount";
 import Cur from "./Currency/Cur";

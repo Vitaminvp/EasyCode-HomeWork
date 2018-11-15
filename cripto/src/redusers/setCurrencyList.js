@@ -1,12 +1,12 @@
 import { SETCLIST, ADDTOCLIST } from '../constants';
 
-const initialSetCList = [];
+const initialSetCurrencyList = [];
 
-export default (curlist = initialSetCList, action) => {
+export default (currencyList = initialSetCurrencyList, action) => {
     const {type, payload} = action;
     switch (type) {
         case SETCLIST: return (payload instanceof Array) ? [...payload] : [payload];
-        case ADDTOCLIST: return [...curlist, payload];
-        default: return curlist;
+        case ADDTOCLIST: return [...currencyList, payload];
+        default: return currencyList;
     }
 }
