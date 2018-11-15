@@ -116,7 +116,6 @@ class PriceComponent extends Component {
         event.preventDefault();
     };
 
-
     filterForDelete = (item, isCoin) => (!isCoin ? this.props.currencyList : this.props.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
