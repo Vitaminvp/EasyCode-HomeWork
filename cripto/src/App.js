@@ -17,11 +17,11 @@ class AppComponent extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-        const coinslist = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
-        const strCoinsList = coinslist.map(item => `${item.Name}:${item.value}`).join('&');
+        const coinsList = localStorage.getItem('coinsList')?JSON.parse(localStorage.getItem('coinsList')):[];
+        const strCoinsList = coinsList.map(item => `${item.Name}:${item.value}`).join('&');
         const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         const strCurrencyList = currencyList.map(item => `${item.Name}`).join('&');
-        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/888:1|USD';
+        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/|';
         this.state = {
             url
         }

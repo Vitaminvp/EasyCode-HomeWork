@@ -5,7 +5,7 @@ import Coin from "./Coin/Coin";
 import CoinAmount from "./CoinAmount/CoinAmount";
 import CurrencyAmount from "./CurrencyAmount/CurrencyAmount";
 import Currency from "./Currency/Currency";
-import Span from "./CoinAmount/ErrorSpan";
+import ErrorSpan from "./CoinAmount/ErrorSpan";
 import AddItemForm from "./Form/AddItemForm";
 import ErrorBoundary from "../ErrorBoundary";
 import './price.css';
@@ -163,7 +163,7 @@ class PriceComponent extends Component {
                                     classN="coinsAmounts"
                                     handleCoinsChangeAmount={this.handleCoinsChangeAmount}
                                     amount={true}
-                                    Spn={<Span>Only numbers allowed!</Span>}/>
+                                    Spn={<ErrorSpan>Only numbers allowed!</ErrorSpan>}/>
 
                     </ErrorBoundary>
 
