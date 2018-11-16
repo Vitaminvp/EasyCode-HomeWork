@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History.jsx';
-import News from './components/news/News.jsx';
+// import News from './components/News/News.jsx';
+import NewsComponent from './components/News';
 import Coins from './components/Coins.jsx';
 import Exchange from './components/Exchange.jsx';
-import Price from './components/coins/Price.jsx';
+import Price from './components/Price/Price.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
@@ -17,13 +18,11 @@ class AppComponent extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-
-        const coinsList = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
-        const strCoinsList = coinsList.map(item => `${item.Name}:${item.value}`).join('&');
-        const currencylist = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
-        const strCurrencyList = currencylist.map(item => `${item.Name}`).join('&');
-        const url = strCoinsList || strCurrencyList ? `/price/${coinsList}|${strCurrencyList}` : '/price/888:1|USD';
-
+        const coinslist = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
+        const strCoinsList = coinslist.map(item => `${item.Name}:${item.value}`).join('&');
+        const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
+        const strCurrencyList = currencyList.map(item => `${item.Name}`).join('&');
+        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/888:1|USD';
         this.state = {
             url
         }
@@ -40,7 +39,6 @@ class AppComponent extends Component {
         this._isMounted = false;
     }
     render() {
-        console.log("this.props.App", this.props);
         return (
             <BrowserRouter>
                 <Route
@@ -53,7 +51,7 @@ class AppComponent extends Component {
                                     <Route exact path="/" component={Coins}/>
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
-                                    <Route path="/news" component={News}/>
+                                    <Route path="/news" component={NewsComponent}/>
                                     <Route path="/coins/:list" component={(props) => <Price {...props} coins={this.props.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>

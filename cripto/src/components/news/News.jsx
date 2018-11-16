@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import ReactPaginate from 'react-paginate';
 import './News.css';
 
 class News extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            offset: 0,
             promoted: [],
-            posts: []
+            data: []
         };
     }
 
@@ -16,13 +18,14 @@ class News extends Component {
             .then(posts => this.setState({promoted: Object.keys(posts.Promoted).map(key => posts.Promoted[key])}));
         fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN')
             .then(res => res.json())
-            .then(posts => this.setState({posts: Object.keys(posts.Data).map(key => posts.Data[key])}))
+            .then(posts => this.setState({data: Object.keys(posts.Data).map(key => posts.Data[key])}))
     }
 
     render() {
         return (
             <div>
                 <h1>News</h1>
+
                 {this.state.promoted.map(post => {
                     return (
                         <div key={post.id}>
@@ -41,7 +44,7 @@ class News extends Component {
                     );
                 })}
                 <div className="posts">
-                    {this.state.posts.map(post => {
+                    {this.state.data.map(post => {
                         return (
 
                             <div key={post.id} className="post">
@@ -59,6 +62,19 @@ class News extends Component {
                             </div>
                         );
                     })}
+                </div>
+                <div className="commentBox">
+                    <ReactPaginate previousLabel={"previous"}
+                                   nextLabel={"next"}
+                                   breakLabel={"..."}
+                                   breakClassName={"break-me"}
+                                   pageCount={this.state.pageCount}
+                                   marginPagesDisplayed={2}
+                                   pageRangeDisplayed={5}
+                                   onPageChange={this.handlePageClick}
+                                   containerClassName={"pagination"}
+                                   subContainerClassName={"pages pagination"}
+                                   activeClassName={"active"} />
                 </div>
             </div>
         )
