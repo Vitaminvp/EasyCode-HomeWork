@@ -28,25 +28,6 @@ class CoinsComponent extends Component {
 
         this.setState({ currentPage, currentCountries, totalPages });
     };
-    // render() {
-    //     console.log("this.props.coins", this.props.coins);
-    //     return (
-    //         <div>
-    //             <h1>Coins</h1>
-    //             <div className="posts">
-    //                 {this.props.coins.map(card => {
-    //                     return (
-    //                         <div key={card.Id} className="card">
-    //                             <h2><a href={`/coins/${card.Name}:1|USD&EUR&UAH&RUB`} rel="noopener noreferrer">{card.CoinName}</a>
-    //                             </h2>
-    //                             <img src={`${CRYPTO_COMPARE_URL}${card.ImageUrl}`} alt="card.CoinName"/>
-    //                         </div>
-    //                     );
-    //                 })}
-    //             </div>
-    //         </div>
-    //     )
-    // }
 
     render() {
         const {

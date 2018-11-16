@@ -5,14 +5,14 @@
     border-radius: 4px;
 }
 .mycontainer ul.pagination {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 50px auto;
     box-shadow: none;
+    display: inline-block;
 }
 .mycontainer .pagination>li {
     display: inline;
 }
-.mycontainer .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+.mycontainer .pagination>.active>a, .mycontainer .pagination>.active>a:focus, .mycontainer .pagination>.active>a:hover, .mycontainer .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     z-index: 2;
     color: #fff;
     cursor: default;
@@ -44,7 +44,7 @@ h2 a{
     text-align: center;
     text-decoration: none;
 }
-.mycontainer .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+.mycontainer .pagination>.disabled>a, .mycontainer .pagination>.disabled>a:focus, .mycontainer .pagination>.disabled>a:hover, .mycontainer .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
     color: #777;
     cursor: default;
     background-color: #fff;
