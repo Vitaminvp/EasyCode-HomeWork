@@ -17,13 +17,21 @@ class Card extends Component {
                             </span>
                             <img
                                 src={`${CRYPTO_COMPARE_URL}${card.ImageUrl}`}
-                                className="d-block w-90"
+                                className="d-block w-100 h-auto"
                                 alt={card.CoinName} />
                         </div>
                         <div className="back w-100 position-relative border-gray border-right px-2 bg-white rounded-left">
                             <span className="country-name text-dark d-block font-weight-bold">
-                                  <h2><a href={`/coins/${card.Name}:1|USD&EUR&UAH&RUB`}
+                                <h2><a href={`/coins/${card.Name}:1|USD&EUR&UAH&RUB`}
                                          rel="noopener noreferrer">{card.CoinName}</a></h2>
+                                <p>Algorithm: {card.Algorithm}</p>
+                                <p>Full name: {card.FullName}</p>
+                                <p>Is trading: {card.IsTrading}</p>
+                                <p>PreMined value: {card.PreMinedValue}</p>
+                                <p>Smart contract address: {card.SmartContractAddress}</p>
+                                <p>Sort order: {card.SortOrder}</p>
+                                <p>Total coin supply: {card.TotalCoinSupply}</p>
+                                <p>Total Ccoins free float: {card.TotalCoinsFreeFloat}</p>
                             </span>
                          </div>
                     </div>
