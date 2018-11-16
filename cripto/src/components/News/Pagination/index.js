@@ -10,7 +10,7 @@ const propTypes = {
 
 const defaultProps = {
     initialPage: 1,
-    pageSize: 10
+    pageSize: 6
 };
 
 class Pagination extends React.Component {
@@ -45,7 +45,7 @@ class Pagination extends React.Component {
         pager = this.getPager(items.length, page, pageSize);
 
         // get new page of items from items array
-        var pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
+        const pageOfItems = items.slice(pager.startIndex, pager.endIndex + 1);
 
         // update state
         this.setState({ pager: pager });

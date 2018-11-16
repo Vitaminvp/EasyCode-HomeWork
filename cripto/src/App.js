@@ -4,7 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History.jsx';
 // import News from './components/News/News.jsx';
 import NewsComponent from './components/News';
-import Coins from './components/Coins.jsx';
+import Coins from './components/Coins/Coins.jsx';
 import Exchange from './components/Exchange.jsx';
 import Price from './components/Price/Price.jsx';
 import ForOFor from './components/404.jsx'

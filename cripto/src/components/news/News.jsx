@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import ReactPaginate from 'react-paginate';
-import './News.css';
 
 class News extends Component {
     constructor(props) {
@@ -62,19 +60,6 @@ class News extends Component {
                             </div>
                         );
                     })}
-                </div>
-                <div className="commentBox">
-                    <ReactPaginate previousLabel={"previous"}
-                                   nextLabel={"next"}
-                                   breakLabel={"..."}
-                                   breakClassName={"break-me"}
-                                   pageCount={this.state.pageCount}
-                                   marginPagesDisplayed={2}
-                                   pageRangeDisplayed={5}
-                                   onPageChange={this.handlePageClick}
-                                   containerClassName={"pagination"}
-                                   subContainerClassName={"pages pagination"}
-                                   activeClassName={"active"} />
                 </div>
             </div>
         )
