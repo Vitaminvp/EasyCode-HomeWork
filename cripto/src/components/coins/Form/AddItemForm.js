@@ -2,7 +2,7 @@ import React from 'react';
 import Btn from "./Btn/Btn";
 import SelectOpt from "./selectOption/select";
 
-const Form = ({value, onChange, onSubmit, coins, list, disabled, children, isCoin}) =>
+const AddItemForm = ({value, onChange, onSubmit, coins, list, disabled, children, isCoin}) =>
     <form onSubmit={(e) => onSubmit(e, isCoin)}>
         <label>
             <i>{children}:&nbsp;</i>
@@ -16,5 +16,5 @@ const Form = ({value, onChange, onSubmit, coins, list, disabled, children, isCoi
         <Btn disabled={disabled} classN="submitBtn">Add</Btn>
     </form>;
 
-export default Form;
+export default AddItemForm;
 

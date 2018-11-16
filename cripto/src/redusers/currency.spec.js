@@ -1,4 +1,4 @@
-import currency from './currency';
+import currency from './currencyAll';
 import {  CURRENCY } from '../constants';
 
 const initialCurrency = [

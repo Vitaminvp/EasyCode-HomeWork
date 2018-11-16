@@ -20,7 +20,6 @@ class News extends Component {
     }
 
     render() {
-        console.log("this.state", this.state);
         return (
             <div>
                 <h1>News</h1>

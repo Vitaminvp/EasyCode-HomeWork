@@ -17,7 +17,6 @@ const CoinAmount = ({item, value, Spn, handleCoinsChangeAmount}) => {
         }
         e.preventDefault();
     };
-
     return <div className="coinAmount">
                 <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
                     <input
