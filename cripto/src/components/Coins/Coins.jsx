@@ -13,15 +13,16 @@ class CoinsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            search: '',
             currentCountries: [],
             currentPage: null,
             totalPages: null
         };
         this.props.setFilteredCoinsList(this.props.coins);
     }
-    handleSearchChange = (search) => {
-        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
+    handleSearchChange = search => {
         this.setState({ search });
+        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
     };
 
     filterListBySearchTerm = (list, searchTerm) => (
@@ -98,7 +99,7 @@ class CoinsComponent extends Component {
 
 const mapStateToProps = state => ({
     coins: state.coins.coins,
-    filteredCoinsList: state.coins.filteredCoinsList
+    filteredCoinsList: state.filteredCoinsList
 });
 
 const mapDispatchToProps = {

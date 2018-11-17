@@ -2,7 +2,7 @@ export const CRYPTO_COMPARE_URL = 'https://www.cryptocompare.com/';
 export const CRYPTO_COMPARE_URL_ALL = 'https://min-api.cryptocompare.com/data/all/coinlist';
 // export const CRYPTO_COMPARE_URL_CUR = 'https://min-api.cryptocompare.com/data/price?fsym=';
 export const CRYPTO_COMPARE_URL_CUR = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=';
-export const COINS_NUM = 222;
+export const COINS_NUM = 234;
 export const INCREMENT = 'INCREMENT';
 export const CURRENCY = 'CURRENCY';
 export const CURRENT = 'CURRENT';
