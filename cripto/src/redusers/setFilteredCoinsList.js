@@ -1,13 +1,12 @@
-import { SETLIST, ADDTOLIST, DELFROMLIST } from '../constants';
+import { FILTEREDCOINSLIST } from '../constants';
 
-const initialSetList = [];
+const initialFilteredSetList = [];
 
-export default (list = initialSetList, action) => {
+export default (filteredCoinsList = initialFilteredSetList, action) => {
     const {type, payload} = action;
     switch (type) {
-        case SETLIST: return (payload instanceof Array) ? [...payload] : [payload];
-        case ADDTOLIST: return [...list, payload];
-        case DELFROMLIST: return [...payload];
-        default: return list;
+        case FILTEREDCOINSLIST: return payload;
+
+        default: return filteredCoinsList;
     }
 }

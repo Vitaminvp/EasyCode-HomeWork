@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 import Pagination from './Pagination/Pagination';
 import Card from './Pagination/Card';
+import { setFilteredCoinsList } from '../../AC';
+import SearchInput from './SearchInput';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Coins.css';
@@ -16,6 +18,14 @@ class CoinsComponent extends Component {
             totalPages: null
         };
     }
+    handleSearchChange = (search) => {
+        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
+        this.setState({ search });
+    };
+
+    filterListBySearchTerm = (list, searchTerm) => (
+        list.filter(coin => coin.CoinName.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
     componentDidMount() {
     }
@@ -35,7 +45,8 @@ class CoinsComponent extends Component {
             currentPage,
             totalPages
         } = this.state;
-        const {coins} = this.props;
+        const { search } = this.state;
+        const { coins } = this.props;
         const totalCountries = coins.length;
 
         if (totalCountries === 0) return null;
@@ -49,7 +60,10 @@ class CoinsComponent extends Component {
 
         return (
             <div className="container mb-5">
-                <div className="row d-flex flex-row py-5">
+                <div className="row d-flex flex-row">
+                    <div>
+                        <SearchInput value={ search } onChange={ this.handleSearchChange } />
+                    </div>
                     <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
                         <div className="d-flex flex-row align-items-center">
                             <h2 className={headerClass}>
@@ -82,10 +96,13 @@ class CoinsComponent extends Component {
 };
 
 const mapStateToProps = state => ({
-    coins: state.coins.coins
+    coins: state.coins.coins,
+    filteredCoinsList: state.coins.filteredCoinsList
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    setFilteredCoinsList
+};
 
 const Coins = connect(
     mapStateToProps,
