@@ -177,14 +177,12 @@ class PriceComponent extends Component {
                               coins={currencyAll}
                               list={currencyList}
                               disabled={this.isActBtnCur}>Pick your currency.</AddItemForm>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+
                         <Currency handleDelete={this.handleDelete}
                              classN="coins"
                              list={currencyList}
                              items={currencyAll}/>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+
                         <CurrencyAmount
                                    list={list}
                                    items={coins}

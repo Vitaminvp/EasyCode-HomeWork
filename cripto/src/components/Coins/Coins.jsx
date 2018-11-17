@@ -21,14 +21,16 @@ class CoinsComponent extends Component {
         this.props.setFilteredCoinsList(this.props.coins);
     }
     handleSearchChange = search => {
-        this.setState({ search });
         this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
         this.onPageChanged({
             currentPage: 1,
             totalPages: Math.floor(this.props.filteredCoinsList.length/18),
             pageLimit: 18,
-            totalRecords: this.props.filteredCoinsList.length || 1
+            totalRecords: this.props.filteredCoinsList.length || 0
         });
+        console.log("this.props.filteredCoinsList.length", this.props.filteredCoinsList.length);
+        this.setState({ search });
+
     };
 
     filterListBySearchTerm = (list, searchTerm) => (
