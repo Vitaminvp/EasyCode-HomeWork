@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class SearchInput extends Component {
     static propTypes = {
         // value: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
+        // onChange: PropTypes.func.isRequired,
     };
 
     state = {

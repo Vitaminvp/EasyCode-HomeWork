@@ -17,6 +17,7 @@ class CoinsComponent extends Component {
             currentPage: null,
             totalPages: null
         };
+        this.props.setFilteredCoinsList(this.props.coins);
     }
     handleSearchChange = (search) => {
         this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
@@ -30,7 +31,7 @@ class CoinsComponent extends Component {
     componentDidMount() {
     }
     onPageChanged = data => {
-        const { coins } = this.props;
+        const coins = this.props.filteredCoinsList;
         const { currentPage, totalPages, pageLimit } = data;
 
         const offset = (currentPage - 1) * pageLimit;
@@ -46,7 +47,7 @@ class CoinsComponent extends Component {
             totalPages
         } = this.state;
         const { search } = this.state;
-        const { coins } = this.props;
+        const coins  = this.props.filteredCoinsList || [];
         const totalCountries = coins.length;
 
         if (totalCountries === 0) return null;
@@ -60,10 +61,10 @@ class CoinsComponent extends Component {
 
         return (
             <div className="container mb-5">
+                <div>
+                    <SearchInput value={ search } onChange={ this.handleSearchChange } />
+                </div>
                 <div className="row d-flex flex-row">
-                    <div>
-                        <SearchInput value={ search } onChange={ this.handleSearchChange } />
-                    </div>
                     <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
                         <div className="d-flex flex-row align-items-center">
                             <h2 className={headerClass}>
