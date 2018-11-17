@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History.jsx';
-import News from './components/news/News.jsx';
-import Coins from './components/Coins.jsx';
+// import News from './components/News/News.jsx';
+import NewsComponent from './components/News';
+import Coins from './components/Coins/Coins.jsx';
 import Exchange from './components/Exchange.jsx';
-import Price from './components/coins/Price.jsx';
+import Price from './components/Price/Price.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
 import TopMenu from './components/TopMenu/TopMenu';
@@ -50,7 +51,7 @@ class AppComponent extends Component {
                                     <Route exact path="/" component={Coins}/>
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
-                                    <Route path="/news" component={News}/>
+                                    <Route path="/news" component={NewsComponent}/>
                                     <Route path="/coins/:list" component={(props) => <Price {...props} coins={this.props.coins} handleSetState={this.handleSetState}/>}/>
                                     <Route component={ForOFor}/>
                                 </Switch>
