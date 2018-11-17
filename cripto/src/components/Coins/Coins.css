@@ -95,5 +95,7 @@ ul.pagination a.page-link:hover {
 
 .back {
     transform: rotateY(-180deg);
+    color: tomato;
+    overflow: hidden;
 }
 
