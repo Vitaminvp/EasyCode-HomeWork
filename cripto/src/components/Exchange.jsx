@@ -8,8 +8,8 @@ import Coin from './Price/Coin/Coin';
 class ExchangeComponent extends Component{
     constructor() {
         super();
-        this.isActBtnCoin = true;
-        this.isActBtnCur = true;
+        this.isActBtnCoin = false;
+        this.isActBtnCur = false;
         this.state = {
             data: [],
             toggleBtn: '',
@@ -36,12 +36,18 @@ class ExchangeComponent extends Component{
     };
     handleChange = (value, isCoin) => {
         if (isCoin) {
-            // this.isActBtnCoin = !value;
-            this.setState({currentCoin: value});
+            this.setState((state, props) => {
+                this.isActBtnCur = state.currentCurrency&&value;
+                return {currentCoin: value}
+            });
+            this.setState((state, props) => ({currentCoin: value}));
         } else {
-            this.setState({currentCurrency: value});
+            this.setState((state, props) => {
+                this.isActBtnCur = state.currentCoin&&value;
+                return {currentCurrency: value}
+            });
         }
-        this.isActBtnCur = this.state.currentCoin && this.state.currentCurrency ? false : true;
+        this.isActBtnCur = !!(this.state.currentCoin && this.state.currentCurrency) ? false : true;
     };
     handleSubmit = (event) => {
         if (this.state.currentCoin && this.state.currentCurrency) {
@@ -58,7 +64,7 @@ class ExchangeComponent extends Component{
                 this.setState({currentCurrency: ''});
                 this.setState({currencyList: [...this.state.currencyList, current]});
             }
-            this.isActBtnCur = true;
+            this.isActBtnCur = false;
         }
         event.preventDefault();
         this.fetchData();
@@ -75,7 +81,7 @@ class ExchangeComponent extends Component{
         }
     };
     render() {
-        const {data, currentCoin, currentCurrency, list, currencyList} = this.state;
+        const {data, currentCoin, currentCurrency, list} = this.state;
         const {coins, currencyAll} = this.props;
         return (
             <div>
@@ -93,16 +99,16 @@ class ExchangeComponent extends Component{
                                          coins={coins}
                                          list={list}
                                          isCoin={true}
-                                         disabled={this.isActBtnCoin}>Pick your coins.</AddItemForm>
+                                         disabled={!this.isActBtnCoin}>Pick your coins.</AddItemForm>
                         </div>
                         <div className="col-md-6">
                             <AddItemForm onSubmit={this.handleSubmit}
                                          value={currentCurrency}
                                          onChange={this.handleChange}
                                          coins={currencyAll}
-                                         list={currencyList}
+                                         list={[]}
                                          isCoin={false}
-                                         disabled={this.isActBtnCur}>Pick your coins.</AddItemForm>
+                                         disabled={!this.isActBtnCur}>Pick your coins.</AddItemForm>
                         </div>
                     </div>
                     <div className="row">
