@@ -23,6 +23,12 @@ class CoinsComponent extends Component {
     handleSearchChange = search => {
         this.setState({ search });
         this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
+        this.onPageChanged({
+            currentPage: 1,
+            totalPages: Math.floor(this.props.filteredCoinsList.length/18),
+            pageLimit: 18,
+            totalRecords: this.props.filteredCoinsList.length || 1
+        });
     };
 
     filterListBySearchTerm = (list, searchTerm) => (
