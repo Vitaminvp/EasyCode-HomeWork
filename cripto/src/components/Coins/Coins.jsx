@@ -18,18 +18,18 @@ class CoinsComponent extends Component {
             currentPage: null,
             totalPages: null
         };
-        this.props.setFilteredCoinsList(this.props.coins);
+        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, ''));
     }
     handleSearchChange = search => {
         this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
+        this.setState({ search });
+
         this.onPageChanged({
             currentPage: 1,
-            totalPages: Math.floor(this.props.filteredCoinsList.length/18),
+            totalPages: Math.ceil(this.props.filteredCoinsList.length/18),
             pageLimit: 18,
             totalRecords: this.props.filteredCoinsList.length || 0
         });
-        console.log("this.props.filteredCoinsList.length", this.props.filteredCoinsList.length);
-        this.setState({ search });
 
     };
 
@@ -64,9 +64,7 @@ class CoinsComponent extends Component {
         const headerClass = [
             "py-2 pr-4 m-0",
             currentPage ? "border-gray border-right" : ""
-        ]
-            .join(" ")
-            .trim();
+        ].join(" ").trim();
 
         return (
             <div className="container mb-5">
