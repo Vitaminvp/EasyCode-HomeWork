@@ -1,0 +1,8 @@
+.row-bottom{
+    border-bottom: 1px solid tomato;
+    border-color: tomato!important;
+    padding: 0 15px;
+}
+.hidden-button .submitBtn{
+    display: none;
+}
