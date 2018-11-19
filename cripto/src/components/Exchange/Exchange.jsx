@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import AddItemForm from '../Price/Form/AddItemForm';
 import Coin from '../Price/Coin/Coin';
 import './Exchange.css';
+import BarChart from '../Chart/BarChart';
+import PieChart from '../Chart/PieChart';
+import DoughnutChart from '../Chart/DoughnutChart';
+import LineChart from '../Chart/LineChart';
 
 
 class ExchangeComponent extends Component {
@@ -82,7 +86,6 @@ class ExchangeComponent extends Component {
     filterForDelete = (item, isCoin) => (!isCoin ? this.state.currencyList : this.state.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
-        console.log("item", item);
         if (isCoin) {
             const list = this.filterForDelete(item, isCoin);
             this.setState({
@@ -97,7 +100,6 @@ class ExchangeComponent extends Component {
         const {data, currentCoin, currentCurrency, list} = this.state;
         const {coins, currencyAll} = this.props;
         const arrOfData = data.map(item => Object.keys(item)[0]);
-        console.log("arrOfData", arrOfData);
         return (
             <div>
                 <div className="container-fluid">
@@ -134,33 +136,43 @@ class ExchangeComponent extends Component {
                                   classN="coins"/>
                         </div>
                     </div>
-                    <div className="row row-bottom">
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold">Market</div>
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold border-right">
+                    <div className="row">
+                        <div className="col-md-2 text-center text-dark font-weight-bold">Market</div>
+                        <div className="col-md-2 text-center text-dark font-weight-bold ">
                             From
                         </div>
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold border-right">To
+                        <div className="col-md-2 text-center text-dark font-weight-bold">To
                         </div>
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold border-right">
+                        <div className="col-md-2 text-center text-dark font-weight-bold">
                             Price
                         </div>
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold border-right">
+                        <div className="col-md-2 text-center text-dark font-weight-bold">
                             Volume 24 hour
                         </div>
-                        <div className="col-md-2 text-center border-bottom text-dark font-weight-bold">Volume 24 hour
+                        <div className="col-md-2 text-center text-dark font-weight-bold">Volume 24 hour
                             To
                         </div>
                     </div>
                     {arrOfData.map((item, i) => {
+                        const labelsSet  = [];
+                        const dataSet = [];
                         if (data[i][item]) {
-                            return <div class="row-bottom">{data[i][item].map(el => (<div className="row border-bottom" key={el.LASTTRADEID}>
+                            return <div className="row-bottom" key={item}>{data[i][item].map(el => {
+                                labelsSet.push(el.PRICE);
+                                dataSet.push(el.LASTVOLUMETO);
+                                return (<div className="row border-bottom" key={el.LASTTRADEID}>
                                             <div className="col-md-2 text-center border-right">{el.MARKET || 'no data'}</div>
                                             <div className="col-md-2 text-center border-right">{el.FROMSYMBOL || 'no data'}</div>
                                             <div className="col-md-2 text-center border-right">{el.TOSYMBOL || 'no data'}</div>
                                             <div className="col-md-2 text-center border-right">{el.PRICE || 'no data'}</div>
                                             <div className="col-md-2 text-center border-right">{el.VOLUME24HOUR || 'no data'}</div>
                                             <div className="col-md-2 text-center">{el.LASTVOLUMETO || 'no data'}</div>
-                                     </div>))}
+                                        </div>)
+
+                            })}
+                                    {i==1 ? <LineChart dataSet={dataSet} labelsSet={labelsSet}/> :
+                                     i%3 ? <BarChart dataSet={dataSet} labelsSet={labelsSet}/> :
+                                     i%2 ? <PieChart dataSet={dataSet} labelsSet={labelsSet}/> : <DoughnutChart dataSet={dataSet} labelsSet={labelsSet}/>}
                             </div>
 
                         }else{
@@ -170,6 +182,7 @@ class ExchangeComponent extends Component {
                         }
                     })}
                 </div>
+
             </div>
         );
     }
