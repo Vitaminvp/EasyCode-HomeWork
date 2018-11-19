@@ -39,7 +39,8 @@ class PriceComponent extends Component {
         currentCoin: PropTypes.string.isRequired
     };
     static defaultProps = {
-        test: "select your coin."
+
+        test: <span style={{fontSize: 'smaller'}}>select your coin.</span>
     };
     // ------------ localStorage ------------- //
     setLocalState = () => {
@@ -142,7 +143,9 @@ class PriceComponent extends Component {
         return (
             <div className="coinsWrapper">
                 <div className="coinContainer">
-                    <h2>Price: {this.props.test}</h2>
+
+                    <h2>Coins: {this.props.test}</h2>
+
                     <ErrorBoundary>
 
                         <AddItemForm onSubmit={this.handleSubmit}
@@ -151,7 +154,7 @@ class PriceComponent extends Component {
                               coins={coins}
                               list={list}
                               isCoin={true}
-                              disabled={this.isActBtnCoin}>Pick your coins</AddItemForm>
+                              disabled={this.isActBtnCoin}>Pick your coins.</AddItemForm>
 
                         <Coin handleDelete={this.handleDelete}
                               list={list}
@@ -169,22 +172,21 @@ class PriceComponent extends Component {
 
                 </div>
                 <div className="coinContainer">
-                    <h2>Currency: </h2>
+                    <h2>Currency: <span style={{fontSize: 'smaller'}}>select your currency.</span></h2>
                     <ErrorBoundary>
                         <AddItemForm onSubmit={this.handleSubmit}
                               value={currentCurrency}
                               onChange={this.handleChange}
                               coins={currencyAll}
                               list={currencyList}
-                              disabled={this.isActBtnCur}>Pick your currency</AddItemForm>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+                              disabled={this.isActBtnCur}>Pick your currency.</AddItemForm>
+
+
                         <Currency handleDelete={this.handleDelete}
                              classN="coins"
                              list={currencyList}
                              items={currencyAll}/>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
+
                         <CurrencyAmount
                                    list={list}
                                    items={coins}

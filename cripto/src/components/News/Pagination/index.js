@@ -115,21 +115,21 @@ class Pagination extends React.Component {
         return (
             <ul className="pagination">
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={(e) => this.setPage(1, e)}>First</a>
+                    <a onClick={(e) => {e.preventDefault(); return this.setPage(1, e)}} href="/">First</a>
                 </li>
                 <li className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a  onClick={(e) => this.setPage(pager.currentPage - 1)}>Previous</a>
+                    <a  onClick={(e) => {e.preventDefault(); return this.setPage(pager.currentPage - 1)}} href="/">Previous</a>
                 </li>
                 {pager.pages.map((page, index) =>
                     <li key={index} className={pager.currentPage === page ? 'active' : ''}>
-                        <a onClick={(e) => this.setPage(page)}>{page}</a>
+                        <a onClick={(e) =>{e.preventDefault(); return  this.setPage(page)}} href="/">{page}</a>
                     </li>
                 )}
                 <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={(e) => this.setPage(pager.currentPage + 1)}>Next</a>
+                    <a onClick={(e) =>{e.preventDefault(); return  this.setPage(pager.currentPage + 1)}} href="/">Next</a>
                 </li>
                 <li className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={(e) => this.setPage(pager.totalPages)}>Last</a>
+                    <a onClick={(e) =>{e.preventDefault(); return this.setPage(pager.totalPages)}} href="/">Last</a>
                 </li>
             </ul>
         );

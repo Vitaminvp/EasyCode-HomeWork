@@ -5,7 +5,7 @@ import History from './components/History.jsx';
 // import News from './components/News/News.jsx';
 import NewsComponent from './components/News';
 import Coins from './components/Coins/Coins.jsx';
-import Exchange from './components/Exchange.jsx';
+import Exchange from './components/Exchange/Exchange.jsx';
 import Price from './components/Price/Price.jsx';
 import ForOFor from './components/404.jsx'
 import './App.css';
@@ -18,11 +18,11 @@ class AppComponent extends Component {
     _isMounted = false;
     constructor(props) {
         super(props);
-        const coinslist = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
-        const strCoinsList = coinslist.map(item => `${item.Name}:${item.value}`).join('&');
+        const coinsList = localStorage.getItem('coinsList')?JSON.parse(localStorage.getItem('coinsList')):[];
+        const strCoinsList = coinsList.map(item => `${item.Name}:${item.value}`).join('&');
         const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         const strCurrencyList = currencyList.map(item => `${item.Name}`).join('&');
-        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/888:1|USD';
+        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/|';
         this.state = {
             url
         }

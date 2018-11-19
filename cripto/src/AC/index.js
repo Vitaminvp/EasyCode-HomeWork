@@ -1,4 +1,4 @@
-import { INCREMENT, CURRENCY, CURRENT, VALUE, SETLIST, ADDTOLIST, ADDTOCLIST, SETCLIST,
+import { INCREMENT, CURRENCY, CURRENT, VALUE, SETLIST, FILTEREDCOINSLIST, ADDTOLIST, ADDTOCLIST, SETCLIST,
     ERROR_COINS_LIST, RECEIVE_COINS_LIST, REQUEST_COINS_LIST  } from '../constants';
 import {CRYPTO_COMPARE_URL_ALL} from '../constants';
 import {COINS_NUM} from '../constants';
@@ -30,6 +30,12 @@ export function setCurrentCoin(data) {
 export function setCoinsList(data) {
     return {
         type: SETLIST,
+        payload: data
+    }
+}
+export function setFilteredCoinsList(data) {
+    return {
+        type: FILTEREDCOINSLIST,
         payload: data
     }
 }
