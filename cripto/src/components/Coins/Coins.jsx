@@ -30,7 +30,6 @@ class CoinsComponent extends Component {
             pageLimit: 18,
             totalRecords: this.props.filteredCoinsList.length || 0
         });
-
     };
 
     filterListBySearchTerm = (list, searchTerm) => (
