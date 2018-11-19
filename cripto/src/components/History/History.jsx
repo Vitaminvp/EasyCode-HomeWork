@@ -90,7 +90,6 @@ class HistoryComponent extends Component {
                 list,
                 data: this.state.data.filter(el => !Object.keys(el)[0].toUpperCase().includes(item.toUpperCase()))
             });
-
         }
     };
 
