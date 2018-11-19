@@ -37,6 +37,7 @@ class HistoryComponent extends Component {
     }
 
     componentDidMount() {
+
     }
 
     handleToggleBtn = (itemName) => {
