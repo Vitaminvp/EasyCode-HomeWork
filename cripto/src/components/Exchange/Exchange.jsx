@@ -158,7 +158,7 @@ class ExchangeComponent extends Component {
                         const dataSet = [];
                         if (data[i][item]) {
                             return <div className="row-bottom" key={item}>{data[i][item].map(el => {
-                                labelsSet.push(el.PRICE);
+                                labelsSet.push(el.MARKET);
                                 dataSet.push(el.LASTVOLUMETO);
                                 return (<div className="row border-bottom" key={el.LASTTRADEID}>
                                             <div className="col-md-2 text-center border-right">{el.MARKET || 'no data'}</div>
@@ -170,7 +170,7 @@ class ExchangeComponent extends Component {
                                         </div>)
 
                             })}
-                                    {i==1 ? <LineChart dataSet={dataSet} labelsSet={labelsSet}/> :
+                                    {i===1 ? <LineChart dataSet={dataSet} labelsSet={labelsSet}/> :
                                      i%3 ? <BarChart dataSet={dataSet} labelsSet={labelsSet}/> :
                                      i%2 ? <PieChart dataSet={dataSet} labelsSet={labelsSet}/> : <DoughnutChart dataSet={dataSet} labelsSet={labelsSet}/>}
                             </div>
