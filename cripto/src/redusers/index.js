@@ -3,7 +3,7 @@ import counter from './counter';
 import currencyAll from './currencyAll';
 import currentCurrency from './currentCurrency';
 import currentCoin from './currentCoin';
-import list from './setCoinsList';
+import coinsList from './setCoinsList';
 import filteredCoinsList from './setFilteredCoinsList';
 import coins from './getCoins';
 import currencyList from './setCurrencyList';
@@ -14,7 +14,7 @@ export default combineReducers({
     currencyAll,
     currentCurrency,
     currentCoin,
-    list,
+    coinsList,
     filteredCoinsList,
     currencyList,
     coins,

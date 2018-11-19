@@ -1,4 +1,4 @@
-import { VALUE } from '../constants';
+import { CURRENTCOIN } from '../constants';
 
 const initialValue = '';
 
@@ -6,7 +6,7 @@ const initialValue = '';
 export default (list = initialValue, action) => {
     const {type, payload} = action;
     switch (type) {
-        case VALUE: return payload;
+        case CURRENTCOIN: return payload;
         default: return list;
     }
 }

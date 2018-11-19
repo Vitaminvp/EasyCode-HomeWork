@@ -1,4 +1,4 @@
-import { CURRENT } from '../constants';
+import { CURRENTCURRENCY } from '../constants';
 
 const initialCurrentCurrency = '';
 
@@ -6,7 +6,7 @@ const initialCurrentCurrency = '';
 export default (currentCurrency = initialCurrentCurrency, action) => {
     const {type, payload} = action;
     switch (type) {
-        case CURRENT: return payload;
+        case CURRENTCURRENCY: return payload;
         default: return currentCurrency;
     }
 }

@@ -1,5 +1,5 @@
 import value from './currentCoin';
-import { VALUE } from '../constants';
+import { CURRENTCOIN } from '../constants';
 
 describe('Search reducers', () => {
     test('should return the initial state', () => {
@@ -8,13 +8,13 @@ describe('Search reducers', () => {
     test('should handle CURRENT', () => {
         expect(
             value('', {
-                type: VALUE,
+                type: CURRENTCOIN,
                 payload: 'test',
             }),
         ).toEqual('test');
         expect(
             value({ value: 'initial state' }, {
-                type: VALUE,
+                type: CURRENTCOIN,
                 payload: 'test2',
             }),
         ).toEqual('test2');
