@@ -33,25 +33,10 @@ class LineChart extends Component {
             },
             maintainAspectRation: false
         };
-        const data = {
-            labels: [...this.props.labelsSet],
-            datasets: [{
-                label: "Line chart",
-                backgroundColor:[
-                    'rgba(155,100,210,0.6)',
-                    'rgba(90,178,255,0.6)',
-                    'rgba(240,134,67,0.6)',
-                    'rgba(255,105,145,0.6)',
-                    'rgba(120,120,120,0.6)',
-                    'rgba(250,55,197,0.6)'
-                ],
-                borderColor: 'transparent',
-                data: [...this.props.dataSet],
-            }]
-        };
+
         return(
             <Line
-                data={data}
+                data={this.props.dataSet}
                 width={50}
                 height={10}
                 options={options}

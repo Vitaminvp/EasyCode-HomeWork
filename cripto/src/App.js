@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import History from './components/History.jsx';
+import History from './components/History/History.jsx';
 // import News from './components/News/News.jsx';
 import NewsComponent from './components/News';
 import Coins from './components/Coins/Coins.jsx';
