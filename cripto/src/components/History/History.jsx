@@ -42,13 +42,13 @@ class HistoryComponent extends Component {
         fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
             .then(res => res.json())
             .then(posts => posts.Data)
-            .then(posts => posts.map(el => ({item: (new Date(el.time)).toLocaleString(undefined, {
+            .then(posts => posts.map(el => ({title: (new Date(el.time)).toLocaleString(undefined, {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-            }), count: el.volume})))
+            }), value: el.volume})))
             .then(posts => this.setState({dataD3: [...posts]}))
     }
 
@@ -191,16 +191,9 @@ class HistoryComponent extends Component {
 
                     {arrOfData.length ?<LineChart dataSet={chartData} />: null}
 
-                    {/*<BarChart data={this.state.dataD3} />*/}
                     <div className="App-chart-container">
                         <Chart data={this.state.dataD3}/>
                     </div>
-
-                        {/*}else{*/}
-                            {/*return <div className="row border-bottom row-bottom" key={item}>*/}
-                                {/*<div className="col-md-12 text-center text-tomato font-weight-bold text-uppercase">{item} no data</div>*/}
-                            {/*</div>*/}
-                        {/*}*/}
 
                 </div>
 

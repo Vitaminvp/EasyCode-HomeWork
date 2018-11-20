@@ -30,15 +30,6 @@ class BarChart extends React.Component {
             .attr("x", (d) => ( this.scaleWidth(d.item) ) )
             .attr("width", this.scaleWidth.bandwidth() )
             .style("fill",  (d) => ( this.scaleColor(d.item) ));
-
-        // bars.selectAll("text")
-        //     .data(data)
-        //     .enter()
-        //     .append("text")
-        //     .text((d) => (d.count))
-        //     .attr("fill", "red")
-        //     .attr("x", (d) => ( this.scaleWidth(d.item)   ))
-        //     .attr("y", (d) => ( this.scaleHeight(d.count) ))
     }
 
     updateScales() {
