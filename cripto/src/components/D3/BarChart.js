@@ -7,7 +7,7 @@ class BarChart extends React.Component {
 
     scaleColor = d3.scaleSequential(d3.interpolateViridis);
     scaleHeight = d3.scaleLinear();
-    scaleWidth = d3.scaleBand().padding(0.1);
+    scaleWidth = d3.scaleBand().padding(0.05);
 
     componentDidMount() {
         this.updateChart();

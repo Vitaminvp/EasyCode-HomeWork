@@ -5,7 +5,7 @@ import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
 import BarChart from '../D3/BarChart';
-import CongressionalDistricts from '../D3/template';
+// import CongressionalDistricts from '../D3/template';
 
 
 class HistoryComponent extends Component {
@@ -42,7 +42,13 @@ class HistoryComponent extends Component {
         fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
             .then(res => res.json())
             .then(posts => posts.Data)
-            .then(posts => posts.map(el => ({item: el.time, count: el.volume})))
+            .then(posts => posts.map(el => ({item: (new Date(el.time)).toLocaleString(undefined, {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            }), count: el.volume})))
             .then(posts => this.setState({dataD3: [...posts]}))
     }
 
