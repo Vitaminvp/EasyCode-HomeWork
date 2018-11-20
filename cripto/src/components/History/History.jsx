@@ -4,7 +4,8 @@ import AddItemForm from '../Price/Form/AddItemForm';
 import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
-import BarChart from '../D3/BarChart';
+// import BarChart from '../D3/BarChart';
+import Chart from '../D3/Chart';
 
 
 class HistoryComponent extends Component {
@@ -190,7 +191,10 @@ class HistoryComponent extends Component {
 
                     {arrOfData.length ?<LineChart dataSet={chartData} />: null}
 
-                    <BarChart data={this.state.dataD3} />
+                    {/*<BarChart data={this.state.dataD3} />*/}
+                    <div className="App-chart-container">
+                        <Chart data={this.state.dataD3}/>
+                    </div>
 
                         {/*}else{*/}
                             {/*return <div className="row border-bottom row-bottom" key={item}>*/}
