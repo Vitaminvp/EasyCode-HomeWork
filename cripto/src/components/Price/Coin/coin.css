@@ -12,6 +12,9 @@
     border-bottom: 1px solid #c6c6c6;
     box-shadow: 0 0 1px #ccc;
 }
+.coin span{
+    font-weight: bold;
+}
 
 .coin img {
     height: 100%;

@@ -4,6 +4,7 @@ import AddItemForm from '../Price/Form/AddItemForm';
 import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
+import BarChart from '../D3/BarChart';
 
 
 class HistoryComponent extends Component {
@@ -17,8 +18,8 @@ class HistoryComponent extends Component {
             currentCurrency: '',
             currentCoin: '',
             currencyList: [],
-            list: []
-
+            list: [],
+            dataD3: []
         };
     }
 
@@ -37,7 +38,17 @@ class HistoryComponent extends Component {
     }
 
     componentDidMount() {
-
+        fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
+            .then(res => res.json())
+            .then(posts => posts.Data)
+            .then(posts => posts.map(el => ({item: (new Date(el.time)).toLocaleString(undefined, {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+            }), count: el.volume})))
+            .then(posts => this.setState({dataD3: [...posts]}))
     }
 
     handleToggleBtn = (itemName) => {
@@ -60,7 +71,7 @@ class HistoryComponent extends Component {
         }
         this.isActBtnCur = !!(this.state.currentCoin && this.state.currentCurrency) ? false : true;
     };
-    handleSubmit = (event) => {
+    handleSubmit = event => {
         const {currentCoin, currentCurrency} = this.state;
         if (currentCoin && currentCurrency) {
             this.setState({toggleBtn: ''});
@@ -85,10 +96,20 @@ class HistoryComponent extends Component {
 
     handleDelete = (item, isCoin) => {
         if (isCoin) {
+            const {data} = this.state;
             const list = this.filterForDelete(item, isCoin);
+            const newData = (data) => {
+                const newData = {};
+                for(let key in data){
+                    if(!String(key).includes(String(item))){
+                        newData[key] = data[key];
+                    }
+                }
+                return newData;
+            };
             this.setState({
                 list,
-                data: this.state.data.filter(el => !Object.keys(el)[0].toUpperCase().includes(item.toUpperCase()))
+                data: {...newData(data)}
             });
         }
     };
@@ -97,8 +118,6 @@ class HistoryComponent extends Component {
         const {data, currentCoin, currentCurrency, list} = this.state;
         const {coins, currencyAll} = this.props;
         const arrOfData = Object.keys(data);
-        console.log("arrOfData", arrOfData);
-        console.log("data", data);
 
         const backgroundColor =  [
             'rgba(155,100,210,0.6)',
@@ -163,13 +182,15 @@ class HistoryComponent extends Component {
                             <Coin handleDelete={this.handleDelete}
                                   list={list}
                                   items={coins}
-                                  classN="coins"/>
+                                  classN="coins"
+                                  coinCarrency={arrOfData}/>
                         </div>
                     </div>
 
 
-                                <LineChart dataSet={chartData} />
+                    {arrOfData.length ?<LineChart dataSet={chartData} />: null}
 
+                    <BarChart data={this.state.dataD3} />
 
                         {/*}else{*/}
                             {/*return <div className="row border-bottom row-bottom" key={item}>*/}

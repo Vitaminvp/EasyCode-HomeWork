@@ -16,8 +16,10 @@ class Coin extends React.Component {
         e.preventDefault();
         this.props.handleDelete(this.props.item.Name, true);
     };
+
     render() {
-        const {item} = this.props;
+        const {item, coinCarrency} = this.props;
+        const currencyTitle = ( coinCarrency !== undefined && coinCarrency.length ) ? coinCarrency.filter(el => el.includes(item.Name)) : null;
         const modal = this.state.showModal ? (
             <Modal>
                 <div className="modal">
@@ -32,6 +34,7 @@ class Coin extends React.Component {
         return <>
                 <div className="coin">
                     <img src={`${CRYPTO_COMPARE_URL}${item.ImageUrl}`} alt={item.CoinName} onClick={this.toggleModal}/>
+                    <span>{ currencyTitle !== null && currencyTitle[0] !== undefined ? currencyTitle[0].slice(-3):null }</span>
                     <a href="/" onClick={this.handleClick}>&times;</a>
                 </div>
                 {modal}
