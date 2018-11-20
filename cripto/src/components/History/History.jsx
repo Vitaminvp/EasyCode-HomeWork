@@ -4,6 +4,8 @@ import AddItemForm from '../Price/Form/AddItemForm';
 import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
+import BarChart from '../D3/BarChart';
+import DonutChart from '../D3/DonutChart';
 
 
 class HistoryComponent extends Component {
@@ -17,8 +19,8 @@ class HistoryComponent extends Component {
             currentCurrency: '',
             currentCoin: '',
             currencyList: [],
-            list: []
-
+            list: [],
+            dataD3: []
         };
     }
 
@@ -28,16 +30,20 @@ class HistoryComponent extends Component {
             .then(res => res.json())
             .then(posts => {
                 if (posts) {
-                    const arrOfPosts = posts.Data;
                     this.setState({
-                        data: {...this.state.data, [currentCoin +'-'+ currentCurrency]: arrOfPosts}
+                        data: {...this.state.data, [currentCoin +'-'+ currentCurrency]: posts.Data}
                     });
                 }
             });
+
     }
 
     componentDidMount() {
-
+        fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
+            .then(res => res.json())
+            .then(posts => posts.Data)
+            .then(posts => posts.map(el => ({item: el.time, count: el.volume})))
+            .then(posts => this.setState({dataD3: [...posts]}))
     }
 
     handleToggleBtn = (itemName) => {
@@ -169,6 +175,8 @@ class HistoryComponent extends Component {
 
 
                                 <LineChart dataSet={chartData} />
+                                <BarChart data={this.state.dataD3} />
+                                <DonutChart/>
 
 
                         {/*}else{*/}
