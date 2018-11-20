@@ -5,7 +5,7 @@ import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
 import BarChart from '../D3/BarChart';
-import DonutChart from '../D3/DonutChart';
+import CongressionalDistricts from '../D3/template';
 
 
 class HistoryComponent extends Component {
@@ -172,19 +172,8 @@ class HistoryComponent extends Component {
                                   classN="coins"/>
                         </div>
                     </div>
-
-
                                 <LineChart dataSet={chartData} />
                                 <BarChart data={this.state.dataD3} />
-                                <DonutChart/>
-
-
-                        {/*}else{*/}
-                            {/*return <div className="row border-bottom row-bottom" key={item}>*/}
-                                {/*<div className="col-md-12 text-center text-tomato font-weight-bold text-uppercase">{item} no data</div>*/}
-                            {/*</div>*/}
-                        {/*}*/}
-
                 </div>
 
             </div>
