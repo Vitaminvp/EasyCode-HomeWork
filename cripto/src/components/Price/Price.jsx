@@ -20,7 +20,8 @@ class PriceComponent extends Component {
         // const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
         // const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         // ------------ localStorage ------------- //
-        const split = this.props.match.params.list.split('|');
+        const split = this.props.match.params.list.split('$');
+        console.log("this.props.match.params.list", this.props.match.params.list);
         const coinsList = split[0] ? split[0].split('&').map(item => ({
                                                             Name: item.split(':')[0],
                                                             value: parseInt(item.split(':')[1])
@@ -54,7 +55,7 @@ class PriceComponent extends Component {
         const currencyList = this.props.currencyList.map(item => `${item.Name}`).join('&');
         let allList;
         if(coinsList || currencyList){
-            allList = `/coins/${coinsList}|${currencyList}`
+            allList = `/coins/${coinsList}?${currencyList}`
         }else{
             allList='';
         }

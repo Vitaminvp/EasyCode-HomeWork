@@ -7,26 +7,40 @@ class SearchInput extends Component {
         // onChange: PropTypes.func.isRequired,
     };
 
-    state = {
-        isValid: true,
-    };
-
     handleSearchChange = (event) => {
-        const searchTerm = event.target.value;
+        const is_array = obj => {
+            if(obj.constructor.toString().indexOf('Array') === -1) {
+                return false;
+            }
+            return true;
+        };
+
+
+        const strip_tags = input => {
+            let newInput;
+            if (input) {
+                const tags = /(<([^>]+)>)/ig;
+                if (!is_array(input)) {
+                    newInput = input.replace(tags,'');
+                }
+                else {
+                    newInput = input.map(item => item.replace(tags,''));
+                }
+                return newInput;
+            }
+            return false;
+        };
+
+        const searchTerm = strip_tags(event.target.value);
         const { onChange } = this.props;
-        onChange(searchTerm);
-        if (!searchTerm) {
-            this.setState({ isValid: true });
-        } else if (searchTerm.length < 3) {
-            this.setState({ isValid: false });
-        } else {
-            this.setState({ isValid: true });
+
+        if(searchTerm) {
+            onChange(searchTerm);
         }
     };
 
     render() {
         const { value } = this.props;
-        const { isValid } = this.state;
 
         return (
             <React.Fragment>
@@ -41,7 +55,6 @@ class SearchInput extends Component {
                         onChange={this.handleSearchChange}
                     />
                 </label>
-                {!isValid && <p>Search term should have at least 3 character</p>}
             </React.Fragment>
         );
     }

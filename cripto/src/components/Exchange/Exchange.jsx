@@ -6,7 +6,6 @@ import './Exchange.css';
 import BarChart from '../Chart/BarChart';
 import PieChart from '../Chart/PieChart';
 import DoughnutChart from '../Chart/DoughnutChart';
-import LineChart from '../Chart/LineChart';
 
 
 class ExchangeComponent extends Component {
@@ -33,7 +32,7 @@ class ExchangeComponent extends Component {
                 if (posts) {
                     const arrOfPosts = posts.Data.Exchanges;
                     this.setState({
-                        data: [...this.state.data, {[currentCoin + currentCurrency]: arrOfPosts}]
+                        data: [...this.state.data, {[currentCoin +'-'+ currentCurrency]: arrOfPosts}]
                     });
                 }
             });
@@ -133,7 +132,8 @@ class ExchangeComponent extends Component {
                             <Coin handleDelete={this.handleDelete}
                                   list={list}
                                   items={coins}
-                                  classN="coins"/>
+                                  classN="coins"
+                                  coinCarrency={arrOfData}/>
                         </div>
                     </div>
                     <div className="row">
@@ -170,8 +170,7 @@ class ExchangeComponent extends Component {
                                         </div>)
 
                             })}
-                                    {i===1 ? <LineChart dataSet={dataSet} labelsSet={labelsSet}/> :
-                                     i%3 ? <BarChart dataSet={dataSet} labelsSet={labelsSet}/> :
+                                    {i%3 ? <BarChart dataSet={dataSet} labelsSet={labelsSet}/> :
                                      i%2 ? <PieChart dataSet={dataSet} labelsSet={labelsSet}/> : <DoughnutChart dataSet={dataSet} labelsSet={labelsSet}/>}
                             </div>
 

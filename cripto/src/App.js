@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import History from './components/History/History.jsx';
-// import News from './components/News/News.jsx';
 import NewsComponent from './components/News';
 import Coins from './components/Coins/Coins.jsx';
 import Exchange from './components/Exchange/Exchange.jsx';
@@ -22,7 +21,7 @@ class AppComponent extends Component {
         const strCoinsList = coinsList.map(item => `${item.Name}:${item.value}`).join('&');
         const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         const strCurrencyList = currencyList.map(item => `${item.Name}`).join('&');
-        const url = strCoinsList || strCurrencyList ? `/coins/${strCoinsList}|${strCurrencyList}` : '/coins/|';
+        const url = (coinsList !== '' && currencyList !== '') ? `/coins/${strCoinsList}?${strCurrencyList}` : '/coins/42:1?USD';
         this.state = {
             url
         }
@@ -52,7 +51,7 @@ class AppComponent extends Component {
                                     <Route path="/history" component={History}/>
                                     <Route path="/exchange" component={Exchange}/>
                                     <Route path="/news" component={NewsComponent}/>
-                                    <Route path="/coins/:list" component={(props) => <Price {...props} coins={this.props.coins} handleSetState={this.handleSetState}/>}/>
+                                    <Route path="/coins/:list" component={(props) => <Price {...props} coins={this.props.coins} handleSetState={this.handleSetState}/>} exact />
                                     <Route component={ForOFor}/>
                                 </Switch>
                             </CSSTransition>

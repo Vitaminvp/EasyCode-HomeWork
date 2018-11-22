@@ -16,19 +16,23 @@ class CoinsComponent extends Component {
             search: '',
             currentCountries: [],
             currentPage: null,
-            totalPages: null
+            totalPages: null,
+            pageLimit: 20,
+            filteredCoinsList: [...this.props.coins]
         };
-        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, ''));
+        // this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, ''));
     }
     handleSearchChange = search => {
-        this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
-        this.setState({ search });
+
+        this.setState({
+            search,
+            filteredCoinsList: [...this.filterListBySearchTerm(this.props.coins, search)]
+        });
 
         this.onPageChanged({
             currentPage: 1,
-            totalPages: Math.ceil(this.props.filteredCoinsList.length/18),
-            pageLimit: 18,
-            totalRecords: this.props.filteredCoinsList.length || 0
+            totalPages: Math.ceil(this.state.filteredCoinsList.length/20) || 1,
+            totalRecords: this.state.filteredCoinsList.length || 0
         });
     };
 
@@ -37,10 +41,21 @@ class CoinsComponent extends Component {
     );
 
     componentDidMount() {
+        // this.setState({
+        //     filteredCoinsList: [...this.props.coins]
+        // });
+    }
+    componentDidUpdate(prevProps) {
+        // if (this.props.filteredCoinsList !== prevProps.filteredCoinsList) {
+        //     this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, this.state.search));
+        // }
     }
     onPageChanged = data => {
-        const coins = this.props.filteredCoinsList;
-        const { currentPage, totalPages, pageLimit } = data;
+        // const coins = this.props.filteredCoinsList;
+        const coins = this.state.filteredCoinsList ? this.state.filteredCoinsList : this.props.coins;
+        const pageLimit = this.state.pageLimit;
+
+        const { currentPage, totalPages } = data;
 
         const offset = (currentPage - 1) * pageLimit;
         const currentCountries = coins.slice(offset, offset + pageLimit);
@@ -55,10 +70,11 @@ class CoinsComponent extends Component {
             totalPages
         } = this.state;
         const { search } = this.state;
-        const coins  = this.props.filteredCoinsList || [];
-        const totalCountries = coins.length;
+        // const coins  = this.state.filteredCoinsList !== null ? this.state.filteredCoinsList : this.props.coins;
+        const coins  = this.state.filteredCoinsList || this.props.coins;
+        const totalCoins = coins.length;
 
-        if (totalCountries === 0) return null;
+        if (totalCoins === 0) return null;
 
         const headerClass = [
             "py-2 pr-4 m-0",
@@ -74,20 +90,20 @@ class CoinsComponent extends Component {
                     <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
                         <div className="d-flex flex-row align-items-center">
                             <h2 className={headerClass}>
-                                <strong className="">{totalCountries}</strong>{" "}
+                                <strong className="">{totalCoins}</strong>{" "}
                                 Coins
                             </h2>
                             {currentPage && (
                                 <span className="current-page d-inline-block h-100 pl-4 text-tomato">
-                  Page <span className="font-weight-bold">{currentPage}</span> /{" "}
-                                    <span className="font-weight-bold">{totalPages}</span>
+                                Page <span className="font-weight-bold">{currentPage}</span> /{" "}
+                                <span className="font-weight-bold">{totalPages}</span>
                 </span>
                             )}
                         </div>
                         <div className="d-flex flex-row py-4 align-items-center">
                             <Pagination
-                                totalRecords={totalCountries}
-                                pageLimit={18}
+                                totalRecords={totalCoins}
+                                pageLimit={this.state.pageLimit}
                                 pageNeighbours={1}
                                 onPageChanged={this.onPageChanged}
                             />

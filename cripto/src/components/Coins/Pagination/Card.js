@@ -8,11 +8,11 @@ class Card extends Component {
 
         return (
             <Fragment>
-                <div className="flip-container col-sm-6 col-md-4 country-card">
+                <div className="flip-container col-sm-6 col-md-3 country-card">
                     <div className="flipper country-card-container  rounded  mx-2 my-3 d-flex flex-row align-items-center p-0 ">
                         <div className="front w-100 border-gray border-right px-2 bg-white rounded-left">
                             <span className="country-name text-dark d-block font-weight-bold">
-                                  <h2><a href={`/coins/${card.Name}:1|USD&EUR&UAH&RUB`}
+                                  <h2><a href={`/coins/${card.Name}:1?USD&EUR&UAH&RUB`}
                                          rel="noopener noreferrer">{card.CoinName}</a></h2>
                             </span>
                             <img
@@ -22,7 +22,7 @@ class Card extends Component {
                         </div>
                         <div className="back w-100 position-relative border-gray border-right px-2 bg-white rounded-left">
                             <span className="country-name text-dark d-block font-weight-bold">
-                                <h2><a href={`/coins/${card.Name}:1|USD&EUR&UAH&RUB`}
+                                <h2><a href={`/coins/${card.Name}:1?USD&EUR&UAH&RUB`}
                                          rel="noopener noreferrer">{card.CoinName}</a></h2>
                                 <p>Algorithm: {card.Algorithm}</p>
                                 <p>Full name: {card.FullName}</p>

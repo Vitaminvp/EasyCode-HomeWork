@@ -4,8 +4,8 @@ import AddItemForm from '../Price/Form/AddItemForm';
 import Coin from '../Price/Coin/Coin';
 import './History.css';
 import LineChart from '../Chart/LineChart';
-import BarChart from '../D3/BarChart';
-// import CongressionalDistricts from '../D3/template';
+import Chart from '../D3/Chart';
+import RadioButtons from './RadioButtons/RadioButtons';
 
 
 class HistoryComponent extends Component {
@@ -14,7 +14,10 @@ class HistoryComponent extends Component {
         this.isActBtnCoin = false;
         this.isActBtnCur = false;
         this.state = {
-            data: [],
+            currentData: 'day',
+            dataDay: [],
+            dataHour: [],
+            dataMinute: [],
             toggleBtn: '',
             currentCurrency: '',
             currentCoin: '',
@@ -30,25 +33,45 @@ class HistoryComponent extends Component {
             .then(res => res.json())
             .then(posts => {
                 if (posts) {
+                    const arrOfPosts = posts.Data;
                     this.setState({
-                        data: {...this.state.data, [currentCoin +'-'+ currentCurrency]: posts.Data}
+                        dataDay: {...this.state.dataDay, [currentCoin +'-'+ currentCurrency]: arrOfPosts}
                     });
                 }
             });
-
+        fetch(`https://min-api.cryptocompare.com/data/histohour?fsym=${currentCoin}&tsym=${currentCurrency}&limit=10`)
+            .then(res => res.json())
+            .then(posts => {
+                if (posts) {
+                    const arrOfPosts = posts.Data;
+                    this.setState({
+                        dataHour: {...this.state.dataHour, [currentCoin +'-'+ currentCurrency]: arrOfPosts}
+                    });
+                }
+            });
+        fetch(`https://min-api.cryptocompare.com/data/histominute?fsym=${currentCoin}&tsym=${currentCurrency}&limit=10`)
+            .then(res => res.json())
+            .then(posts => {
+                if (posts) {
+                    const arrOfPosts = posts.Data;
+                    this.setState({
+                        dataMinute: {...this.state.dataMinute, [currentCoin +'-'+ currentCurrency]: arrOfPosts}
+                    });
+                }
+            });
     }
 
     componentDidMount() {
         fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
             .then(res => res.json())
             .then(posts => posts.Data)
-            .then(posts => posts.map(el => ({item: (new Date(el.time)).toLocaleString(undefined, {
+            .then(posts => posts.map(el => ({title: (new Date(el.time)).toLocaleString(undefined, {
                 day: 'numeric',
                 month: 'numeric',
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-            }), count: el.volume})))
+            }), value: el.volume})))
             .then(posts => this.setState({dataD3: [...posts]}))
     }
 
@@ -56,6 +79,11 @@ class HistoryComponent extends Component {
         this.setState({
             toggleBtn: this.state.toggleBtn !== itemName ? itemName : ''
         })
+    };
+    handleCurrentData = (currentData) => {
+        this.setState({
+            currentData
+        });
     };
     handleChange = (value, isCoin) => {
         if (isCoin) {
@@ -72,7 +100,7 @@ class HistoryComponent extends Component {
         }
         this.isActBtnCur = !!(this.state.currentCoin && this.state.currentCurrency) ? false : true;
     };
-    handleSubmit = (event) => {
+    handleSubmit = event => {
         const {currentCoin, currentCurrency} = this.state;
         if (currentCoin && currentCurrency) {
             this.setState({toggleBtn: ''});
@@ -91,26 +119,38 @@ class HistoryComponent extends Component {
             this.isActBtnCur = false;
         }
         event.preventDefault();
-        this.fetchData();
+        this.fetchData('day');
+
     };
     filterForDelete = (item, isCoin) => (!isCoin ? this.state.currencyList : this.state.list).filter(element => element.Name !== item);
 
     handleDelete = (item, isCoin) => {
         if (isCoin) {
+            const {dataDay, dataHour, dataMinute} = this.state;
             const list = this.filterForDelete(item, isCoin);
+            const newData = data => {
+                const newData = {};
+                for(let key in data){
+                    if(!String(key).includes(String(item))){
+                        newData[key] = data[key];
+                    }
+                }
+                return newData;
+            };
             this.setState({
                 list,
-                data: this.state.data.filter(el => !Object.keys(el)[0].toUpperCase().includes(item.toUpperCase()))
+                dataDay: {...newData(dataDay)},
+                dataHour: {...newData(dataHour)},
+                dataMinute: {...newData(dataMinute)}
             });
         }
     };
 
     render() {
-        const {data, currentCoin, currentCurrency, list} = this.state;
+        const {currentCoin, currentCurrency, list} = this.state;
+        const data = this.state.currentData === 'day' ? this.state.dataDay : this.state.currentData === 'hour' ? this.state.dataHour : this.state.dataMinute;
         const {coins, currencyAll} = this.props;
         const arrOfData = Object.keys(data);
-        console.log("arrOfData", arrOfData);
-        console.log("data", data);
 
         const backgroundColor =  [
             'rgba(155,100,210,0.6)',
@@ -149,6 +189,7 @@ class HistoryComponent extends Component {
                         <div className="col-12 posts  text-center">
                             <h1>History</h1>
                         </div>
+                        {arrOfData.length ? <RadioButtons handleCurrentData={this.handleCurrentData}/> : null}
                     </div>
                     <div className="row">
                         <div className="col-md-6 text-right hidden-button">
@@ -175,13 +216,19 @@ class HistoryComponent extends Component {
                             <Coin handleDelete={this.handleDelete}
                                   list={list}
                                   items={coins}
-                                  classN="coins"/>
+                                  classN="coins"
+                                  coinCarrency={arrOfData}/>
                         </div>
                     </div>
-                                <LineChart dataSet={chartData} />
-                                <BarChart data={this.state.dataD3} />
-                </div>
 
+
+                    {arrOfData.length ?<LineChart dataSet={chartData} />: null}
+
+                    <div className="App-chart-container">
+                        <h2>Historical Daily Exchange Volume</h2>
+                        <Chart data={this.state.dataD3}/>
+                    </div>
+                </div>
             </div>
         );
     }
