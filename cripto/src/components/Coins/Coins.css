@@ -69,7 +69,7 @@ ul.pagination a.page-link:hover {
 
 .flip-container, .front, .back {
     width: 320px;
-    height: 330px;
+    max-height: 350px;
     margin-bottom: 20px;
 }
 

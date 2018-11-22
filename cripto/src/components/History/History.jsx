@@ -6,6 +6,7 @@ import './History.css';
 import LineChart from '../Chart/LineChart';
 import Chart from '../D3/Chart';
 import RadioButtons from './RadioButtons/RadioButtons';
+import * as moment from 'moment';
 
 
 class HistoryComponent extends Component {
@@ -65,13 +66,7 @@ class HistoryComponent extends Component {
         fetch(`https://min-api.cryptocompare.com/data/exchange/histoday?tsym=USD&limit=10`)
             .then(res => res.json())
             .then(posts => posts.Data)
-            .then(posts => posts.map(el => ({title: (new Date(el.time)).toLocaleString(undefined, {
-                day: 'numeric',
-                month: 'numeric',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-            }), value: el.volume})))
+            .then(posts => posts.map(el => ({title: moment(el.time).format('lll'), value: el.volume/10000})))
             .then(posts => this.setState({dataD3: [...posts]}))
     }
 
@@ -174,7 +169,7 @@ class HistoryComponent extends Component {
             if (data[item]) {
                 data[item].map((el, j) => {
                     dataSet.push(el.high);
-                    chartData.labels[j] = data[item][j].time;
+                    chartData.labels[j] = moment(data[item][j].time).format('MMM Do, h:mm');
                     return el;
                 })
             }
