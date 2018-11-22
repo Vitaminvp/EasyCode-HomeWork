@@ -17,12 +17,13 @@ class CoinsComponent extends Component {
             currentCountries: [],
             currentPage: null,
             totalPages: null,
-            filteredCoinsList: []
+            pageLimit: 20,
+            filteredCoinsList: [...this.props.coins]
         };
         // this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, ''));
     }
     handleSearchChange = search => {
-        // this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, search));
+
         this.setState({
             search,
             filteredCoinsList: [...this.filterListBySearchTerm(this.props.coins, search)]
@@ -30,8 +31,7 @@ class CoinsComponent extends Component {
 
         this.onPageChanged({
             currentPage: 1,
-            totalPages: Math.ceil(this.state.filteredCoinsList.length/18) || 1,
-            pageLimit: 18,
+            totalPages: Math.ceil(this.state.filteredCoinsList.length/20) || 1,
             totalRecords: this.state.filteredCoinsList.length || 0
         });
     };
@@ -41,14 +41,21 @@ class CoinsComponent extends Component {
     );
 
     componentDidMount() {
-        this.setState({
-            filteredCoinsList: [...this.props.coins]
-        });
+        // this.setState({
+        //     filteredCoinsList: [...this.props.coins]
+        // });
+    }
+    componentDidUpdate(prevProps) {
+        // if (this.props.filteredCoinsList !== prevProps.filteredCoinsList) {
+        //     this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, this.state.search));
+        // }
     }
     onPageChanged = data => {
         // const coins = this.props.filteredCoinsList;
-        const coins = this.state.filteredCoinsList;
-        const { currentPage, totalPages, pageLimit } = data;
+        const coins = this.state.filteredCoinsList ? this.state.filteredCoinsList : this.props.coins;
+        const pageLimit = this.state.pageLimit;
+
+        const { currentPage, totalPages } = data;
 
         const offset = (currentPage - 1) * pageLimit;
         const currentCountries = coins.slice(offset, offset + pageLimit);
@@ -63,7 +70,8 @@ class CoinsComponent extends Component {
             totalPages
         } = this.state;
         const { search } = this.state;
-        const coins  = this.state.filteredCoinsList;
+        // const coins  = this.state.filteredCoinsList !== null ? this.state.filteredCoinsList : this.props.coins;
+        const coins  = this.state.filteredCoinsList || this.props.coins;
         const totalCoins = coins.length;
 
         if (totalCoins === 0) return null;
@@ -87,7 +95,7 @@ class CoinsComponent extends Component {
                             </h2>
                             {currentPage && (
                                 <span className="current-page d-inline-block h-100 pl-4 text-tomato">
-                  Page <span className="font-weight-bold">{currentPage}</span> /{" "}
+                                Page <span className="font-weight-bold">{currentPage}</span> /{" "}
                                     <span className="font-weight-bold">{totalPages}</span>
                 </span>
                             )}
@@ -95,7 +103,7 @@ class CoinsComponent extends Component {
                         <div className="d-flex flex-row py-4 align-items-center">
                             <Pagination
                                 totalRecords={totalCoins}
-                                pageLimit={18}
+                                pageLimit={this.state.pageLimit}
                                 pageNeighbours={1}
                                 onPageChanged={this.onPageChanged}
                             />
@@ -125,5 +133,3 @@ const Coins = connect(
 )(CoinsComponent);
 
 export default Coins;
-
-

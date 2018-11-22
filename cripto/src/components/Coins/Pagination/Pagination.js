@@ -12,7 +12,6 @@ const range = (from, to, step = 1) => {
         range.push(i);
         i += step;
     }
-
     return range;
 };
 
@@ -30,7 +29,6 @@ class Pagination extends Component {
                 : 0;
 
         this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
-
         this.state = { currentPage: 1 };
     }
 
