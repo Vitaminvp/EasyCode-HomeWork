@@ -19,8 +19,6 @@ export default class Bars extends Component {
 
         const bars = (
             data.map(datum =>{
-                console.log("this.colorScale", this.colorScale(Math.ceil(datum.value/1000000000)));
-                console.log("datum.value", Math.ceil(datum.value/1000000000));
                 return <rect
                     key={datum.title}
                     x={xScale(datum.title)}
