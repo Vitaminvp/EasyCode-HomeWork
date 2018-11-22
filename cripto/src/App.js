@@ -21,7 +21,7 @@ class AppComponent extends Component {
         const strCoinsList = coinsList.map(item => `${item.Name}:${item.value}`).join('&');
         const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         const strCurrencyList = currencyList.map(item => `${item.Name}`).join('&');
-        const url = (coinsList !== '' && currencyList !== '') ? `/coins/${strCoinsList}?${strCurrencyList}` : '/coins/42:1?USD';
+        const url = (coinsList !== '' && currencyList !== '') ? `/coins/${strCoinsList}$${strCurrencyList}` : '/coins/42:1?USD';
         this.state = {
             url
         }
