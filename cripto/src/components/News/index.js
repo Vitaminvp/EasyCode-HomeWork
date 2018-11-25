@@ -1,36 +1,75 @@
 import React from 'react';
 import Pagination from './Pagination';
 import './Pagination/index.css';
+import SearchInput  from '../Coins/SearchInput';
+import Span  from '../Price/CoinAmount/ErrorSpan';
 
 class NewsComponent extends React.Component {
     constructor() {
         super();
         this.state = {
+            search: '',
             articles: [],
-            pageOfItems: []
+            filteredArticles: [],
+            pageOfItems: [],
+            pager: { pager: {} },
+            isValid: true
         };
     }
-
     componentDidMount() {
         fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN')
             .then(res => res.json())
-            .then(posts => this.setState({articles: Object.keys(posts.Data).map(key => posts.Data[key])}));
+            .then(posts => this.setState({
+                articles: Object.keys(posts.Data).map(key => posts.Data[key]),
+                filteredArticles: Object.keys(posts.Data).map(key => posts.Data[key])
+            }));
     }
 
     onChangePage = pageOfItems => {
-        // update state with new page of items
         this.setState({pageOfItems: pageOfItems});
     };
+    
+    // componentDidUpdate(prevProps, prevState) {
+    // }
+    filterListBySearchTerm = (list, searchTerm) => (
+        list.filter(data => data.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
+    handleSearchChange = search => {
+        const { articles } = this.state;
+        const filteredArticles = this.filterListBySearchTerm(articles, search);
+        if(filteredArticles.length <= 0){
+            this.setState({
+                isValid: false
+            });
+            return;
+        };
+
+        this.setState({
+            isValid: true,
+            search,
+            filteredArticles
+        });
+    };
+    handlePager = pager => {
+        this.setState({ pager });
+    };
     render() {
+        const { search, filteredArticles, pageOfItems } = this.state;
         return (
-            <div>
+            <div className="position-relative d-inline">
+                {!this.state.isValid ? <Span>No results found for this query</Span> : null}
+                <SearchInput value={ search } onChange={ this.handleSearchChange } />
                 <div className="mycontainer">
                     <div className="text-center">
                         <h1>News</h1>
-                        <Pagination items={this.state.articles} onChangePage={this.onChangePage}/>
+                        <Pagination
+                            items={filteredArticles}
+                            onChangePage={this.onChangePage}
+                            handlePager={this.handlePager}
+                            pager={this.state.pager}/>
                         <div className="posts">
-                            {this.state.pageOfItems.map(post =>
+                            {pageOfItems.map(post =>
                                 <div key={post.id} className="post">
                                     <h2><a href={post.guid} target="_blank" rel="noopener noreferrer">{post.title}</a></h2>
                                     <div className="newsItem">

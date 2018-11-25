@@ -4,7 +4,7 @@
 }
 a:hover {
     color: red;
-    text-decoration: none;
+    text-decoration: underline;
 }
 .current-page {
     font-size: 1.5rem;

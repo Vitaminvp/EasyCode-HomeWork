@@ -1,39 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-import Pagination from './Pagination/Pagination';
+import {getCoinsList} from '../../AC';
 import Card from './Pagination/Card';
-import { setFilteredCoinsList } from '../../AC';
-import SearchInput from './SearchInput';
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Coins.css';
+import Pagination from './Pagination';
+import './Pagination/index.css';
+import SearchInput  from '../Coins/SearchInput';
+import Span  from '../Price/CoinAmount/ErrorSpan';
 
 class CoinsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            coins: [],
             search: '',
-            currentCountries: [],
-            currentPage: null,
-            totalPages: null,
-            pageLimit: 20,
-            filteredCoinsList: [...this.props.coins]
+            filteredCoins: [],
+            pageOfItems: [],
+            pager: { pager: {} },
+            isValid: true
         };
-        // this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, ''));
     }
-    handleSearchChange = search => {
 
-        this.setState({
-            search,
-            filteredCoinsList: [...this.filterListBySearchTerm(this.props.coins, search)]
-        });
-
-        this.onPageChanged({
-            currentPage: 1,
-            totalPages: Math.ceil(this.state.filteredCoinsList.length/20) || 1,
-            totalRecords: this.state.filteredCoinsList.length || 0
-        });
+    onChangePage = pageOfItems => {
+        this.setState({pageOfItems: pageOfItems});
     };
 
     filterListBySearchTerm = (list, searchTerm) => (
@@ -41,90 +31,75 @@ class CoinsComponent extends Component {
     );
 
     componentDidMount() {
-        // this.setState({
-        //     filteredCoinsList: [...this.props.coins]
-        // });
+        this.setState({
+            coins: this.props.coins,
+            filteredCoins: this.props.coins
+        });
     }
-    componentDidUpdate(prevProps) {
-        // if (this.props.filteredCoinsList !== prevProps.filteredCoinsList) {
-        //     this.props.setFilteredCoinsList(this.filterListBySearchTerm(this.props.coins, this.state.search));
-        // }
-    }
-    onPageChanged = data => {
-        // const coins = this.props.filteredCoinsList;
-        const coins = this.state.filteredCoinsList ? this.state.filteredCoinsList : this.props.coins;
-        const pageLimit = this.state.pageLimit;
 
-        const { currentPage, totalPages } = data;
 
-        const offset = (currentPage - 1) * pageLimit;
-        const currentCountries = coins.slice(offset, offset + pageLimit);
+    handleSearchChange = search => {
+        const { coins } = this.state;
+        const filteredCoins = this.filterListBySearchTerm(coins, search);
+        if(filteredCoins.length <= 0){
+            this.setState({
+                isValid: false
+            });
+            return;
+        };
+        this.setState({
+            isValid: true,
+            search,
+            filteredCoins
+        });
+    };
 
-        this.setState({ currentPage, currentCountries, totalPages });
+    handlePager = pager => {
+        this.setState({ pager });
     };
 
     render() {
-        const {
-            currentCountries,
-            currentPage,
-            totalPages
-        } = this.state;
-        const { search } = this.state;
-        // const coins  = this.state.filteredCoinsList !== null ? this.state.filteredCoinsList : this.props.coins;
-        const coins  = this.state.filteredCoinsList || this.props.coins;
-        const totalCoins = coins.length;
-
-        if (totalCoins === 0) return null;
-
-        const headerClass = [
-            "py-2 pr-4 m-0",
-            currentPage ? "border-gray border-right" : ""
-        ].join(" ").trim();
-
+        const { search, filteredCoins } = this.state;
         return (
             <div className="container mb-5">
-                <div>
+                <div className="position-relative d-inline">{!this.state.isValid ? <Span>No results found for this query</Span> : null}
                     <SearchInput value={ search } onChange={ this.handleSearchChange } />
                 </div>
                 <div className="row d-flex flex-row">
-                    <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between">
+                    <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between mycontainer">
                         <div className="d-flex flex-row align-items-center">
-                            <h2 className={headerClass}>
-                                <strong className="">{totalCoins}</strong>{" "}
-                                Coins
+                            <h2 className=''>
+                                Coins: {filteredCoins.length > 0 ? filteredCoins.length : null}
                             </h2>
-                            {currentPage && (
-                                <span className="current-page d-inline-block h-100 pl-4 text-tomato">
-                                Page <span className="font-weight-bold">{currentPage}</span> /{" "}
-                                    <span className="font-weight-bold">{totalPages}</span>
-                </span>
-                            )}
                         </div>
                         <div className="d-flex flex-row py-4 align-items-center">
                             <Pagination
-                                totalRecords={totalCoins}
-                                pageLimit={this.state.pageLimit}
-                                pageNeighbours={1}
-                                onPageChanged={this.onPageChanged}
-                            />
+                                items={ filteredCoins }
+                                onChangePage={this.onChangePage}
+                                handlePager={this.handlePager}
+                                pager={this.state.pager}/>
                         </div>
                     </div>
-                    {currentCountries.map(card => (
+                    {this.state.pageOfItems.map(card => (
                         <Card key={card.Id} card={card} />
                     ))}
+                </div>
+                <div className="text-center">
+                    <h2>
+                        -{this.state.pager.currentPage? this.state.pager.currentPage : null}-
+                    </h2>
                 </div>
             </div>
         );
     }
-};
+}
 
 const mapStateToProps = state => ({
     coins: state.coins.coins,
-    filteredCoinsList: state.filteredCoinsList
 });
 
 const mapDispatchToProps = {
-    setFilteredCoinsList
+    getCoinsList
 };
 
 const Coins = connect(

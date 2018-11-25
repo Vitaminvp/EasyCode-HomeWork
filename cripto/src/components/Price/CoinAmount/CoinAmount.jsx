@@ -1,31 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
 import WrappedComponent from '../HOC/listTransformation';
 import './coinAmount.css';
 
-const CoinAmount = ({item, value, Spn, handleCoinsChangeAmount}) => {
-    const handleChange = (e) => {
-        e.target.classList.remove('alarm');
-        e.target.parentNode.lastChild.style.display = 'none';
-
+class CoinAmount extends Component{ //item, value, Spn, handleCoinsChangeAmount
+    constructor(props){
+        super(props);
+        this.state = {
+            isValid: true
+        };
+    }
+    handleChange = (e) => {
+        const { item, handleCoinsChangeAmount } = this.props;
         const re = /^[0-9.\b]+$/;
         if (e.target.value === '' || re.test(e.target.value)) {
             handleCoinsChangeAmount(item.Name, e.target.value);
+            this.setState({
+                isValid: true
+            });
         } else {
-            e.target.classList.add('alarm');
             handleCoinsChangeAmount(item.Name, '0');
-            e.target.parentNode.lastChild.style.display = 'block';
+            this.setState({
+                isValid: false
+            });
         }
         e.preventDefault();
     };
-    return <div className="coinAmount">
-                <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
-                    <input
-                        onChange={handleChange}
-                        defaultValue={value}
-                        className="coinAmount_input"/>
-                    {Spn}
-                </label>
-            </div>;
+    render() {
+        const {item, value, Spn} = this.props;
+        return <div className="coinAmount">
+            <label className="coinAmount_label"><span className="coinName">{item.Name}:</span>
+                <input
+                    onChange={this.handleChange}
+                    defaultValue={value}
+                    className="coinAmount_input"/>
+                {!this.state.isValid ? Spn : null}
+            </label>
+        </div>;
+    }
+
 };
 
 export default WrappedComponent(CoinAmount);
