@@ -35,7 +35,7 @@ class CoinsComponent extends Component {
                 coins: this.props.coins,
                 filteredCoins: this.props.coins
             });
-        }, 1000);
+        }, 1500);
     };
 
     handleSearchChange = search => {
