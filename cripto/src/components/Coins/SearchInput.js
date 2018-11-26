@@ -14,15 +14,14 @@ class SearchInput extends Component {
         const searchTerm = event.target.value;
         const { onChange } = this.props;
         onChange(searchTerm);
-        // if (!searchTerm) {
-        //     this.setState({ isValid: true });
-        // } else if (searchTerm.length < 3) {
-        //     this.setState({ isValid: false });
-        // } else {
-        //     this.setState({ isValid: true });
-        // }
+
     };
-    // handleSearchChange = (event) => {
+
+
+
+    // handleSearchChange = event => {
+    //
+    //
     //     const is_array = obj => {
     //         if(obj.constructor.toString().indexOf('Array') === -1) {
     //             return false;
@@ -34,7 +33,7 @@ class SearchInput extends Component {
     //     const strip_tags = input => {
     //         let newInput;
     //         if (input) {
-    //             const tags = /(<([^>]+)>)/ig;
+    //             const tags = /<[^>]*>/g;
     //             if (!is_array(input)) {
     //                 newInput = input.replace(tags,'');
     //             }

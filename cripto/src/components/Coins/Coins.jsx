@@ -13,9 +13,9 @@ class CoinsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            coins: [],
+            coins: [...this.props.coins],
             search: '',
-            filteredCoins: [],
+            filteredCoins: [...this.props.coins],
             pageOfItems: [],
             pager: { pager: {} },
             isValid: true
@@ -37,8 +37,7 @@ class CoinsComponent extends Component {
             coins: this.props.coins,
             filteredCoins: this.props.coins
         });
-    }
-
+    };
 
     handleSearchChange = search => {
         const { coins } = this.state;
