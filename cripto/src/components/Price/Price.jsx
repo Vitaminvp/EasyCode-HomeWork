@@ -8,8 +8,8 @@ import Currency from "./Currency/Currency";
 import Span from "./CoinAmount/ErrorSpan";
 import AddItemForm from "./Form/AddItemForm";
 import ErrorBoundary from "../ErrorBoundary";
-import './price.css';
 import {setCurrencyNameAll, setCurrentCurrency, setCurrentCoin, addToCoinsList, setCoinsList, setCurrencyList, addToCurrencyList} from "../../AC";
+import './price.css';
 
 class PriceComponent extends Component {
     constructor(props) {
