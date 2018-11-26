@@ -32,11 +32,14 @@ class CoinsComponent extends Component {
     );
 
     componentDidMount() {
-        this.props.setFilteredCoinsList(this.props.coins);
-        this.setState({
-            coins: this.props.coins,
-            filteredCoins: this.props.coins
-        });
+        setTimeout(()=>{
+            this.props.setFilteredCoinsList(this.props.coins);
+            this.setState({
+                coins: this.props.coins,
+                filteredCoins: this.props.coins
+            });
+        }, 1000);
+
     };
 
     handleSearchChange = search => {
