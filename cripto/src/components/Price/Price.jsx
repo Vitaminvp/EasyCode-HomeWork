@@ -16,10 +16,12 @@ class PriceComponent extends Component {
         super(props);
         this.isActBtnCoin = true;
         this.isActBtnCur = true;
+
         // ------------ localStorage ------------- //
         // const list = localStorage.getItem('list')?JSON.parse(localStorage.getItem('list')):[];
         // const currencyList = localStorage.getItem('currencyList')?JSON.parse(localStorage.getItem('currencyList')):[];
         // ------------ localStorage ------------- //
+
         const split = this.props.match.params.list.split('$');
         const coinsList = split[0] ? split[0].split('&').map(item => ({
                                                             Name: item.split(':')[0],
