@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {setFilteredCoinsList} from '../../AC';
 import Card from './Pagination/Card';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Coins.css';
@@ -20,7 +19,6 @@ class CoinsComponent extends Component {
             pager: { pager: {} },
             isValid: true
         };
-        this.props.setFilteredCoinsList(this.props.coins);
     }
 
     onChangePage = pageOfItems => {
@@ -33,13 +31,11 @@ class CoinsComponent extends Component {
 
     componentDidMount() {
         setTimeout(()=>{
-            this.props.setFilteredCoinsList(this.props.coins);
             this.setState({
                 coins: this.props.coins,
                 filteredCoins: this.props.coins
             });
         }, 1000);
-
     };
 
     handleSearchChange = search => {
@@ -51,7 +47,6 @@ class CoinsComponent extends Component {
             });
             return;
         };
-        this.props.setFilteredCoinsList(filteredCoins);
         this.setState({
             isValid: true,
             search,
@@ -105,7 +100,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    setFilteredCoinsList
 };
 
 const Coins = connect(

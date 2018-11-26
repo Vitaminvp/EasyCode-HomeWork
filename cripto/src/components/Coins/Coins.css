@@ -4,7 +4,7 @@
 }
 a:hover {
     color: red;
-    text-decoration: underline;
+    text-decoration: none;
 }
 .current-page {
     font-size: 1.5rem;
@@ -14,7 +14,6 @@ a:hover {
 .country-card-container {
     cursor: pointer;
     position: relative;
-    /*overflow: hidden;*/
 }
 
 .country-name {
