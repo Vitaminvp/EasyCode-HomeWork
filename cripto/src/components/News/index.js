@@ -87,6 +87,11 @@ class NewsComponent extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="text-center">
+                    <h2>
+                        -{this.state.pager.currentPage? this.state.pager.currentPage : null}-
+                    </h2>
+                </div>
             </div>
         );
     }

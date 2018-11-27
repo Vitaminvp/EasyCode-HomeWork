@@ -59,7 +59,7 @@ class SearchInput extends Component {
         return (
             <React.Fragment>
                 {!isValid && <p>Search term should have at least 3 character</p>}
-                <label htmlFor="search coinAmount_label">
+                <label htmlFor="search coinAmount_label" className="search">
                     <span className="coinName">Search</span>
                     <input
                         className="coinAmount_input"
