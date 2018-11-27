@@ -100,3 +100,9 @@ ul.pagination a.page-link:hover {
     color: tomato;
 }
 
+.loader{
+    text-align: center;
+}
+.loader img{
+    max-width: 100%;
+}

@@ -62,33 +62,41 @@ class CoinsComponent extends Component {
         const { search, filteredCoins } = this.state;
         return (
             <div className="container mb-5">
+                {filteredCoins.length > 0 ? (
+                    <>
                 <div className="position-relative d-inline">{!this.state.isValid ? <Span>No results found for this query</Span> : null}
                     <SearchInput value={ search } onChange={ this.handleSearchChange } />
                 </div>
-                <div className="row d-flex flex-row">
-                    <div className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between mycontainer">
-                        <div className="d-flex flex-row align-items-center">
-                            <h2 className=''>
-                                Coins: {filteredCoins.length > 0 ? filteredCoins.length : null}
-                            </h2>
+
+                    <div className="row d-flex flex-row">
+                        <div
+                            className="w-100 px-4 py-5 d-flex flex-row flex-wrap align-items-center justify-content-between mycontainer">
+                            <div className="d-flex flex-row align-items-center">
+                                <h2 className=''>
+                                    Coins: {filteredCoins.length > 0 ? filteredCoins.length : null}
+                                </h2>
+                            </div>
+                            <div className="d-flex flex-row py-4 align-items-center">
+                                <Pagination
+                                    items={filteredCoins}
+                                    onChangePage={this.onChangePage}
+                                    handlePager={this.handlePager}
+                                    pager={this.state.pager}/>
+                            </div>
                         </div>
-                        <div className="d-flex flex-row py-4 align-items-center">
-                            <Pagination
-                                items={ filteredCoins }
-                                onChangePage={this.onChangePage}
-                                handlePager={this.handlePager}
-                                pager={this.state.pager}/>
-                        </div>
+                        {this.state.pageOfItems.map(card => (
+                            <Card key={card.Id} card={card}/>
+                        ))}
                     </div>
-                    {this.state.pageOfItems.map(card => (
-                        <Card key={card.Id} card={card} />
-                    ))}
-                </div>
+
                 <div className="text-center">
                     <h2>
                         -{this.state.pager.currentPage? this.state.pager.currentPage : null}-
                     </h2>
                 </div>
+                    </>)
+                : <div className="loader"><img src="./img/loader.gif" /></div>
+                }
             </div>
         );
     }
