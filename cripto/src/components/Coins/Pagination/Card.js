@@ -5,7 +5,6 @@ import {CRYPTO_COMPARE_URL} from '../../../constants';
 class Card extends Component {
     render() {
         const {card} = this.props || {};
-
         return (
             <Fragment>
                 <div className="flip-container col-sm-6 col-md-3 country-card">
