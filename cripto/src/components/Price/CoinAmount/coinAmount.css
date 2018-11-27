@@ -8,9 +8,13 @@
     font-weight: bold;
     text-shadow: 0 1px 0 #000;
 }
+span.coinName{
+    color: tomato;
+    font-weight: bold;
+}
 
 .warning {
-    display: none;
+    /*display: none;*/
     opacity: 0.75;
     position: absolute;
     top: -25px;

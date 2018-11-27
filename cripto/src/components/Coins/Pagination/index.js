@@ -10,10 +10,14 @@ const propTypes = {
 
 const defaultProps = {
     initialPage: 1,
-    pageSize: 6
+    pageSize: 20
 };
 
 class Pagination extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     // this.state = { pager: {} };
+    // }
 
     componentWillMount() {
         // set page if items array isn't empty

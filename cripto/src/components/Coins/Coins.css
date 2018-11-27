@@ -14,7 +14,6 @@ a:hover {
 .country-card-container {
     cursor: pointer;
     position: relative;
-    /*overflow: hidden;*/
 }
 
 .country-name {

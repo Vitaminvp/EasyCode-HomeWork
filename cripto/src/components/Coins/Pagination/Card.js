@@ -8,7 +8,8 @@ class Card extends Component {
         return (
             <Fragment>
                 <div className="flip-container col-sm-6 col-md-3 country-card">
-                    <div className="flipper country-card-container  rounded  mx-2 my-3 d-flex flex-row align-items-center p-0 ">
+                    <div
+                        className="flipper country-card-container  rounded  mx-2 my-3 d-flex flex-row align-items-center p-0 ">
                         <div className="front w-100 border-gray border-right p-2 bg-white rounded-left">
                             <span className="country-name text-dark d-block font-weight-bold">
                                   <h2><a href={`/coins/${card.Name}:1$USD&EUR&UAH&RUB`}
@@ -17,12 +18,14 @@ class Card extends Component {
                             <img
                                 src={`${CRYPTO_COMPARE_URL}${card.ImageUrl}`}
                                 className="d-block w-100 h-auto"
-                                alt={card.CoinName} />
+                                alt={card.CoinName}/>
                         </div>
-                        <div className="back w-100 position-relative border-gray border-right p-2 bg-white rounded-left">
-                            <span className="country-name text-dark d-block font-weight-bold">
-                                <h2><a href={`/coins/${card.Name}:1$USD&EUR&UAH&RUB`}
-                                         rel="noopener noreferrer">{card.CoinName}</a></h2>
+                        <div
+                            className="back w-100 position-relative border-gray border-right p-2 bg-white rounded-left">
+                            <a href={`/coins/${card.Name}:1$USD&EUR&UAH&RUB`}
+                               rel="noopener noreferrer">
+                                <span className="country-name text-dark d-block font-weight-bold">
+                                <h2>{card.CoinName}</h2>
                                 <p>Algorithm: {card.Algorithm}</p>
                                 <p>Full name: {card.FullName}</p>
                                 <p>PreMined value: {card.PreMinedValue}</p>
@@ -31,7 +34,8 @@ class Card extends Component {
                                 <p>Total coin supply: {card.TotalCoinSupply}</p>
                                 <p>Total Ccoins free float: {card.TotalCoinsFreeFloat}</p>
                             </span>
-                         </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </Fragment>
