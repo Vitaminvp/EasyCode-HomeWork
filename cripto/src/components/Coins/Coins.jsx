@@ -46,7 +46,7 @@ class CoinsComponent extends Component {
                 isValid: false
             });
             return;
-        };
+        }
         this.setState({
             isValid: true,
             search,
